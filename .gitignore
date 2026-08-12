@@ -5,3 +5,6 @@ __pycache__/
 .ruff_cache/
 .DS_Store
 evaluation/results/
+evaluation/tracks.local.json
+proposed-registry.json
+PR_BODY.md

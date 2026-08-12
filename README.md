@@ -1,119 +1,150 @@
 # Stem Separator Models
 
-A small, maintainer-curated database of stem-separation models and recommendations.
+A small, maintainer-curated registry of locally runnable stem-separation models, evidence and recommendations.
 
-The project follows the same broad idea as [Privacy Guides' Verified Apps](https://github.com/privacyguides/verified-apps): the useful product is a simple, reviewable data file. Automation checks the data, but it does not try to replace maintainer judgement.
+The project follows the useful part of [Privacy Guides' Verified Apps](https://github.com/privacyguides/verified-apps): the product is a simple, reviewable data file. Automation validates it and prepares structured changes; maintainer judgement remains the trust boundary.
 
-## Files
-
-```text
-registry.json                 Models and current recommendations
-sources.json                  Online sources for Hermes to monitor
-scripts/validate.py           Lightweight data validation
-scripts/evaluate.py           Candidate-versus-current listening comparison
-evaluation/tracks.json        Songs available on the evaluation runner
-.github/workflows/ci.yml      Validates every change
-.github/workflows/evaluate.yml  Optional self-hosted A/B run
-HERMES.md                     Instructions for the private Hermes agent
-```
-
-The app can download the database directly from GitHub:
+## Repository
 
 ```text
-https://raw.githubusercontent.com/OWNER/REPOSITORY/main/registry.json
+registry.json                    App-facing models, evidence and recommendations
+sources.json                     Sources monitored by the private Hermes agent
+scripts/validate.py              Dependency-free registry validation
+scripts/pr_body.py               Structured PR-body generator
+scripts/evaluate.py              Optional candidate-versus-current listening test
+evaluation/tracks.json           Public empty template for the private runner manifest
+.github/workflows/ci.yml         Validation on pushes and PRs
+.github/workflows/evaluate.yml   Optional self-hosted listening comparison
+HERMES.md                        Private agent maintenance instructions
+CONTRIBUTING.md                  Public contribution and data-quality rules
+SECURITY.md                      Private vulnerability reporting guidance
 ```
 
-GitHub's raw file endpoint supports normal HTTP caching, so the app should retain a local copy and use `ETag` / `If-None-Match` when checking for updates.
+There is no generated directory, API service or database. Apps can fetch `registry.json` directly from GitHub and cache it with `ETag` / `If-None-Match`.
 
-## Data model
+The registry contains only models with publicly downloadable weights/configuration and a credible local inference path. Provider-only models and hosted ensembles are excluded. Services such as MVSep may still appear as benchmark or qualitative evidence sources.
 
-`registry.json` is the app-facing file and contains:
-
-- `metric_definitions`: units, ranges and whether higher or lower is better.
-- `benchmark_suites`: stable, versioned benchmark protocols.
-- `models`: backend support, benchmark results and normalized quality observations.
-- `recommendations`: the selected model ID for each stem.
-
-Apps should compare benchmark results only when their `suite` IDs match. Standardized and non-standardized suites are explicitly labelled. Qualitative material is stored separately as normalized 0–100 `quality` observations, including its derivation method, confidence and source.
-
-Exact scores published by a source belong in a benchmark result. `llm_derived` quality values are only for converting qualitative sentiment into consistent, actionable fields.
-
-Recommendation entries intentionally contain almost no prose. Explanatory data lives in benchmarks and quality observations.
-
-Example standardized result:
+`scope` makes this contract machine-readable:
 
 ```json
 {
-  "stem": "instrumental",
-  "suite": "mvsep-multisong-v1",
-  "values": {
-    "sdr_db": 17.55,
-    "snr_db": 18.12
-  },
-  "source": "https://..."
+  "execution": "local_only",
+  "weights": "publicly_downloadable",
+  "provider_only_models": false,
+  "license_metadata_required": true
 }
 ```
 
-An app resolves `sdr_db` through `metric_definitions` and `mvsep-multisong-v1` through `benchmark_suites`, so labels, units, comparison direction, protocol and standardization status remain data-driven.
+Publicly downloadable weights are not necessarily permissively licensed. Apps should expose and filter each model's `availability.license`; `unknown` means the licence still requires verification.
 
-Run the only required local check with:
+## Evidence model
 
-```bash
-python3 scripts/validate.py
+The initial baseline covers current, specialist and historical models across vocal/instrumental separation, karaoke, drum and drum-substem separation, bass, four/six/many-stem output, guitars, piano, strings and bowed strings, choir, winds, brass, trumpet, saxophone, synth, organ, bells, percussion and restoration tasks.
+
+The two primary evidence sources have different jobs:
+
+- MVSep supplies measured results such as SDR, SI-SDR, L1 frequency, Log-WMSE, Aura STFT/MRSTFT, bleedless and fullness. Results are comparable only within the same `benchmark_suites` entry.
+- The Deton24 guide supplies qualitative observations. Hermes converts its descriptions into source-attributed 0–100 `semantic_evidence` fields such as bleed control, fullness preservation, artifact control, robustness and tonal fidelity.
+
+Other sources, including python-audio-separator, pymss, MVSepLess resources, MLX projects and Hugging Face, supply artifact and local-compatibility metadata. They are not treated as quality rankings.
+
+Missing values are omitted. They are never filled with zero, and missing evidence reduces coverage rather than model quality.
+
+Example measured result:
+
+```json
+{
+  "suite": "mvsep-multisong-v1",
+  "stem": "instrumental",
+  "values": {
+    "sdr_db": 17.5466,
+    "mvsep_bleedless": 41.3606,
+    "mvsep_fullness": 34.2534
+  },
+  "source": "https://mvsep.com/quality_checker/entry/9482",
+  "config": {}
+}
 ```
 
-## Adding or changing models
+Example structured qualitative evidence:
 
-For now, changes are generated by the private Hermes agent or made directly by the maintainer. GitHub does not need network access to Hermes.
+```json
+{
+  "task": "instrumental",
+  "method": "llm_derived",
+  "values": {
+    "bleed_control": 88,
+    "fullness_preservation": 82,
+    "artifact_control": 76
+  },
+  "confidence": 0.72,
+  "source_id": "deton24-google-doc-2026-08-12",
+  "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+  "location": {
+    "line_start": 6955,
+    "line_end": 7200
+  },
+  "tags": ["all_rounder"]
+}
+```
 
-The intended flow is:
+## Recommendations
+
+Every recommendation points directly to a locally runnable public-weight model:
+
+```json
+{
+  "policy": "balanced-quality-v1",
+  "model": "becruily-deux",
+  "alternatives": [
+    {
+      "model": "bs-roformer-leap-xe",
+      "specialty": "bleed_control"
+    }
+  ]
+}
+```
+
+- `model` is the recommended locally runnable model.
+- `alternatives` expose task-specific trade-offs without maintaining explanatory paragraphs.
+
+The versioned policy combines multiple measured and semantic components; it does not sort by SDR alone. Its declared measured and semantic class weights are validated against the per-task metric weights. Tasks without an explicit weight set use the declared `default_task_weights` entry (`specialist` in the current policy). Public weights and a local runtime are eligibility requirements, not score bonuses.
+
+Deprecated models are not eligible as default recommendations. An experimental model can only fill a task when no non-experimental public-weight candidate supports it; apps should inspect the selected model status and present that recommendation as opt-in rather than production-ready.
+
+For multitrack recommendations, `delivery.mode: residual_to_stem` tells an app to calculate the difference between the input and the raw stem sum and add it to `other`. The delivered stems therefore sum to the original audio even when the model's raw outputs do not.
+
+## Maintenance flow
+
+Hermes is private and reachable only by the maintainer. GitHub never invokes it.
 
 ```text
-Hermes periodically reads sources.json
+Hermes polls sources.json
         ↓
-compares online information with registry.json
+diffs private source snapshots
         ↓
-researches model, URLs, compatibility and recommendations
+LLM extracts candidate factual and semantic changes
         ↓
 updates registry.json on a branch
         ↓
-runs scripts/validate.py and scripts/pr_body.py
+scripts/validate.py + scripts/pr_body.py
         ↓
-opens a GitHub PR using the generated structured body
+Hermes opens a structured GitHub PR
         ↓
-CI + maintainer review
+CI and maintainer review
 ```
 
-Newly discovered models should normally be added as `experimental` before becoming a recommendation.
+Use one recommendation task per PR. A newly added model and its evidence can be introduced first, followed by independent `vocals` and `instrumental` recommendation PRs. That lets the maintainer accept one result and reject the other without partial merges or stacked-PR machinery.
 
-## Accepting vocals but rejecting instrumental
+The optional self-hosted evaluation workflow runs only when manually dispatched. The committed `evaluation/tracks.json` is an empty public template; the runner keeps its real filenames in ignored `evaluation/tracks.local.json`. It compares the current and proposed local recommendation through listed `audio_separator` or `pymss` backends, then attaches the resulting audio/HTML artifact to the PR. Copyrighted tracks, identifying filenames and rendered audio are not committed.
 
-Use one recommendation PR per stem. Do not put a vocal and instrumental recommendation change in the same PR.
+## Security and publication
 
-For a model that may improve both outputs, Hermes should create:
+Before publishing or mirroring the repository, scan the current tree and all Git history with a secret scanner. Normal publication should push `main` (and intentional release tags) only; do not mirror local tool/checkpoint refs. GitHub Actions are pinned to immutable commit SHAs, workflows use least-privilege permissions, and the self-hosted evaluation job can only be started manually by a repository collaborator.
 
-1. A model metadata PR, if the model is not already in the database.
-2. A PR changing only `recommendations.vocals`.
-3. A separate PR changing only `recommendations.instrumental`.
+Run the required local checks with:
 
-The second and third PRs can be accepted independently. This is simpler than partial merges or stacked PRs.
-
-Hermes generates each PR body with `scripts/pr_body.py`. The body contains an overview, exact model/benchmark/quality deltas, the recommendation change, configured test files and the listening artifact link when available.
-
-Before merging a recommendation PR, the maintainer can manually run the **Compare model recommendation** workflow. It separates the configured test songs with the current model and proposed model, then attaches an HTML/audio comparison to the PR.
-
-## Evaluation runner
-
-The optional workflow expects a disposable or dedicated self-hosted runner labelled:
-
-```text
-self-hosted, stem-evaluation
+```bash
+python3 scripts/validate.py
+python3 -m py_compile scripts/*.py
 ```
-
-The runner needs:
-
-- `python3`
-- `audio-separator`
-- evaluation audio stored in `/opt/stem-registry/tracks`, or another directory configured with the repository variable `EVALUATION_AUDIO_DIR`
-
-The filenames are listed in `evaluation/tracks.json`. Do not commit copyrighted songs to this repository.

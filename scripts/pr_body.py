@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Generate a structured PR body from an app-registry delta."""
+"""Generate a structured PR body from a registry delta."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -35,21 +36,21 @@ def rows_added_removed(before: list[dict], after: list[dict]) -> tuple[list[dict
 
 
 def changed_keys(before: dict, after: dict) -> list[tuple[str, str]]:
-    rows = []
+    output = []
     for key in sorted(before.keys() | after.keys()):
-        if stable(before.get(key)) != stable(after.get(key)):
-            if key not in before:
-                change = "Added"
-            elif key not in after:
-                change = "Removed"
-            else:
-                change = "Updated"
-            rows.append((change, key))
-    return rows
+        if stable(before.get(key)) == stable(after.get(key)):
+            continue
+        change = "Added" if key not in before else "Removed" if key not in after else "Updated"
+        output.append((change, key))
+    return output
 
 
 def model_metadata(model: dict) -> dict:
-    return {key: value for key, value in model.items() if key not in {"benchmarks", "quality"}}
+    return {
+        key: value
+        for key, value in model.items()
+        if key not in {"benchmarks", "semantic_evidence"}
+    }
 
 
 def metric_values(values: dict[str, Any]) -> str:
@@ -69,6 +70,20 @@ def table(headers: list[str], rows: list[list[str]], empty: str = "None") -> lis
     ]
     output.extend("| " + " | ".join(row) + " |" for row in rows)
     return output
+
+
+def task_model(recommendation: dict | None) -> str:
+    if not recommendation or not recommendation.get("model"):
+        return "—"
+    return f"`{recommendation['model']}`"
+
+
+def track_filename(track: object) -> str:
+    if isinstance(track, str):
+        return track
+    if isinstance(track, dict) and isinstance(track.get("filename"), str):
+        return track["filename"]
+    raise RuntimeError("Each evaluation track must be a filename or an object with filename")
 
 
 def main() -> int:
@@ -91,17 +106,11 @@ def main() -> int:
         if stable(model_metadata(before_models[model_id]))
         != stable(model_metadata(after_models[model_id]))
     )
-    metric_changes = changed_keys(
-        before.get("metric_definitions", {}), after.get("metric_definitions", {})
-    )
-    suite_changes = changed_keys(
-        before.get("benchmark_suites", {}), after.get("benchmark_suites", {})
-    )
 
     benchmark_added: list[tuple[str, dict]] = []
     benchmark_removed: list[tuple[str, dict]] = []
-    quality_added: list[tuple[str, dict]] = []
-    quality_removed: list[tuple[str, dict]] = []
+    semantic_added: list[tuple[str, dict]] = []
+    semantic_removed: list[tuple[str, dict]] = []
     for model_id in sorted(before_models.keys() | after_models.keys()):
         old_model = before_models.get(model_id, {})
         new_model = after_models.get(model_id, {})
@@ -110,50 +119,59 @@ def main() -> int:
         )
         benchmark_added.extend((model_id, row) for row in added)
         benchmark_removed.extend((model_id, row) for row in removed)
-        added, removed = rows_added_removed(old_model.get("quality", []), new_model.get("quality", []))
-        quality_added.extend((model_id, row) for row in added)
-        quality_removed.extend((model_id, row) for row in removed)
+        added, removed = rows_added_removed(
+            old_model.get("semantic_evidence", []), new_model.get("semantic_evidence", [])
+        )
+        semantic_added.extend((model_id, row) for row in added)
+        semantic_removed.extend((model_id, row) for row in removed)
 
-    recommendation_rows: list[list[str]] = []
-    changed_stems = []
-    before_recommendations = before["recommendations"]
-    after_recommendations = after["recommendations"]
-    for stem in sorted(before_recommendations.keys() | after_recommendations.keys()):
-        old = before_recommendations.get(stem)
-        new = after_recommendations.get(stem)
-        old_model = old.get("model") if old else None
-        new_model = new.get("model") if new else None
-        if old_model != new_model:
-            changed_stems.append(stem)
-            recommendation_rows.append(
-                [stem, f"`{old_model}`" if old_model else "—", f"`{new_model}`" if new_model else "—"]
-            )
-    if len(changed_stems) > 1:
-        raise RuntimeError("Recommendation PRs must change no more than one stem")
+    before_recommendations = before.get("recommendations", {})
+    after_recommendations = after.get("recommendations", {})
+    changed_tasks = [
+        task
+        for task in sorted(before_recommendations.keys() | after_recommendations.keys())
+        if stable(before_recommendations.get(task)) != stable(after_recommendations.get(task))
+    ]
+    baseline_replacement = before.get("schema") != after.get("schema") or (
+        before.get("baseline") is not True and after.get("baseline") is True
+    )
+    maintenance_change = (
+        before.get("generated_at") != after.get("generated_at")
+        or stable(before.get("source_snapshots", {})) != stable(after.get("source_snapshots", {}))
+        or (before.get("baseline") is True and after.get("baseline") is False)
+    )
+    if len(changed_tasks) > 1 and not baseline_replacement and not maintenance_change:
+        raise RuntimeError("Recommendation PRs must change no more than one task")
 
-    model_rows = []
-    for model_id in added_models:
-        model = after_models[model_id]
-        model_rows.append(["Added", f"`{model_id}`", model["status"], ", ".join(model["stems"])])
-    for model_id in updated_models:
-        model = after_models[model_id]
-        model_rows.append(["Updated", f"`{model_id}`", model["status"], ", ".join(model["stems"])])
-    for model_id in removed_models:
-        model = before_models[model_id]
-        model_rows.append(["Removed", f"`{model_id}`", model["status"], ", ".join(model["stems"])])
-
-    definition_rows = [[change, f"`{definition_id}`"] for change, definition_id in metric_changes]
-    suite_rows = []
-    for change, suite_id in suite_changes:
-        suite = after.get("benchmark_suites", {}).get(suite_id) or before["benchmark_suites"][suite_id]
-        suite_rows.append(
+    recommendation_rows = []
+    for task in changed_tasks:
+        old = before_recommendations.get(task)
+        new = after_recommendations.get(task)
+        recommendation_rows.append(
             [
-                change,
-                f"`{suite_id}`",
-                "yes" if suite["standardized"] else "no",
-                source_link(suite["protocol"]),
+                task,
+                task_model(old),
+                task_model(new),
             ]
         )
+
+    model_rows = []
+    for change, model_ids, source in (
+        ("Added", added_models, after_models),
+        ("Updated", updated_models, after_models),
+        ("Removed", removed_models, before_models),
+    ):
+        for model_id in model_ids:
+            model = source[model_id]
+            model_rows.append(
+                [
+                    change,
+                    f"`{model_id}`",
+                    model["status"],
+                    ", ".join(model.get("tasks", model.get("stems", []))),
+                    model.get("availability", {}).get("state", "legacy"),
+                ]
+            )
 
     benchmark_rows = []
     for change, entries in (("Added", benchmark_added), ("Removed", benchmark_removed)):
@@ -169,73 +187,98 @@ def main() -> int:
                 ]
             )
 
-    quality_rows = []
-    for change, entries in (("Added", quality_added), ("Removed", quality_removed)):
+    semantic_rows = []
+    for change, entries in (("Added", semantic_added), ("Removed", semantic_removed)):
         for model_id, observation in entries:
-            quality_rows.append(
+            semantic_rows.append(
                 [
                     change,
                     f"`{model_id}`",
-                    observation["stem"],
-                    observation["method"],
+                    observation["task"],
                     metric_values(observation["values"]),
                     str(observation["confidence"]),
                     source_link(observation["source"]),
                 ]
             )
 
-    tracks = load(ROOT / "evaluation/tracks.json")["tracks"]
+    metric_changes = changed_keys(
+        before.get("metric_definitions", {}), after.get("metric_definitions", {})
+    )
+    suite_changes = changed_keys(
+        before.get("benchmark_suites", {}), after.get("benchmark_suites", {})
+    )
+    policy_changes = changed_keys(
+        before.get("recommendation_policies", {}), after.get("recommendation_policies", {})
+    )
+    tracks_path = ROOT / os.environ.get("TRACKS_FILE", "evaluation/tracks.local.json")
+    tracks = (
+        [track_filename(track) for track in load(tracks_path)["tracks"]]
+        if tracks_path.is_file()
+        else []
+    )
+
     overview_rows = [
         ["Models", f"+{len(added_models)} / ~{len(updated_models)} / -{len(removed_models)}"],
+        ["Measured results", f"+{len(benchmark_added)} / -{len(benchmark_removed)}"],
+        ["Semantic observations", f"+{len(semantic_added)} / -{len(semantic_removed)}"],
         ["Metric definitions", str(len(metric_changes))],
         ["Benchmark suites", str(len(suite_changes))],
-        ["Benchmarks", f"+{len(benchmark_added)} / -{len(benchmark_removed)}"],
-        ["Quality observations", f"+{len(quality_added)} / -{len(quality_removed)}"],
-        ["Recommendation", changed_stems[0] if changed_stems else "unchanged"],
+        ["Policies", str(len(policy_changes))],
+        [
+            "Recommendation task",
+            changed_tasks[0]
+            if len(changed_tasks) == 1
+            else f"{len(changed_tasks)} tasks"
+            if changed_tasks
+            else "unchanged",
+        ],
     ]
-    if changed_stems:
-        overview_rows.append(["Test files", "<br>".join(f"`{filename}`" for filename in tracks)])
+    listening_required = len(changed_tasks) == 1 and not baseline_replacement and not maintenance_change
+    if listening_required:
         overview_rows.append(
-            [
-                "Comparison artifact",
-                f"[download]({args.artifact_url})" if args.artifact_url else "pending",
-            ]
+            ["Test tracks", "<br>".join(f"`{track}`" for track in tracks) or "private manifest not present"]
         )
+        overview_rows.append(
+            ["Listening artifact", f"[download]({args.artifact_url})" if args.artifact_url else "pending"]
+        )
+
     lines = ["## Overview", ""]
     lines.extend(table(["Field", "Value"], overview_rows))
     lines.extend(["", "## Registry delta", "", "### Models", ""])
-    lines.extend(table(["Change", "Model", "Status", "Stems"], model_rows))
-    lines.extend(["", "### Metric definitions", ""])
-    lines.extend(table(["Change", "Metric"], definition_rows))
-    lines.extend(["", "### Benchmark suites", ""])
-    lines.extend(table(["Change", "Suite", "Standardized", "Protocol"], suite_rows))
-    lines.extend(["", "### Standardized and reported benchmarks", ""])
-    lines.extend(
-        table(
-            ["Change", "Model", "Stem", "Suite", "Values", "Evidence"],
-            benchmark_rows,
-        )
-    )
-    lines.extend(["", "### Normalized quality observations", ""])
-    lines.extend(
-        table(
-            ["Change", "Model", "Stem", "Method", "Values", "Confidence", "Evidence"],
-            quality_rows,
-        )
-    )
+    lines.extend(table(["Change", "Model", "Status", "Tasks", "Availability"], model_rows))
+    lines.extend(["", "### Measured benchmark results", ""])
+    lines.extend(table(["Change", "Model", "Stem", "Suite", "Values", "Evidence"], benchmark_rows))
+    lines.extend(["", "### Structured semantic evidence", ""])
+    lines.extend(table(["Change", "Model", "Task", "Values", "Confidence", "Evidence"], semantic_rows))
     lines.extend(["", "### Recommendations", ""])
-    lines.extend(table(["Stem", "Current", "Proposed"], recommendation_rows))
+    lines.extend(
+        table(
+            ["Task", "Current", "Proposed"],
+            recommendation_rows,
+        )
+    )
     lines.extend(["", "## Listening comparison", ""])
-    if changed_stems:
-        lines.append(f"- Stem: `{changed_stems[0]}`")
-        lines.append("- Test files:")
-        lines.extend(f"  - `{filename}`" for filename in tracks)
-        if args.artifact_url:
-            lines.append(f"- Artifact: [download comparison]({args.artifact_url})")
+    if listening_required:
+        lines.append(f"- Task: `{changed_tasks[0]}`")
+        if tracks:
+            lines.append("- Test tracks:")
+            lines.extend(f"  - `{track}`" for track in tracks)
         else:
-            lines.append("- Artifact: pending")
+            lines.append("- Test tracks: private manifest not present")
+        lines.append(
+            f"- Artifact: [download comparison]({args.artifact_url})"
+            if args.artifact_url
+            else "- Artifact: pending"
+        )
+        lines.append("- [ ] Accept the recommendation change")
     else:
-        lines.append("Not required: no recommendation changed.")
+        lines.append(
+            "Not required for this baseline replacement."
+            if baseline_replacement
+            else "Not required for this dated registry maintenance update."
+            if maintenance_change
+            else "Not required: no recommendation changed."
+        )
     lines.extend(["", "## Checks", "", "- [x] `python3 scripts/validate.py`", ""])
     args.output.write_text("\n".join(lines), encoding="utf-8")
     return 0

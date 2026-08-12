@@ -2,50 +2,85 @@
   "schema": 1,
   "sources": [
     {
-      "name": "python-audio-separator",
-      "url": "https://github.com/nomadkaraoke/python-audio-separator",
-      "enabled": true,
-      "look_for": [
-        "new models",
-        "model filenames",
-        "backend compatibility",
-        "reported SDR, SNR and SIR results",
-        "bleed, fullness and artifact observations",
-        "releases"
-      ]
-    },
-    {
-      "name": "mlx-audio-separator",
-      "url": "https://github.com/ssmall256/mlx-audio-separator",
-      "enabled": true,
-      "look_for": [
-        "supported architectures",
-        "model compatibility",
-        "runtime and memory results",
-        "releases"
-      ]
-    },
-    {
-      "name": "MVSep quality checker",
-      "url": "https://mvsep.com/quality_checker/",
-      "enabled": true,
-      "look_for": [
-        "standardized benchmark results",
-        "SDR, SNR and SIR by stem",
-        "new high-performing models"
-      ]
-    },
-    {
       "name": "Deton24 stem separation guide",
       "url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
       "fetch_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/export?format=txt",
       "enabled": true,
+      "role": "primary_qualitative",
       "look_for": [
         "recommended models by stem",
         "bleed, fullness and artifact observations",
         "model settings",
         "comparisons and caveats",
         "explicit benchmark values"
+      ]
+    },
+    {
+      "name": "MVSep quality checker",
+      "url": "https://mvsep.com/quality_checker/",
+      "enabled": true,
+      "role": "primary_quantitative",
+      "look_for": [
+        "standardized benchmark results",
+        "SDR, SI-SDR, L1 frequency, Log-WMSE and Aura metrics",
+        "bleedless and fullness by stem",
+        "suite, dataset and test configuration",
+        "new high-performing models as evidence candidates",
+        "whether matching public weights and local inference code exist"
+      ]
+    },
+    {
+      "name": "python-audio-separator",
+      "url": "https://github.com/nomadkaraoke/python-audio-separator",
+      "fetch_url": "https://raw.githubusercontent.com/nomadkaraoke/python-audio-separator/main/audio_separator/models-scores.json",
+      "enabled": true,
+      "role": "supplementary",
+      "look_for": [
+        "new models",
+        "model filenames",
+        "backend compatibility",
+        "artifact locations",
+        "releases"
+      ]
+    },
+    {
+      "name": "pymss",
+      "url": "https://github.com/pymss-project/pymss",
+      "fetch_url": "https://raw.githubusercontent.com/pymss-project/pymss/main/pymss/resources/model_catalog.json",
+      "enabled": true,
+      "role": "supplementary",
+      "look_for": [
+        "catalog model identifiers",
+        "supported architectures",
+        "checkpoint and configuration paths",
+        "backend compatibility",
+        "releases"
+      ]
+    },
+    {
+      "name": "mvsepless resources",
+      "url": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+      "fetch_url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/main/models.json",
+      "enabled": true,
+      "role": "supplementary",
+      "look_for": [
+        "catalog model identifiers",
+        "checkpoint and configuration URLs",
+        "artifact revisions",
+        "new locally runnable specialist models",
+        "removed or renamed models"
+      ]
+    },
+    {
+      "name": "mlx-audio-separator",
+      "url": "https://github.com/ssmall256/mlx-audio-separator",
+      "enabled": true,
+      "role": "supplementary",
+      "look_for": [
+        "supported architectures",
+        "exact checkpoint compatibility",
+        "runtime and memory results",
+        "releases"
       ]
     }
   ]
