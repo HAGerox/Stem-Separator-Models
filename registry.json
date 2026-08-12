@@ -1,5 +1,73 @@
 {
-  "schema": 1,
+  "schema": 2,
+  "metric_definitions": {
+    "sdr_db": {
+      "label": "SDR",
+      "kind": "measured",
+      "unit": "dB",
+      "better": "higher"
+    },
+    "snr_db": {
+      "label": "SNR",
+      "kind": "measured",
+      "unit": "dB",
+      "better": "higher"
+    },
+    "sir_db": {
+      "label": "SIR",
+      "kind": "measured",
+      "unit": "dB",
+      "better": "higher"
+    },
+    "bleed_control": {
+      "label": "Bleed control",
+      "kind": "normalized",
+      "unit": "score",
+      "better": "higher",
+      "min": 0,
+      "max": 100
+    },
+    "fullness": {
+      "label": "Fullness",
+      "kind": "normalized",
+      "unit": "score",
+      "better": "higher",
+      "min": 0,
+      "max": 100
+    },
+    "artifact_control": {
+      "label": "Artifact control",
+      "kind": "normalized",
+      "unit": "score",
+      "better": "higher",
+      "min": 0,
+      "max": 100
+    }
+  },
+  "benchmark_suites": {
+    "mvsep-multisong-v1": {
+      "name": "MVSep Multisong",
+      "version": 1,
+      "standardized": true,
+      "protocol": "https://mvsep.com/quality_checker/",
+      "source": "https://mvsep.com/quality_checker/",
+      "metrics": [
+        "sdr_db",
+        "snr_db",
+        "sir_db"
+      ]
+    },
+    "audio-separator-catalogue": {
+      "name": "audio-separator catalogue",
+      "version": 1,
+      "standardized": false,
+      "protocol": "https://github.com/nomadkaraoke/python-audio-separator",
+      "source": "https://github.com/nomadkaraoke/python-audio-separator",
+      "metrics": [
+        "sdr_db"
+      ]
+    }
+  },
   "models": [
     {
       "id": "bs-roformer-viperx-1297",
@@ -21,12 +89,11 @@
           "tested": false
         }
       },
+      "benchmarks": [],
+      "quality": [],
       "license": "unknown",
       "sources": [
-        {
-          "url": "https://github.com/nomadkaraoke/python-audio-separator",
-          "note": "Used as the primary CLI model example by audio-separator."
-        }
+        "https://github.com/nomadkaraoke/python-audio-separator"
       ]
     },
     {
@@ -51,12 +118,36 @@
           "tested": false
         }
       },
+      "benchmarks": [
+        {
+          "stem": "vocals",
+          "suite": "audio-separator-catalogue",
+          "values": {
+            "sdr_db": 10.8
+          },
+          "source": "https://github.com/nomadkaraoke/python-audio-separator"
+        },
+        {
+          "stem": "drums",
+          "suite": "audio-separator-catalogue",
+          "values": {
+            "sdr_db": 10.1
+          },
+          "source": "https://github.com/nomadkaraoke/python-audio-separator"
+        },
+        {
+          "stem": "bass",
+          "suite": "audio-separator-catalogue",
+          "values": {
+            "sdr_db": 11.9
+          },
+          "source": "https://github.com/nomadkaraoke/python-audio-separator"
+        }
+      ],
+      "quality": [],
       "license": "unknown",
       "sources": [
-        {
-          "url": "https://github.com/nomadkaraoke/python-audio-separator",
-          "note": "Listed as a supported multi-stem model."
-        }
+        "https://github.com/nomadkaraoke/python-audio-separator"
       ]
     },
     {
@@ -75,19 +166,17 @@
           "tested": false
         }
       },
+      "benchmarks": [],
+      "quality": [],
       "license": "unknown",
       "sources": [
-        {
-          "url": "https://github.com/nomadkaraoke/python-audio-separator",
-          "note": "Documented as a supported model filename."
-        }
+        "https://github.com/nomadkaraoke/python-audio-separator"
       ]
     }
   ],
   "recommendations": {
     "vocals": {
       "model": "bs-roformer-viperx-1297",
-      "reason": "Initial example recommendation pending a maintained listening and benchmark review.",
       "reviewed": "2026-08-12",
       "sources": [
         "https://github.com/nomadkaraoke/python-audio-separator"
@@ -95,7 +184,6 @@
     },
     "instrumental": {
       "model": "bs-roformer-viperx-1297",
-      "reason": "Initial example recommendation pending a maintained listening and benchmark review.",
       "reviewed": "2026-08-12",
       "sources": [
         "https://github.com/nomadkaraoke/python-audio-separator"
@@ -103,7 +191,6 @@
     },
     "drums": {
       "model": "htdemucs-ft",
-      "reason": "Initial example multi-stem recommendation.",
       "reviewed": "2026-08-12",
       "sources": [
         "https://github.com/nomadkaraoke/python-audio-separator"
@@ -111,4 +198,3 @@
     }
   }
 }
-

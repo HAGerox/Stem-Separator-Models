@@ -46,10 +46,15 @@ jobs:
           name: comparison-pr-${{ inputs.pr_number }}-${{ inputs.stem }}
           path: evaluation/results/${{ github.run_id }}
           retention-days: 14
-      - name: Link the comparison from the PR
+      - name: Write the artifact into the structured PR body
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ inputs.pr_number }}
-          STEM: ${{ inputs.stem }}
           ARTIFACT_URL: ${{ steps.artifact.outputs.artifact-url }}
-        run: gh pr comment "$PR_NUMBER" --body "[$STEM model comparison artifact]($ARTIFACT_URL) is ready for listening review."
+        run: |
+          python3 scripts/pr_body.py \
+            --base-ref origin/main \
+            --registry proposed-registry.json \
+            --artifact-url "$ARTIFACT_URL" \
+            --output PR_BODY.md
+          gh pr edit "$PR_NUMBER" --body-file PR_BODY.md

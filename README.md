@@ -27,12 +27,34 @@ GitHub's raw file endpoint supports normal HTTP caching, so the app should retai
 
 ## Data model
 
-`registry.json` has two deliberately separate sections:
+`registry.json` is the app-facing file and contains:
 
-- `models` describes what exists, where it can run, and the evidence for it.
-- `recommendations` describes which model the app should choose for each task.
+- `metric_definitions`: units, ranges and whether higher or lower is better.
+- `benchmark_suites`: stable, versioned benchmark protocols.
+- `models`: backend support, benchmark results and normalized quality observations.
+- `recommendations`: the selected model ID for each stem.
 
-Each claim links directly to its source. The initial entries are examples based on public backend documentation, not a newly reproduced leaderboard.
+Apps should compare benchmark results only when their `suite` IDs match. Standardized and non-standardized suites are explicitly labelled. Qualitative material is stored separately as normalized 0–100 `quality` observations, including its derivation method, confidence and source.
+
+Exact scores published by a source belong in a benchmark result. `llm_derived` quality values are only for converting qualitative sentiment into consistent, actionable fields.
+
+Recommendation entries intentionally contain almost no prose. Explanatory data lives in benchmarks and quality observations.
+
+Example standardized result:
+
+```json
+{
+  "stem": "instrumental",
+  "suite": "mvsep-multisong-v1",
+  "values": {
+    "sdr_db": 17.55,
+    "snr_db": 18.12
+  },
+  "source": "https://..."
+}
+```
+
+An app resolves `sdr_db` through `metric_definitions` and `mvsep-multisong-v1` through `benchmark_suites`, so labels, units, comparison direction, protocol and standardization status remain data-driven.
 
 Run the only required local check with:
 
@@ -55,9 +77,9 @@ researches model, URLs, compatibility and recommendations
         ↓
 updates registry.json on a branch
         ↓
-runs scripts/validate.py
+runs scripts/validate.py and scripts/pr_body.py
         ↓
-opens a GitHub PR
+opens a GitHub PR using the generated structured body
         ↓
 CI + maintainer review
 ```
@@ -75,6 +97,8 @@ For a model that may improve both outputs, Hermes should create:
 3. A separate PR changing only `recommendations.instrumental`.
 
 The second and third PRs can be accepted independently. This is simpler than partial merges or stacked PRs.
+
+Hermes generates each PR body with `scripts/pr_body.py`. The body contains an overview, exact model/benchmark/quality deltas, the recommendation change, configured test files and the listening artifact link when available.
 
 Before merging a recommendation PR, the maintainer can manually run the **Compare model recommendation** workflow. It separates the configured test songs with the current model and proposed model, then attaches an HTML/audio comparison to the PR.
 

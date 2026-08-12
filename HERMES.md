@@ -1,48 +1,82 @@
 # Hermes maintenance instructions
 
-Hermes runs on the maintainer's private network and opens pull requests from there. GitHub Actions must not call Hermes.
+Hermes runs privately and opens GitHub pull requests. GitHub does not call Hermes.
 
-## Scheduled job
+## Scheduled run
 
-On a daily or weekly schedule:
-
-1. Clone or update this repository.
-2. Read `sources.json`.
-3. Compare each enabled source with the information currently represented in `registry.json`.
-4. Investigate meaningful changes, following direct links to model repositories and files where necessary.
-5. Update the database only when the source supports the change.
+1. Update the repository.
+2. Read enabled entries in `sources.json`.
+3. Compare those sources with `registry.json` and previous private snapshots.
+4. Research changed models, benchmark results and recommendations.
+5. Update `registry.json`.
 6. Run `python3 scripts/validate.py`.
-7. Open a pull request with a concise summary and source links.
+7. Run `python3 scripts/pr_body.py --output PR_BODY.md`.
+8. Open a PR using `gh pr create --body-file PR_BODY.md`.
 
-Hermes may keep page hashes, exported documents, and previous snapshots in its own working directory. They do not need to be committed here.
+Hermes may retain source exports and hashes outside this repository.
 
-## Pull request rules
+## Numerical benchmarks
 
-- A metadata-only PR may add or correct multiple closely related facts.
-- A recommendation PR changes exactly one stem under `recommendations`.
-- If one model may improve vocals and instrumental, open two recommendation PRs.
-- Do not mark a model as tested unless an actual backend run was performed.
-- Do not invent benchmark values, hashes, licences, publication dates, or compatibility claims.
-- Prefer a pinned model URL and SHA-256 when the upstream source provides a stable downloadable artifact.
-- Link every non-obvious claim to a public source.
+Put comparable numerical results in `benchmarks`:
 
-## Suggested PR body
-
-```text
-## Change
-
-- Added/updated ...
-
-## Why
-
-- Source A says ...
-- Source B reports ...
-
-## Verification
-
-- [x] registry validation passed
-- [ ] model was run with audio-separator
-- [ ] model was run with MLX
-- [ ] listening comparison attached
+```json
+{
+  "stem": "instrumental",
+  "suite": "mvsep-multisong-v1",
+  "values": {
+    "sdr_db": 17.55,
+    "snr_db": 18.12
+  },
+  "source": "https://..."
+}
 ```
+
+Rules:
+
+- Results are directly comparable only when `suite` matches.
+- Create a new versioned suite ID when the dataset or protocol changes.
+- Copy values exactly; never infer missing numerical measurements.
+- Keep separate results from separate suites.
+- Do not average results across suites.
+
+## Converting qualitative material
+
+Convert useful sentiment from guides and documents into `quality` observations:
+
+```json
+{
+  "stem": "vocals",
+  "method": "llm_derived",
+  "values": {
+    "bleed_control": 82,
+    "fullness": 71,
+    "artifact_control": 76
+  },
+  "confidence": 0.74,
+  "source": "https://..."
+}
+```
+
+All quality metrics are 0–100 and higher is better.
+
+- `bleed_control`: 0 means severe unwanted-source bleed; 100 means effectively isolated.
+- `fullness`: 0 means substantial desired-source loss; 100 means complete desired-source capture.
+- `artifact_control`: 0 means severe processing artifacts; 100 means effectively artifact-free.
+
+Use `method` as follows:
+
+- `source_score`: normalize an explicit score supplied by the source.
+- `llm_derived`: translate qualitative source language using the rubric above.
+- `listening_test`: derive from this repository's maintained listening test.
+
+Confidence is 0–1 and reflects source clarity and coverage, not model quality. Preserve separate observations from separate sources. Do not silently combine them into a single score.
+
+## PR rules
+
+- A recommendation PR changes exactly one recommendation model.
+- A model/benchmark PR may update related factual records without changing a recommendation.
+- Open separate recommendation PRs for vocals and instrumental.
+- Do not mark a backend as tested without a completed run.
+- Do not invent URLs, hashes, licences or measured benchmark values.
+- The generated PR body is authoritative; avoid adding narrative sections.
 

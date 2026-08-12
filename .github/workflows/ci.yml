@@ -13,5 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - name: Validate data
         run: python3 scripts/validate.py
+      - name: Validate structured PR delta
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+        run: python3 scripts/pr_body.py --base-ref "$BASE_REF" --output /tmp/PR_BODY.md
