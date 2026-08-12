@@ -1,0 +1,55 @@
+name: Compare model recommendation
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Pull request containing the proposed recommendation
+        required: true
+        type: number
+      stem:
+        description: Stem to compare, e.g. vocals or instrumental
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  compare:
+    runs-on: [self-hosted, stem-evaluation]
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Read proposed registry from the PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+        run: |
+          git fetch origin "pull/$PR_NUMBER/head"
+          git show FETCH_HEAD:registry.json > proposed-registry.json
+          python3 scripts/validate.py proposed-registry.json
+      - name: Compare current and proposed models
+        env:
+          STEM: ${{ inputs.stem }}
+          PROPOSED_REGISTRY: proposed-registry.json
+          AUDIO_DIR: ${{ vars.EVALUATION_AUDIO_DIR || '/opt/stem-registry/tracks' }}
+          OUTPUT_DIR: evaluation/results/${{ github.run_id }}
+        run: python3 scripts/evaluate.py
+      - id: artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: comparison-pr-${{ inputs.pr_number }}-${{ inputs.stem }}
+          path: evaluation/results/${{ github.run_id }}
+          retention-days: 14
+      - name: Link the comparison from the PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+          STEM: ${{ inputs.stem }}
+          ARTIFACT_URL: ${{ steps.artifact.outputs.artifact-url }}
+        run: gh pr comment "$PR_NUMBER" --body "[$STEM model comparison artifact]($ARTIFACT_URL) is ready for listening review."

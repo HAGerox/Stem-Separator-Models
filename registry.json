@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "models": [
+    {
+      "id": "bs-roformer-viperx-1297",
+      "name": "BS-Roformer Viperx 12.9755",
+      "author": "Viperx",
+      "architecture": "bs_roformer",
+      "status": "recommended",
+      "stems": [
+        "vocals",
+        "instrumental"
+      ],
+      "backends": {
+        "audio_separator": {
+          "model_filename": "model_bs_roformer_ep_317_sdr_12.9755.ckpt",
+          "tested": false
+        },
+        "mlx_audio_separator": {
+          "supported": true,
+          "tested": false
+        }
+      },
+      "license": "unknown",
+      "sources": [
+        {
+          "url": "https://github.com/nomadkaraoke/python-audio-separator",
+          "note": "Used as the primary CLI model example by audio-separator."
+        }
+      ]
+    },
+    {
+      "id": "htdemucs-ft",
+      "name": "HTDemucs Fine-tuned",
+      "author": "Meta Research",
+      "architecture": "demucs",
+      "status": "recommended",
+      "stems": [
+        "vocals",
+        "drums",
+        "bass",
+        "other"
+      ],
+      "backends": {
+        "audio_separator": {
+          "model_filename": "htdemucs_ft.yaml",
+          "tested": false
+        },
+        "mlx_audio_separator": {
+          "supported": true,
+          "tested": false
+        }
+      },
+      "license": "unknown",
+      "sources": [
+        {
+          "url": "https://github.com/nomadkaraoke/python-audio-separator",
+          "note": "Listed as a supported multi-stem model."
+        }
+      ]
+    },
+    {
+      "id": "uvr-mdxnet-kara-2",
+      "name": "UVR MDX-Net Karaoke 2",
+      "author": "UVR community",
+      "architecture": "mdxnet",
+      "status": "experimental",
+      "stems": [
+        "vocals",
+        "instrumental"
+      ],
+      "backends": {
+        "audio_separator": {
+          "model_filename": "UVR_MDXNET_KARA_2.onnx",
+          "tested": false
+        }
+      },
+      "license": "unknown",
+      "sources": [
+        {
+          "url": "https://github.com/nomadkaraoke/python-audio-separator",
+          "note": "Documented as a supported model filename."
+        }
+      ]
+    }
+  ],
+  "recommendations": {
+    "vocals": {
+      "model": "bs-roformer-viperx-1297",
+      "reason": "Initial example recommendation pending a maintained listening and benchmark review.",
+      "reviewed": "2026-08-12",
+      "sources": [
+        "https://github.com/nomadkaraoke/python-audio-separator"
+      ]
+    },
+    "instrumental": {
+      "model": "bs-roformer-viperx-1297",
+      "reason": "Initial example recommendation pending a maintained listening and benchmark review.",
+      "reviewed": "2026-08-12",
+      "sources": [
+        "https://github.com/nomadkaraoke/python-audio-separator"
+      ]
+    },
+    "drums": {
+      "model": "htdemucs-ft",
+      "reason": "Initial example multi-stem recommendation.",
+      "reviewed": "2026-08-12",
+      "sources": [
+        "https://github.com/nomadkaraoke/python-audio-separator"
+      ]
+    }
+  }
+}
+

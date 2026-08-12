@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "name": "python-audio-separator",
+      "url": "https://github.com/nomadkaraoke/python-audio-separator",
+      "enabled": true,
+      "look_for": [
+        "new models",
+        "model filenames",
+        "backend compatibility",
+        "releases"
+      ]
+    },
+    {
+      "name": "mlx-audio-separator",
+      "url": "https://github.com/ssmall256/mlx-audio-separator",
+      "enabled": true,
+      "look_for": [
+        "supported architectures",
+        "model compatibility",
+        "releases"
+      ]
+    },
+    {
+      "name": "MVSep quality checker",
+      "url": "https://mvsep.com/quality_checker/",
+      "enabled": true,
+      "look_for": [
+        "benchmark results",
+        "new high-performing models"
+      ]
+    }
+  ]
+}
+
