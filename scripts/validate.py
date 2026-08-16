@@ -12,9 +12,10 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from evidence_policy import (
-    RECOMMENDATION_POLICIES,
-    SEMANTIC_MAX,
-    SEMANTIC_MIN,
+    ORDINAL_CONFIDENCE_ORDER,
+    ORDINAL_RECOMMENDATION_POLICIES,
+    ORDINAL_RELATIONS,
+    SOURCE_TIER_ORDER,
 )
 from product_policy import EXCLUDED_CAPABILITIES, multitrack_policy_errors
 
@@ -32,13 +33,19 @@ AVAILABILITY_STATES = {
 BACKEND_STATES = {
     "validated",
     "listed",
+    "compatible_unvalidated",
     "declared",
     "custom_code",
     "not_listed",
     "unsupported",
     "unknown",
 }
-SEMANTIC_METHODS = {"source_score", "llm_derived", "listening_test"}
+AUDIO_SEPARATOR_ADMISSION_STATES = {
+    "validated",
+    "listed",
+    "compatible_unvalidated",
+}
+LOCATION_KINDS = {"line_range", "page", "section", "json_pointer", "entry"}
 LEGACY_MULTITRACK_TASKS = {"multitrack_4", "multitrack_6", "multitrack_many"}
 
 
@@ -77,8 +84,9 @@ def main() -> int:
     registry = load(registry_path)
     watched_sources = load(ROOT / "sources.json")
 
-    if registry.get("schema") != 3:
-        errors.append("registry.json: schema must be 3")
+    schema = registry.get("schema")
+    if schema != 4:
+        errors.append("registry.json: schema must be 4")
     if not valid_date(registry.get("generated_at")):
         errors.append("registry.json: generated_at must be YYYY-MM-DD")
     if not isinstance(registry.get("baseline"), bool):
@@ -118,6 +126,16 @@ def main() -> int:
             not isinstance(snapshot["sha256"], str) or not SHA256.fullmatch(snapshot["sha256"])
         ):
             errors.append(f"{where}: sha256 must be 64 lowercase hex characters")
+        tiers = snapshot.get("tiers")
+        if tiers is not None:
+            if not isinstance(tiers, dict) or not tiers:
+                errors.append(f"{where}.tiers: must be a non-empty object")
+            else:
+                for claim_kind, tier in tiers.items():
+                    if claim_kind not in {"qualitative", "measured", "artifact"}:
+                        errors.append(f"{where}.tiers: invalid claim kind {claim_kind!r}")
+                    if tier not in SOURCE_TIER_ORDER:
+                        errors.append(f"{where}.tiers.{claim_kind}: invalid source tier")
 
     if valid_date(registry.get("generated_at")):
         generated_at = date.fromisoformat(registry["generated_at"])
@@ -130,18 +148,11 @@ def main() -> int:
     if not isinstance(evidence_policy, dict):
         errors.append("evidence_policy must be an object")
     else:
-        primary_sources = evidence_policy.get("primary_sources")
-        if not isinstance(primary_sources, list) or not primary_sources:
-            errors.append("evidence_policy.primary_sources must be a non-empty list")
-        for procedural_field in ("rules", "semantic_scale"):
+        for procedural_field in ("rules", "semantic_scale", "primary_sources"):
             if procedural_field in evidence_policy:
                 errors.append(
                     f"evidence_policy.{procedural_field}: procedural policy must live in code"
                 )
-        if isinstance(primary_sources, list):
-            for source_id in primary_sources:
-                if source_id not in snapshots:
-                    errors.append(f"evidence_policy.primary_sources: unknown snapshot {source_id!r}")
 
     metrics = registry.get("metric_definitions")
     if not isinstance(metrics, dict) or not metrics:
@@ -154,17 +165,19 @@ def main() -> int:
         if not isinstance(metric, dict):
             errors.append(f"{where}: must be an object")
             continue
-        if metric.get("kind") not in {"measured", "semantic"}:
-            errors.append(f"{where}: kind must be measured or semantic")
+        if metric.get("kind") not in {"measured", "ordinal"}:
+            errors.append(f"{where}: kind must be measured or ordinal")
         if not isinstance(metric.get("label"), str) or not metric["label"]:
             errors.append(f"{where}: label is required")
-        if not isinstance(metric.get("unit"), str) or not metric["unit"]:
-            errors.append(f"{where}: unit is required")
-        if metric.get("better") not in {"higher", "lower"}:
-            errors.append(f"{where}: better must be higher or lower")
-        if metric.get("kind") == "semantic":
-            if "min" in metric or "max" in metric:
-                errors.append(f"{where}: semantic range is code-owned")
+        if metric.get("kind") == "measured":
+            if not isinstance(metric.get("unit"), str) or not metric["unit"]:
+                errors.append(f"{where}: unit is required")
+            if metric.get("better") not in {"higher", "lower"}:
+                errors.append(f"{where}: better must be higher or lower")
+        elif metric.get("kind") == "ordinal":
+            for scalar_field in ("unit", "better", "min", "max"):
+                if scalar_field in metric:
+                    errors.append(f"{where}: ordinal metric cannot declare {scalar_field}")
 
     suites = registry.get("benchmark_suites")
     if not isinstance(suites, dict) or not suites:
@@ -190,7 +203,7 @@ def main() -> int:
 
     if "recommendation_policies" in registry:
         errors.append("recommendation_policies: procedural policy must live in code")
-    policies = RECOMMENDATION_POLICIES
+    policies = ORDINAL_RECOMMENDATION_POLICIES
     for policy_id, policy in policies.items():
         where = f"recommendation_policies.{policy_id}"
         if not isinstance(policy_id, str) or not ID.fullmatch(policy_id):
@@ -198,12 +211,11 @@ def main() -> int:
         if not isinstance(policy, dict):
             errors.append(f"{where}: must be an object")
             continue
-        measured_weight = policy.get("measured_weight")
-        semantic_weight = policy.get("semantic_weight")
-        if not numeric(measured_weight) or not numeric(semantic_weight):
-            errors.append(f"{where}: measured_weight and semantic_weight must be numeric")
-        elif abs(measured_weight + semantic_weight - 1) > 1e-9:
-            errors.append(f"{where}: evidence-class weights must sum to 1")
+        if policy.get("minimum_confidence") not in ORDINAL_CONFIDENCE_ORDER:
+            errors.append(f"{where}: minimum_confidence is invalid")
+        minimum_coverage = policy.get("minimum_coverage")
+        if not numeric(minimum_coverage) or not 0 <= minimum_coverage <= 1:
+            errors.append(f"{where}: minimum_coverage must be between 0 and 1")
         if policy.get("missing") != "reduce_coverage":
             errors.append(f"{where}: missing must be reduce_coverage")
         task_weights = policy.get("task_weights")
@@ -216,8 +228,6 @@ def main() -> int:
                     errors.append(f"{task_where}: must be a non-empty object")
                     continue
                 total = 0.0
-                measured_total = 0.0
-                semantic_total = 0.0
                 for metric_id, weight in weights.items():
                     definition = metrics.get(metric_id)
                     if definition is None:
@@ -226,22 +236,8 @@ def main() -> int:
                         errors.append(f"{task_where}.{metric_id}: weight must be positive")
                     else:
                         total += weight
-                        if definition and definition.get("kind") == "measured":
-                            measured_total += weight
-                        elif definition and definition.get("kind") == "semantic":
-                            semantic_total += weight
                 if abs(total - 1) > 1e-9:
                     errors.append(f"{task_where}: metric weights must sum to 1, got {total:g}")
-                if numeric(measured_weight) and abs(measured_total - measured_weight) > 1e-7:
-                    errors.append(
-                        f"{task_where}: measured metric weights must sum to {measured_weight:g}, "
-                        f"got {measured_total:g}"
-                    )
-                if numeric(semantic_weight) and abs(semantic_total - semantic_weight) > 1e-7:
-                    errors.append(
-                        f"{task_where}: semantic metric weights must sum to {semantic_weight:g}, "
-                        f"got {semantic_total:g}"
-                    )
             default_task_weights = policy.get("default_task_weights")
             if default_task_weights not in task_weights:
                 errors.append(f"{where}: default_task_weights must name a task_weights entry")
@@ -251,7 +247,6 @@ def main() -> int:
         errors.append("models must be a non-empty list")
         models = []
     model_ids: set[str] = set()
-    evidence_ids: set[str] = set()
     by_id: dict[str, dict] = {}
     output_capabilities_by_model: dict[str, set[str]] = {}
     for index, model in enumerate(models):
@@ -345,11 +340,13 @@ def main() -> int:
                     errors.append(f"{backend_where}: validated must be boolean")
                 if details.get("validated") and details.get("state") != "validated":
                     errors.append(f"{backend_where}: validated=true requires state=validated")
-                if details.get("state") in {"listed", "validated"} and not any(
+                if details.get("state") in AUDIO_SEPARATOR_ADMISSION_STATES and not any(
                     isinstance(details.get(field), str) and details[field]
                     for field in ("model_filename", "catalog_id")
                 ):
-                    errors.append(f"{backend_where}: listed backends require model_filename or catalog_id")
+                    errors.append(
+                        f"{backend_where}: admitted backends require model_filename or catalog_id"
+                    )
                 for field in ("model_filename", "catalog_id"):
                     reference = details.get(field)
                     if reference is not None and (
@@ -365,8 +362,8 @@ def main() -> int:
                             f"{backend_where}.catalog_snapshot: snapshot must have a SHA-256"
                         )
                 outputs = details.get("outputs")
-                if details.get("state") in {"listed", "validated"} and not outputs:
-                    errors.append(f"{backend_where}: listed backends require exact outputs")
+                if details.get("state") in AUDIO_SEPARATOR_ADMISSION_STATES and not outputs:
+                    errors.append(f"{backend_where}: admitted backends require exact outputs")
                 if outputs is not None:
                     if not isinstance(outputs, list) or not outputs:
                         errors.append(f"{backend_where}.outputs: must be a non-empty list")
@@ -375,9 +372,7 @@ def main() -> int:
                         capabilities: set[str] = set()
                         for output_index, output in enumerate(outputs):
                             output_where = f"{backend_where}.outputs[{output_index}]"
-                            if isinstance(output, str):
-                                runtime_key = capability = output
-                            elif isinstance(output, dict):
+                            if isinstance(output, dict):
                                 runtime_key = output.get("runtime_key")
                                 capability = output.get("capability")
                                 if "label" in output and (
@@ -385,12 +380,12 @@ def main() -> int:
                                 ):
                                     errors.append(f"{output_where}.label: must be non-empty")
                             else:
-                                errors.append(f"{output_where}: must be a string or object")
+                                errors.append(
+                                    f"{output_where}: must be an explicit output object"
+                                )
                                 continue
                             if not isinstance(runtime_key, str) or not OUTPUT_KEY.fullmatch(runtime_key):
                                 errors.append(f"{output_where}.runtime_key: invalid exact output key")
-                            elif runtime_key in runtime_keys:
-                                errors.append(f"{output_where}.runtime_key: duplicate {runtime_key!r}")
                             else:
                                 runtime_keys.add(runtime_key)
                             if not isinstance(capability, str) or not ID.fullmatch(capability):
@@ -421,8 +416,50 @@ def main() -> int:
                                 f"{backend_where}.artifact_names: unknown artifacts "
                                 + ", ".join(sorted(missing_artifacts))
                             )
-                if details.get("state") in {"validated", "listed", "declared", "custom_code"}:
+                if details.get("state") in {
+                    "validated",
+                    "listed",
+                    "compatible_unvalidated",
+                    "declared",
+                    "custom_code",
+                }:
                     locally_runnable = True
+            audio_separator = backends.get("audio_separator")
+            if not isinstance(audio_separator, dict):
+                errors.append(
+                    f"{where}.backends.audio_separator: admitted registry models must declare this backend"
+                )
+            elif audio_separator.get("state") not in AUDIO_SEPARATOR_ADMISSION_STATES:
+                errors.append(
+                    f"{where}.backends.audio_separator: state must be validated, listed, or compatible_unvalidated"
+                )
+            elif audio_separator.get("state") == "compatible_unvalidated":
+                if audio_separator.get("validated") is not False:
+                    errors.append(
+                        f"{where}.backends.audio_separator: compatible_unvalidated requires validated=false"
+                    )
+                if not isinstance(audio_separator.get("model_filename"), str):
+                    errors.append(
+                        f"{where}.backends.audio_separator: compatible_unvalidated requires model_filename"
+                    )
+                selected_artifact_names = audio_separator.get("artifact_names", [])
+                selected_artifacts = [
+                    artifact
+                    for artifact in artifacts
+                    if isinstance(artifact, dict)
+                    and artifact.get("name") in selected_artifact_names
+                ]
+                if not any(
+                    Path(artifact["name"]).suffix.lower()
+                    in {".ckpt", ".pth", ".onnx", ".th"}
+                    for artifact in selected_artifacts
+                ) or not any(
+                    Path(artifact["name"]).suffix.lower() in {".yaml", ".yml"}
+                    for artifact in selected_artifacts
+                ):
+                    errors.append(
+                        f"{where}.backends.audio_separator: compatible_unvalidated requires selected checkpoint and YAML artifacts"
+                    )
             if not locally_runnable:
                 errors.append(f"{where}: at least one local backend path is required")
         output_capabilities_by_model[model_id] = model_output_capabilities
@@ -486,55 +523,8 @@ def main() -> int:
                 if not isinstance(result.get("config"), dict):
                     errors.append(f"{result_where}: config must be an object")
 
-        observations = model.get("semantic_evidence")
-        if not isinstance(observations, list):
-            errors.append(f"{where}: semantic_evidence must be a list")
-        else:
-            for observation_index, observation in enumerate(observations):
-                observation_where = f"{where}.semantic_evidence[{observation_index}]"
-                if not isinstance(observation, dict):
-                    errors.append(f"{observation_where}: must be an object")
-                    continue
-                evidence_id = observation.get("id")
-                if not isinstance(evidence_id, str) or not ID.fullmatch(evidence_id):
-                    errors.append(f"{observation_where}: invalid id")
-                elif evidence_id in evidence_ids:
-                    errors.append(f"{observation_where}: duplicate evidence id {evidence_id}")
-                else:
-                    evidence_ids.add(evidence_id)
-                if observation.get("task") not in tasks:
-                    errors.append(f"{observation_where}: task must be one of the model tasks")
-                if observation.get("method") not in SEMANTIC_METHODS:
-                    errors.append(f"{observation_where}: invalid method")
-                confidence = observation.get("confidence")
-                if not numeric(confidence) or not 0 <= confidence <= 1:
-                    errors.append(f"{observation_where}: confidence must be between 0 and 1")
-                values = observation.get("values")
-                if not isinstance(values, dict) or not values:
-                    errors.append(f"{observation_where}: values must be a non-empty object")
-                else:
-                    for metric_id, value in values.items():
-                        definition = metrics.get(metric_id)
-                        if not definition or definition.get("kind") != "semantic":
-                            errors.append(f"{observation_where}: {metric_id!r} is not semantic")
-                        elif not numeric(value) or not SEMANTIC_MIN <= value <= SEMANTIC_MAX:
-                            errors.append(f"{observation_where}: {metric_id} is outside its range")
-                if not isinstance(observation.get("source_id"), str) or not observation["source_id"]:
-                    errors.append(f"{observation_where}: source_id is required")
-                elif observation["source_id"] not in snapshots:
-                    errors.append(f"{observation_where}: unknown source snapshot {observation['source_id']!r}")
-                if not valid_url(observation.get("source")):
-                    errors.append(f"{observation_where}: HTTPS source is required")
-                location = observation.get("location")
-                if not isinstance(location, dict):
-                    errors.append(f"{observation_where}: location must be an object")
-                else:
-                    start, end = location.get("line_start"), location.get("line_end")
-                    if not isinstance(start, int) or not isinstance(end, int) or start < 1 or end < start:
-                        errors.append(f"{observation_where}: invalid line range")
-                tags = observation.get("tags")
-                if not isinstance(tags, list) or not all(isinstance(tag, str) and ID.fullmatch(tag) for tag in tags):
-                    errors.append(f"{observation_where}: tags must be an id list")
+        if "semantic_evidence" in model:
+            errors.append(f"{where}: semantic_evidence is not allowed in schema 4")
 
         source_links = model.get("sources")
         if not isinstance(source_links, list) or not source_links or not all(valid_url(link) for link in source_links):
@@ -542,6 +532,150 @@ def main() -> int:
         elif availability.get("repository") not in source_links:
             errors.append(f"{where}: sources must include availability.repository")
 
+    contexts = registry.get("evidence_contexts")
+    if not isinstance(contexts, dict):
+        errors.append("evidence_contexts must be an object")
+        contexts = {}
+    if isinstance(contexts, dict):
+        for context_id, context_definition in contexts.items():
+            where = f"evidence_contexts.{context_id}"
+            if not isinstance(context_id, str) or not ID.fullmatch(context_id):
+                errors.append(f"{where}: invalid context id")
+            if not isinstance(context_definition, dict):
+                errors.append(f"{where}: must be an object")
+                continue
+            for field in ("scope", "protocol"):
+                if not isinstance(context_definition.get(field), str) or not context_definition[field]:
+                    errors.append(f"{where}.{field}: non-empty string is required")
+            stem_mapping = context_definition.get("stem_mapping")
+            if not isinstance(stem_mapping, dict) or not stem_mapping:
+                errors.append(f"{where}.stem_mapping: non-empty object is required")
+            elif not all(
+                isinstance(key, str)
+                and ID.fullmatch(key)
+                and isinstance(value, str)
+                and ID.fullmatch(value)
+                for key, value in stem_mapping.items()
+            ):
+                errors.append(f"{where}.stem_mapping: keys and values must be ids")
+            conditions = context_definition.get("conditions")
+            if not isinstance(conditions, list) or not all(
+                isinstance(condition, str) and ID.fullmatch(condition)
+                for condition in conditions
+            ):
+                errors.append(f"{where}.conditions: must be an id list")
+
+        ordinal_rows = registry.get("ordinal_evidence")
+        if not isinstance(ordinal_rows, list):
+            errors.append("ordinal_evidence must be a list")
+            ordinal_rows = []
+        ordinal_count = len(ordinal_rows)
+        ordinal_ids: set[str] = set()
+        source_fingerprints: set[str] = set()
+        for index, observation in enumerate(ordinal_rows):
+            where = f"ordinal_evidence[{index}]"
+            if not isinstance(observation, dict):
+                errors.append(f"{where}: must be an object")
+                continue
+            evidence_id = observation.get("id")
+            if not isinstance(evidence_id, str) or not ID.fullmatch(evidence_id):
+                errors.append(f"{where}: invalid id")
+            elif evidence_id in ordinal_ids:
+                errors.append(f"{where}: duplicate evidence id {evidence_id}")
+            else:
+                ordinal_ids.add(evidence_id)
+            task = observation.get("task")
+            if not isinstance(task, str) or not ID.fullmatch(task):
+                errors.append(f"{where}.task: must be an id")
+            metric_id = observation.get("metric")
+            if metric_id not in metrics or metrics.get(metric_id, {}).get("kind") != "ordinal":
+                errors.append(f"{where}.metric: must name an ordinal metric")
+            if observation.get("context") not in contexts:
+                errors.append(f"{where}.context: unknown evidence context")
+            if observation.get("relation") not in ORDINAL_RELATIONS:
+                errors.append(f"{where}.relation: invalid ordinal relation")
+            if observation.get("confidence") not in ORDINAL_CONFIDENCE_ORDER:
+                errors.append(f"{where}.confidence: invalid confidence")
+
+            endpoint_models: list[str] = []
+            for side in ("left", "right"):
+                endpoint = observation.get(side)
+                endpoint_where = f"{where}.{side}"
+                if not isinstance(endpoint, dict):
+                    errors.append(f"{endpoint_where}: must be an object")
+                    continue
+                model_id = endpoint.get("model")
+                if not isinstance(model_id, str) or model_id not in by_id:
+                    errors.append(f"{endpoint_where}.model: unknown model {model_id!r}")
+                else:
+                    endpoint_models.append(model_id)
+                    if task not in by_id[model_id].get("tasks", []):
+                        errors.append(f"{endpoint_where}.model: model does not support {task!r}")
+                if "config" in endpoint and not isinstance(endpoint["config"], dict):
+                    errors.append(f"{endpoint_where}.config: must be an object")
+            if len(endpoint_models) == 2:
+                if endpoint_models[0] == endpoint_models[1]:
+                    errors.append(f"{where}: comparison endpoints must differ")
+                elif endpoint_models[0] > endpoint_models[1]:
+                    errors.append(f"{where}: endpoints must be in canonical model-id order")
+
+            source = observation.get("source")
+            if not isinstance(source, dict):
+                errors.append(f"{where}.source: must be an object")
+            else:
+                snapshot_id = source.get("snapshot")
+                if snapshot_id not in snapshots:
+                    errors.append(f"{where}.source.snapshot: unknown source snapshot")
+                else:
+                    snapshot = snapshots[snapshot_id]
+                    source_tiers = snapshot.get("tiers", {}) if isinstance(snapshot, dict) else {}
+                    if source_tiers.get("qualitative") not in SOURCE_TIER_ORDER:
+                        errors.append(
+                            f"{where}.source.snapshot: source has no qualitative evidence tier"
+                        )
+                if not valid_url(source.get("entry_url")):
+                    errors.append(f"{where}.source.entry_url: HTTPS URL is required")
+                location = source.get("location")
+                if not isinstance(location, dict) or location.get("kind") not in LOCATION_KINDS:
+                    errors.append(f"{where}.source.location: invalid typed location")
+                elif location["kind"] == "line_range":
+                    start, end = location.get("start"), location.get("end")
+                    if not isinstance(start, int) or not isinstance(end, int) or start < 1 or end < start:
+                        errors.append(f"{where}.source.location: invalid line range")
+                elif location["kind"] == "page":
+                    if not isinstance(location.get("page"), int) or location["page"] < 1:
+                        errors.append(f"{where}.source.location.page: positive integer is required")
+                else:
+                    if not isinstance(location.get("value"), str) or not location["value"]:
+                        errors.append(f"{where}.source.location.value: non-empty string is required")
+                if evidence_id and isinstance(evidence_id, str):
+                    fingerprint = json.dumps(
+                        {
+                            "task": task,
+                            "metric": metric_id,
+                            "context": observation.get("context"),
+                            "left": observation.get("left"),
+                            "right": observation.get("right"),
+                            "relation": observation.get("relation"),
+                            "source": source,
+                        },
+                        sort_keys=True,
+                    )
+                    if fingerprint in source_fingerprints:
+                        errors.append(f"{where}: duplicate normalized source observation")
+                    source_fingerprints.add(fingerprint)
+
+            tags = observation.get("tags", [])
+            if not isinstance(tags, list) or not all(
+                isinstance(tag, str) and ID.fullmatch(tag) for tag in tags
+            ):
+                errors.append(f"{where}.tags: must be an id list")
+            if "paraphrase" in observation and (
+                not isinstance(observation["paraphrase"], str) or not observation["paraphrase"]
+            ):
+                errors.append(f"{where}.paraphrase: must be a non-empty string")
+            if not isinstance(observation.get("summary"), str) or not observation["summary"]:
+                errors.append(f"{where}.summary: non-empty source summary is required")
     recommendations = registry.get("recommendations")
     if not isinstance(recommendations, dict) or not recommendations:
         errors.append("recommendations must be a non-empty object")
@@ -714,11 +848,11 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
     benchmark_count = sum(len(model["benchmarks"]) for model in models)
-    semantic_count = sum(len(model["semantic_evidence"]) for model in models)
     task_count = len({task for model in models for task in model["tasks"]})
     print(
         f"Registry valid: {len(models)} models, {len(recommendations)} recommendations, "
-        f"{task_count} model tasks, {benchmark_count} benchmarks, {semantic_count} semantic observations"
+        f"{task_count} model tasks, {benchmark_count} benchmarks, "
+        f"{ordinal_count} ordinal comparisons"
     )
     return 0
 

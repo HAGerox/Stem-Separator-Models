@@ -8,6 +8,8 @@ metadata; only workflow-like tasks are excluded.
 
 from __future__ import annotations
 
+import math
+
 
 POLICY_VERSION = "stem-separator-v1"
 PRODUCT_BACKENDS = ("audio_separator",)
@@ -134,8 +136,23 @@ PARENT_CHILD_CAPABILITIES = {
 MULTITRACK_REQUIRED_CAPABILITIES = {"vocals", "drums", "bass"}
 MULTITRACK_MIN_OUTPUTS = 4
 MULTITRACK_MAX_OUTPUTS = 12
+MULTITRACK_BROAD_CAPABILITIES = {
+    "vocals",
+    "drums",
+    "bass",
+    "guitar",
+    "keys",
+    "piano",
+    "strings",
+    "wind",
+    "brass",
+    "percussion",
+    "other",
+}
 MULTITRACK_RECONSTRUCTION_MODES = {"native", "residual_to_remainder"}
-MULTITRACK_VALIDATION_SCOPES = {"exact_checkpoint_smoke", "general_music_suite"}
+# Native reconstruction needs no post-processing. Residual correction must not
+# be exposed until every product runtime implements it.
+PRODUCT_RECONSTRUCTION_MODES = {"native"}
 
 
 def label_for(capability: str) -> str:
@@ -156,7 +173,11 @@ def group_for(capability: str) -> str:
 
 
 def multitrack_policy_errors(decomposition: object) -> list[str]:
-    """Return policy violations for an explicit general-music decomposition."""
+    """Return policy violations for a broad general-music decomposition.
+
+    Reconstruction is an optional, independent delivery feature and therefore
+    does not participate in decomposition qualification.
+    """
 
     if not isinstance(decomposition, dict):
         return ["must be an object"]
@@ -178,30 +199,58 @@ def multitrack_policy_errors(decomposition: object) -> list[str]:
     missing = MULTITRACK_REQUIRED_CAPABILITIES - output_set
     if missing:
         errors.append("outputs are missing " + ", ".join(sorted(missing)))
+    narrow = output_set - MULTITRACK_BROAD_CAPABILITIES
+    if narrow:
+        errors.append(
+            "outputs contain non-broad capabilities " + ", ".join(sorted(narrow))
+        )
     remainder = decomposition.get("remainder")
-    if not isinstance(remainder, str) or remainder not in output_set:
-        errors.append("remainder must name one of the outputs")
+    if remainder != "other" or remainder not in output_set:
+        errors.append("remainder must be the broad 'other' output")
     for parent, children in PARENT_CHILD_CAPABILITIES.items():
         overlap = output_set & children
         if parent in output_set and overlap:
             errors.append(f"top-level outputs mix {parent} with {', '.join(sorted(overlap))}")
-    reconstruction = decomposition.get("reconstruction")
+    return errors
+
+
+def multitrack_reconstruction_errors(reconstruction: object) -> list[str]:
+    """Return violations for an optional general-music reconstruction claim.
+
+    An exact-checkpoint smoke establishes runtime compatibility, not broad
+    reconstruction fidelity.
+    """
+
+    if reconstruction is None:
+        return []
     if not isinstance(reconstruction, dict):
-        errors.append("reconstruction must be an object")
-    else:
-        if reconstruction.get("mode") not in MULTITRACK_RECONSTRUCTION_MODES:
-            errors.append("reconstruction.mode is unsupported")
-        if reconstruction.get("validated") is not True:
-            errors.append("reconstruction.validated must be true")
-        if reconstruction.get("validation_scope") not in MULTITRACK_VALIDATION_SCOPES:
-            errors.append("reconstruction.validation_scope is unsupported")
-        if not isinstance(reconstruction.get("suite"), str) or not reconstruction["suite"]:
-            errors.append("reconstruction.suite is required")
-        residual_ratio = reconstruction.get("residual_rms_ratio")
-        if residual_ratio is not None and (
-            not isinstance(residual_ratio, (int, float))
-            or isinstance(residual_ratio, bool)
-            or residual_ratio < 0
+        return ["must be an object"]
+    errors: list[str] = []
+    if reconstruction.get("mode") not in MULTITRACK_RECONSTRUCTION_MODES:
+        errors.append("mode is unsupported")
+    if reconstruction.get("validated") is not True:
+        errors.append("validated must be true")
+    if reconstruction.get("validation_scope") != "general_music_suite":
+        errors.append("validation_scope must be general_music_suite")
+    if (
+        not isinstance(reconstruction.get("suite"), str)
+        or not reconstruction["suite"].strip()
+    ):
+        errors.append("suite is required")
+    for field in ("residual_rms_ratio", "residual_db"):
+        value = reconstruction.get(field)
+        if value is not None and (
+            not isinstance(value, (int, float))
+            or isinstance(value, bool)
+            or not math.isfinite(value)
         ):
-            errors.append("reconstruction.residual_rms_ratio must be non-negative")
+            errors.append(f"{field} must be finite")
+    residual_ratio = reconstruction.get("residual_rms_ratio")
+    if (
+        isinstance(residual_ratio, (int, float))
+        and not isinstance(residual_ratio, bool)
+        and math.isfinite(residual_ratio)
+        and residual_ratio < 0
+    ):
+        errors.append("residual_rms_ratio must be non-negative")
     return errors

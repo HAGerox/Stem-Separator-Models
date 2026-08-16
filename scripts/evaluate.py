@@ -17,9 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 def normalized_outputs(details: dict[str, Any]) -> list[dict[str, str]]:
     outputs = []
     for item in details.get("outputs", []):
-        if isinstance(item, str):
-            outputs.append({"runtime_key": item, "capability": item})
-        elif isinstance(item, dict):
+        if (
+            isinstance(item, dict)
+            and isinstance(item.get("runtime_key"), str)
+            and isinstance(item.get("capability"), str)
+        ):
             outputs.append(
                 {"runtime_key": item["runtime_key"], "capability": item["capability"]}
             )

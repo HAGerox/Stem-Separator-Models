@@ -13,11 +13,13 @@ from product_policy import (
     GROUP_ORDER,
     POLICY_VERSION,
     PRODUCT_BACKENDS,
+    PRODUCT_RECONSTRUCTION_MODES,
     PROMOTED_CAPABILITIES,
     group_for,
     kind_for,
     label_for,
     multitrack_policy_errors,
+    multitrack_reconstruction_errors,
 )
 
 
@@ -29,13 +31,15 @@ def load(path: Path) -> dict[str, Any]:
 
 
 def normalized_outputs(details: dict[str, Any]) -> list[dict[str, str]]:
-    """Normalize the temporary string form while emitting only canonical objects."""
+    """Return only explicit capability-to-runtime output contracts."""
 
     output: list[dict[str, str]] = []
     for item in details.get("outputs", []):
-        if isinstance(item, str):
-            output.append({"runtime_key": item, "capability": item})
-        elif isinstance(item, dict):
+        if (
+            isinstance(item, dict)
+            and isinstance(item.get("runtime_key"), str)
+            and isinstance(item.get("capability"), str)
+        ):
             normalized = {
                 "runtime_key": item["runtime_key"],
                 "capability": item["capability"],
@@ -202,6 +206,8 @@ def multitrack_entry(
     errors = multitrack_policy_errors(decomposition)
     if model is None:
         errors.insert(0, "unknown model")
+    elif "multitrack" not in model.get("tasks", []):
+        errors.append("model does not explicitly intend a multitrack decomposition")
     output_contracts: dict[str, list[dict[str, Any]]] = {}
     if isinstance(decomposition, dict):
         for capability in decomposition.get("outputs", []):
@@ -219,6 +225,33 @@ def multitrack_entry(
     )
     if not model or not isinstance(decomposition, dict):
         return None, diagnostic
+    reconstruction = decomposition.get("reconstruction")
+    reconstruction_errors = multitrack_reconstruction_errors(reconstruction)
+    reconstruction_mode = (
+        reconstruction.get("mode") if isinstance(reconstruction, dict) else None
+    )
+    if reconstruction_mode not in PRODUCT_RECONSTRUCTION_MODES:
+        reconstruction_errors.append(
+            f"{reconstruction_mode or 'declared mode'} is not implemented by the product"
+        )
+    product_decomposition = {
+        key: decomposition[key]
+        for key in ("scope", "hierarchy", "outputs", "remainder")
+        if key in decomposition
+    }
+    product_reconstruction = None
+    if reconstruction is not None:
+        product_reconstruction = {
+            "available": not reconstruction_errors,
+            "mode": reconstruction_mode,
+            "validation_scope": (
+                reconstruction.get("validation_scope")
+                if isinstance(reconstruction, dict)
+                else None
+            ),
+            "suite": reconstruction.get("suite") if isinstance(reconstruction, dict) else None,
+            "errors": reconstruction_errors,
+        }
     return (
         {
             "id": "multitrack",
@@ -230,7 +263,8 @@ def multitrack_entry(
                 "policy": recommendation.get("policy"),
                 "decomposition": decomposition_id,
             },
-            "decomposition": decomposition,
+            "decomposition": product_decomposition,
+            "reconstruction": product_reconstruction,
             "output_backends": output_contracts,
         },
         diagnostic,

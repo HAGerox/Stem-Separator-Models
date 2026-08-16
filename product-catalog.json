@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "policy": "stem-separator-v1",
-  "registry_schema": 3,
+  "registry_schema": 4,
   "generated_at": "2026-08-16",
   "promoted": [
     "vocals",
@@ -31,7 +31,7 @@
         "model": "becruily-deux",
         "model_name": "Becruily Deux",
         "preferred_model": "becruily-deux",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -114,7 +114,40 @@
           "model_name": "BS RoFormer Leap XE",
           "specialty": "bleed_control",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_leap_xe_voc.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "vocals",
+                  "capability": "vocals",
+                  "label": "Vocals"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_leap_xe_voc.ckpt",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_voc.ckpt",
+                  "sha256": "b739c1d2d87a81cd3dd3844ed9ad0bd678708c7a0a761a03a1aaff9af79a096d"
+                },
+                {
+                  "name": "leap_xe_config_voc.yaml",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_voc.yaml",
+                  "sha256": "d3cb8c84be2e9bcbc64c1086e2256dc097ab5addebc5ce507818e90ff8cbdc25"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         },
         {
           "model": "resurrection-vocals",
@@ -198,7 +231,7 @@
         "model": "becruily-deux",
         "model_name": "Becruily Deux",
         "preferred_model": "becruily-deux",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -277,13 +310,6 @@
           ]
         },
         {
-          "model": "hyperace-v2-instrumental",
-          "model_name": "BS RoFormer HyperACE v2 Instrumental",
-          "specialty": "fullness",
-          "ready": false,
-          "backends": []
-        },
-        {
           "model": "gabox-fv7z",
           "model_name": "MelBand RoFormer Inst Gabox Fv7z",
           "specialty": "low_noise_bleedless",
@@ -317,13 +343,6 @@
               "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
             }
           ]
-        },
-        {
-          "model": "bs-roformer-inst-fno",
-          "model_name": "BS RoFormer Instrumental FNO",
-          "specialty": "bleed_control",
-          "ready": false,
-          "backends": []
         },
         {
           "model": "viperx-1297",
@@ -367,7 +386,7 @@
         "model": "bs-roformer-sw",
         "model_name": "BS RoFormer SW 6-Stem",
         "preferred_model": "bs-roformer-sw",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -487,7 +506,7 @@
         "model": "bs-roformer-sw",
         "model_name": "BS RoFormer SW 6-Stem",
         "preferred_model": "bs-roformer-sw",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -607,7 +626,7 @@
         "model": "bs-roformer-sw",
         "model_name": "BS RoFormer SW 6-Stem",
         "preferred_model": "bs-roformer-sw",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -690,7 +709,40 @@
           "model_name": "MelBand RoFormer Guitar",
           "specialty": "guitar_capture",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "becruily_guitar.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "Guitar",
+                  "capability": "guitar",
+                  "label": "Guitar"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "becruily_guitar.ckpt",
+                  "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+                  "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
+                },
+                {
+                  "name": "config_guitar_becruily.yaml",
+                  "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+                  "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -705,7 +757,7 @@
         "model": "bs-roformer-sw",
         "model_name": "BS RoFormer SW 6-Stem",
         "preferred_model": "bs-roformer-sw",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -796,17 +848,83 @@
         "model": "karaoke-frazer-becruily",
         "model_name": "BS RoFormer Karaoke Frazer & Becruily",
         "preferred_model": "karaoke-frazer-becruily",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
-      "backends": [],
+      "backends": [
+        {
+          "id": "audio_separator",
+          "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
+          "ready": false,
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_roformer_karaoke_frazer_becruily.ckpt",
+              "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/bs_roformer_karaoke_frazer_becruily.ckpt",
+              "sha256": "eb90ee24c1154d83fbcfd27e96182f19e061557cc6e4746953125e08c29389f9"
+            },
+            {
+              "name": "config_karaoke_frazer_becruily.yaml",
+              "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
+              "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
       "candidates": [
         {
           "model": "karaoke-frazer-becruily",
           "model_name": "BS RoFormer Karaoke Frazer & Becruily",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "Instrumental",
+                  "capability": "backing_vocals",
+                  "label": "Backing vocals"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_roformer_karaoke_frazer_becruily.ckpt",
+                  "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/bs_roformer_karaoke_frazer_becruily.ckpt",
+                  "sha256": "eb90ee24c1154d83fbcfd27e96182f19e061557cc6e4746953125e08c29389f9"
+                },
+                {
+                  "name": "config_karaoke_frazer_becruily.yaml",
+                  "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
+                  "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -821,42 +939,83 @@
         "model": "karaoke-frazer-becruily",
         "model_name": "BS RoFormer Karaoke Frazer & Becruily",
         "preferred_model": "karaoke-frazer-becruily",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
-      "backends": [],
+      "backends": [
+        {
+          "id": "audio_separator",
+          "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
+          "ready": false,
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_roformer_karaoke_frazer_becruily.ckpt",
+              "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/bs_roformer_karaoke_frazer_becruily.ckpt",
+              "sha256": "eb90ee24c1154d83fbcfd27e96182f19e061557cc6e4746953125e08c29389f9"
+            },
+            {
+              "name": "config_karaoke_frazer_becruily.yaml",
+              "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
+              "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
       "candidates": [
         {
           "model": "karaoke-frazer-becruily",
           "model_name": "BS RoFormer Karaoke Frazer & Becruily",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "congas",
-      "label": "Congas",
-      "kind": "stem",
-      "group": "rhythm",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "Vocals",
+                  "capability": "lead_vocals",
+                  "label": "Lead vocals"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_roformer_karaoke_frazer_becruily.ckpt",
+                  "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/bs_roformer_karaoke_frazer_becruily.ckpt",
+                  "sha256": "eb90ee24c1154d83fbcfd27e96182f19e061557cc6e4746953125e08c29389f9"
+                },
+                {
+                  "name": "config_karaoke_frazer_becruily.yaml",
+                  "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
+                  "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -871,7 +1030,7 @@
         "model": "jarredou-drumsep-6",
         "model_name": "MDX23C DrumSep 6-Stem",
         "preferred_model": "jarredou-drumsep-6",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -962,17 +1121,83 @@
         "model": "jarredou-drumsep-5",
         "model_name": "MDX23C DrumSep 5-Stem",
         "preferred_model": "jarredou-drumsep-5",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
-      "backends": [],
+      "backends": [
+        {
+          "id": "audio_separator",
+          "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
+          "ready": false,
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "cymbals",
+              "capability": "cymbals",
+              "label": "Cymbals"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+            },
+            {
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
       "candidates": [
         {
           "model": "jarredou-drumsep-5",
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "cymbals",
+                  "capability": "cymbals",
+                  "label": "Cymbals"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+                },
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -987,7 +1212,7 @@
         "model": "jarredou-drumsep-6",
         "model_name": "MDX23C DrumSep 6-Stem",
         "preferred_model": "jarredou-drumsep-5",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": true
       },
       "backends": [
@@ -1030,7 +1255,40 @@
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "hh",
+                  "capability": "hihat",
+                  "label": "Hi-hat"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+                },
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         },
         {
           "model": "jarredou-drumsep-6",
@@ -1085,7 +1343,7 @@
         "model": "jarredou-drumsep-6",
         "model_name": "MDX23C DrumSep 6-Stem",
         "preferred_model": "jarredou-drumsep-5",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": true
       },
       "backends": [
@@ -1128,7 +1386,40 @@
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "kick",
+                  "capability": "kick",
+                  "label": "Kick"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+                },
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         },
         {
           "model": "jarredou-drumsep-6",
@@ -1173,31 +1464,6 @@
       ]
     },
     {
-      "id": "percussion",
-      "label": "Percussion",
-      "kind": "stem",
-      "group": "rhythm",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
       "id": "ride",
       "label": "Ride",
       "kind": "stem",
@@ -1208,7 +1474,7 @@
         "model": "jarredou-drumsep-6",
         "model_name": "MDX23C DrumSep 6-Stem",
         "preferred_model": "jarredou-drumsep-6",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -1299,7 +1565,7 @@
         "model": "jarredou-drumsep-6",
         "model_name": "MDX23C DrumSep 6-Stem",
         "preferred_model": "jarredou-drumsep-5",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": true
       },
       "backends": [
@@ -1342,7 +1608,40 @@
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "snare",
+                  "capability": "snare",
+                  "label": "Snare"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+                },
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         },
         {
           "model": "jarredou-drumsep-6",
@@ -1387,56 +1686,6 @@
       ]
     },
     {
-      "id": "tambourine",
-      "label": "Tambourine",
-      "kind": "stem",
-      "group": "rhythm",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "timpani",
-      "label": "Timpani",
-      "kind": "stem",
-      "group": "rhythm",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
       "id": "toms",
       "label": "Toms",
       "kind": "stem",
@@ -1447,7 +1696,7 @@
         "model": "jarredou-drumsep-6",
         "model_name": "MDX23C DrumSep 6-Stem",
         "preferred_model": "jarredou-drumsep-5",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": true
       },
       "backends": [
@@ -1490,7 +1739,40 @@
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "toms",
+                  "capability": "toms",
+                  "label": "Toms"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+                  "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+                },
+                {
+                  "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+                  "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         },
         {
           "model": "jarredou-drumsep-6",
@@ -1535,106 +1817,6 @@
       ]
     },
     {
-      "id": "triangle",
-      "label": "Triangle",
-      "kind": "stem",
-      "group": "rhythm",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "acoustic_guitar",
-      "label": "Acoustic Guitar",
-      "kind": "stem",
-      "group": "guitar",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "banjo",
-      "label": "Banjo",
-      "kind": "stem",
-      "group": "guitar",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "dobro",
-      "label": "Dobro",
-      "kind": "stem",
-      "group": "guitar",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
       "id": "electric_guitar",
       "label": "Electric Guitar",
       "kind": "stem",
@@ -1642,252 +1824,86 @@
       "promoted": false,
       "available": false,
       "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
+        "model": "becruily-guitar",
+        "model_name": "MelBand RoFormer Guitar",
+        "preferred_model": "becruily-guitar",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
-      "backends": [],
-      "candidates": [
+      "backends": [
         {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
+          "id": "audio_separator",
+          "reference": "becruily_guitar.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
           "ready": false,
-          "backends": []
-        },
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "Guitar",
+              "capability": "electric_guitar",
+              "label": "Electric guitar"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "becruily_guitar.ckpt",
+              "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+              "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
+            },
+            {
+              "name": "config_guitar_becruily.yaml",
+              "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+              "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
+      "candidates": [
         {
           "model": "becruily-guitar",
           "model_name": "MelBand RoFormer Guitar",
-          "specialty": "qualitative_candidate_unverified_runtime",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "mandolin",
-      "label": "Mandolin",
-      "kind": "stem",
-      "group": "guitar",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "sitar",
-      "label": "Sitar",
-      "kind": "stem",
-      "group": "guitar",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "ukulele",
-      "label": "Ukulele",
-      "kind": "stem",
-      "group": "guitar",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "digital_piano",
-      "label": "Digital Piano",
-      "kind": "stem",
-      "group": "keys",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "harpsichord",
-      "label": "Harpsichord",
-      "kind": "stem",
-      "group": "keys",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "keys",
-      "label": "Keys",
-      "kind": "stem",
-      "group": "keys",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "organ",
-      "label": "Organ",
-      "kind": "stem",
-      "group": "keys",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "synth",
-      "label": "Synth",
-      "kind": "stem",
-      "group": "keys",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "bassoon",
-      "label": "Bassoon",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "becruily_guitar.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "Guitar",
+                  "capability": "electric_guitar",
+                  "label": "Electric guitar"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "becruily_guitar.ckpt",
+                  "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+                  "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
+                },
+                {
+                  "name": "config_guitar_becruily.yaml",
+                  "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+                  "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -1899,252 +1915,86 @@
       "promoted": false,
       "available": false,
       "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
+        "model": "gilliaan-bowed-strings-duality",
+        "model_name": "BS RoFormer Bowed Strings Duality",
+        "preferred_model": "gilliaan-bowed-strings-duality",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
-      "backends": [],
-      "candidates": [
+      "backends": [
         {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
+          "id": "audio_separator",
+          "reference": "bs_bowed_str_gilliaaan.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
           "ready": false,
-          "backends": []
-        },
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "strings",
+              "capability": "bowed_strings",
+              "label": "Bowed strings"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_bowed_str_gilliaaan.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+              "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+            },
+            {
+              "name": "bs_bowed_str_gilliaaan_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+              "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
+      "candidates": [
         {
           "model": "gilliaan-bowed-strings-duality",
           "model_name": "BS RoFormer Bowed Strings Duality",
-          "specialty": "qualitative_candidate_unverified_runtime",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "brass",
-      "label": "Brass",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "cello",
-      "label": "Cello",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "clarinet",
-      "label": "Clarinet",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "double_bass",
-      "label": "Double Bass",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "flute",
-      "label": "Flute",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "french_horn",
-      "label": "French Horn",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "harp",
-      "label": "Harp",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "oboe",
-      "label": "Oboe",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "saxophone",
-      "label": "Saxophone",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_bowed_str_gilliaaan.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "strings",
+                  "capability": "bowed_strings",
+                  "label": "Bowed strings"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_bowed_str_gilliaaan.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+                  "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+                },
+                {
+                  "name": "bs_bowed_str_gilliaaan_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+                  "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -2156,377 +2006,86 @@
       "promoted": false,
       "available": false,
       "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
+        "model": "gilliaan-bowed-strings-duality",
+        "model_name": "BS RoFormer Bowed Strings Duality",
+        "preferred_model": "gilliaan-bowed-strings-duality",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
-      "backends": [],
-      "candidates": [
+      "backends": [
         {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
+          "id": "audio_separator",
+          "reference": "bs_bowed_str_gilliaaan.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
           "ready": false,
-          "backends": []
-        },
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "strings",
+              "capability": "strings",
+              "label": "Strings"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_bowed_str_gilliaaan.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+              "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+            },
+            {
+              "name": "bs_bowed_str_gilliaaan_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+              "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
+      "candidates": [
         {
           "model": "gilliaan-bowed-strings-duality",
           "model_name": "BS RoFormer Bowed Strings Duality",
-          "specialty": "qualitative_candidate_unverified_runtime",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "trombone",
-      "label": "Trombone",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
           "specialty": "recommended",
           "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "trumpet",
-      "label": "Trumpet",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "tuba",
-      "label": "Tuba",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "viola",
-      "label": "Viola",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "violin",
-      "label": "Violin",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "wind",
-      "label": "Wind",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "woodwinds",
-      "label": "Woodwinds",
-      "kind": "stem",
-      "group": "orchestral",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "accordion",
-      "label": "Accordion",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "alto_vocals",
-      "label": "Alto Vocals",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "scnet-choirsep-experimental",
-        "model_name": "SCNet ChoirSep Experimental",
-        "preferred_model": "scnet-choirsep-experimental",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "scnet-choirsep-experimental",
-          "model_name": "SCNet ChoirSep Experimental",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "bass_vocals",
-      "label": "Bass Vocals",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "scnet-choirsep-experimental",
-        "model_name": "SCNet ChoirSep Experimental",
-        "preferred_model": "scnet-choirsep-experimental",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "scnet-choirsep-experimental",
-          "model_name": "SCNet ChoirSep Experimental",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "bells",
-      "label": "Bells",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "glockenspiel",
-      "label": "Glockenspiel",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "harmonica",
-      "label": "Harmonica",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "marimba",
-      "label": "Marimba",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_bowed_str_gilliaaan.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "strings",
+                  "capability": "strings",
+                  "label": "Strings"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_bowed_str_gilliaaan.ckpt",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+                  "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+                },
+                {
+                  "name": "bs_bowed_str_gilliaaan_config.yaml",
+                  "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+                  "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -2541,7 +2100,7 @@
         "model": "bs-roformer-sw",
         "model_name": "BS RoFormer SW 6-Stem",
         "preferred_model": "bs-roformer-sw",
-        "policy": "balanced-quality-v1",
+        "policy": "ordinal-quality-v1",
         "used_fallback": false
       },
       "backends": [
@@ -2620,81 +2179,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "soprano_vocals",
-      "label": "Soprano Vocals",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "scnet-choirsep-experimental",
-        "model_name": "SCNet ChoirSep Experimental",
-        "preferred_model": "scnet-choirsep-experimental",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "scnet-choirsep-experimental",
-          "model_name": "SCNet ChoirSep Experimental",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "tenor_vocals",
-      "label": "Tenor Vocals",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "scnet-choirsep-experimental",
-        "model_name": "SCNet ChoirSep Experimental",
-        "preferred_model": "scnet-choirsep-experimental",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "scnet-choirsep-experimental",
-          "model_name": "SCNet ChoirSep Experimental",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
-    },
-    {
-      "id": "wind_chimes",
-      "label": "Wind Chimes",
-      "kind": "stem",
-      "group": "other",
-      "promoted": false,
-      "available": false,
-      "recommendation": {
-        "model": "mvsep-mega-53-stems",
-        "model_name": "MVSep Mega 53 Stems",
-        "preferred_model": "mvsep-mega-53-stems",
-        "policy": "balanced-quality-v1",
-        "used_fallback": false
-      },
-      "backends": [],
-      "candidates": [
-        {
-          "model": "mvsep-mega-53-stems",
-          "model_name": "MVSep Mega 53 Stems",
-          "specialty": "recommended",
-          "ready": false,
-          "backends": []
-        }
-      ]
     }
   ],
   "multitrack": {
@@ -2704,7 +2188,7 @@
     "recommendation": {
       "model": "bs-roformer-sw",
       "model_name": "BS RoFormer SW 6-Stem",
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "decomposition": "general_music_6"
     },
     "decomposition": {
@@ -2718,16 +2202,17 @@
         "piano",
         "other"
       ],
-      "remainder": "other",
-      "reconstruction": {
-        "mode": "residual_to_remainder",
-        "validated": true,
-        "validation_scope": "exact_checkpoint_smoke",
-        "suite": "stem-separator-synthetic-reconstruction-v1",
-        "fixture": "2s_stereo_two_tone",
-        "residual_rms_ratio": 0.0383464,
-        "residual_db": -28.3255
-      }
+      "remainder": "other"
+    },
+    "reconstruction": {
+      "available": false,
+      "mode": "residual_to_remainder",
+      "validation_scope": "exact_checkpoint_smoke",
+      "suite": "stem-separator-synthetic-reconstruction-v1",
+      "errors": [
+        "validation_scope must be general_music_suite",
+        "residual_to_remainder is not implemented by the product"
+      ]
     },
     "output_backends": {
       "vocals": [
@@ -3053,9 +2538,55 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/becruily/mel-band-roformer-guitar"
+        "repository": "https://huggingface.co/becruily/mel-band-roformer-guitar",
+        "revision": "6409e7f88754b07ef7ca3bd1b76a15f010f1672a",
+        "artifacts": [
+          {
+            "name": "becruily_guitar.ckpt",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+            "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
+          },
+          {
+            "name": "config_guitar_becruily.yaml",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+            "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
+          }
+        ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "becruily_guitar.ckpt",
+          "artifact_names": [
+            "becruily_guitar.ckpt",
+            "config_guitar_becruily.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "Guitar",
+              "capability": "guitar",
+              "label": "Guitar"
+            },
+            {
+              "runtime_key": "Guitar",
+              "capability": "electric_guitar",
+              "label": "Electric guitar"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "becruily_guitar.ckpt",
+              "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+              "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
+            },
+            {
+              "name": "config_guitar_becruily.yaml",
+              "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+              "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
+            }
+          ]
+        },
         "pymss": {
           "state": "listed",
           "validated": false,
@@ -3068,47 +2599,16 @@
               "label": "Guitar"
             }
           ],
-          "artifacts": []
-        }
-      }
-    },
-    "bs-roformer-inst-fno": {
-      "name": "BS RoFormer Instrumental FNO",
-      "architecture": "bs_roformer",
-      "status": "specialist",
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO",
-        "revision": "d23c266984fecf4fcc87866f5fb9caeec2398af4",
-        "artifacts": [
-          {
-            "name": "bs_roformer_fno.ckpt",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bs_roformer_fno.ckpt",
-            "sha256": "f35bf6d87b2863372388e85c2d9679e5b7651e5c2ddd23aab1480f7af10b90ca"
-          },
-          {
-            "name": "bsrofo_fno.yaml",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bsrofo_fno.yaml",
-            "sha256": "8e79699a9d75c31c407f02e84b00521d9c8e59ae323a4449f911dd8c10defeac"
-          }
-        ]
-      },
-      "backends": {
-        "pymss": {
-          "state": "declared",
-          "validated": false,
-          "outputs": [],
           "artifacts": [
             {
-              "name": "bs_roformer_fno.ckpt",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bs_roformer_fno.ckpt",
-              "sha256": "f35bf6d87b2863372388e85c2d9679e5b7651e5c2ddd23aab1480f7af10b90ca"
+              "name": "becruily_guitar.ckpt",
+              "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+              "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
             },
             {
-              "name": "bsrofo_fno.yaml",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bsrofo_fno.yaml",
-              "sha256": "8e79699a9d75c31c407f02e84b00521d9c8e59ae323a4449f911dd8c10defeac"
+              "name": "config_guitar_becruily.yaml",
+              "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+              "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
             }
           ]
         }
@@ -3148,24 +2648,30 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "not_listed",
+          "state": "compatible_unvalidated",
           "validated": false,
-          "outputs": [],
-          "artifacts": [
+          "model_filename": "bs_leap_xe_voc.ckpt",
+          "artifact_names": [
+            "bs_leap_xe_voc.ckpt",
+            "leap_xe_config_voc.yaml"
+          ],
+          "outputs": [
             {
-              "name": "bs_leap_xe_inst.ckpt",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_inst.ckpt",
-              "sha256": "33ee9415f491d257fa7a79f6e92a80d647bc71ed622bfef9a137b6e4250307d3"
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
             },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifacts": [
             {
               "name": "bs_leap_xe_voc.ckpt",
               "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_voc.ckpt",
               "sha256": "b739c1d2d87a81cd3dd3844ed9ad0bd678708c7a0a761a03a1aaff9af79a096d"
-            },
-            {
-              "name": "leap_xe_config_inst.yaml",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_inst.yaml",
-              "sha256": "bc188276085e07840757e5117285ead7ec5631f94329c1c6f5f0aff385adea4d"
             },
             {
               "name": "leap_xe_config_voc.yaml",
@@ -3363,15 +2869,72 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "8e2b6945d510001642bb18bb1d209f661fc5b7b0",
+        "artifacts": [
+          {
+            "name": "bs_bowed_str_gilliaaan.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+            "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+          },
+          {
+            "name": "bs_bowed_str_gilliaaan_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+            "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+          }
+        ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "bs_bowed_str_gilliaaan.ckpt",
+          "artifact_names": [
+            "bs_bowed_str_gilliaaan.ckpt",
+            "bs_bowed_str_gilliaaan_config.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "strings",
+              "capability": "strings",
+              "label": "Strings"
+            },
+            {
+              "runtime_key": "strings",
+              "capability": "bowed_strings",
+              "label": "Bowed strings"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_bowed_str_gilliaaan.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+              "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+            },
+            {
+              "name": "bs_bowed_str_gilliaaan_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+              "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+            }
+          ]
+        },
         "mvsepless": {
           "state": "declared",
           "validated": false,
           "catalog_id": "bs_bowed_str_gilliaaan",
           "outputs": [],
-          "artifacts": []
+          "artifacts": [
+            {
+              "name": "bs_bowed_str_gilliaaan.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+              "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+            },
+            {
+              "name": "bs_bowed_str_gilliaaan_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+              "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+            }
+          ]
         }
       }
     },
@@ -3416,77 +2979,6 @@
         }
       }
     },
-    "hyperace-v2-instrumental": {
-      "name": "BS RoFormer HyperACE v2 Instrumental",
-      "architecture": "bs_roformer_hyperace",
-      "status": "current",
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE",
-        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059",
-        "artifacts": [
-          {
-            "name": "bs_roformer_inst_hyperacev2.ckpt",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/bs_roformer_inst_hyperacev2.ckpt",
-            "sha256": "4d61178ef966d2b4e9ad456ffbbc6fd5b2828df07a7af32931142c1a5ff1fe6f"
-          },
-          {
-            "name": "config.yaml",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/config.yaml",
-            "sha256": "85d10906007df21ee48dbb86faa09205609274eb38ea224dce767e2844d0a934"
-          }
-        ]
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "unsupported",
-          "validated": false,
-          "outputs": [],
-          "artifacts": [
-            {
-              "name": "bs_roformer_inst_hyperacev2.ckpt",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/bs_roformer_inst_hyperacev2.ckpt",
-              "sha256": "4d61178ef966d2b4e9ad456ffbbc6fd5b2828df07a7af32931142c1a5ff1fe6f"
-            },
-            {
-              "name": "config.yaml",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/config.yaml",
-              "sha256": "85d10906007df21ee48dbb86faa09205609274eb38ea224dce767e2844d0a934"
-            }
-          ]
-        },
-        "pymss": {
-          "state": "listed",
-          "validated": false,
-          "catalog_id": "bs_roformer_inst_hyperacev2.ckpt",
-          "catalog_snapshot": "pymss-catalogue-2026-08-13",
-          "artifact_names": [
-            "bs_roformer_inst_hyperacev2.ckpt",
-            "config.yaml"
-          ],
-          "outputs": [
-            {
-              "runtime_key": "instrumental",
-              "capability": "instrumental",
-              "label": "Instrumental"
-            }
-          ],
-          "artifacts": [
-            {
-              "name": "bs_roformer_inst_hyperacev2.ckpt",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/bs_roformer_inst_hyperacev2.ckpt",
-              "sha256": "4d61178ef966d2b4e9ad456ffbbc6fd5b2828df07a7af32931142c1a5ff1fe6f"
-            },
-            {
-              "name": "config.yaml",
-              "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/config.yaml",
-              "sha256": "85d10906007df21ee48dbb86faa09205609274eb38ea224dce767e2844d0a934"
-            }
-          ]
-        }
-      }
-    },
     "jarredou-drumsep-5": {
       "name": "MDX23C DrumSep 5-Stem",
       "architecture": "mdx23c",
@@ -3510,6 +3002,54 @@
         ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+          "artifact_names": [
+            "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+            "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "kick",
+              "capability": "kick",
+              "label": "Kick"
+            },
+            {
+              "runtime_key": "snare",
+              "capability": "snare",
+              "label": "Snare"
+            },
+            {
+              "runtime_key": "toms",
+              "capability": "toms",
+              "label": "Toms"
+            },
+            {
+              "runtime_key": "hh",
+              "capability": "hihat",
+              "label": "Hi-hat"
+            },
+            {
+              "runtime_key": "cymbals",
+              "capability": "cymbals",
+              "label": "Cymbals"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+            },
+            {
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+            }
+          ]
+        },
         "mvsepless": {
           "state": "listed",
           "validated": false,
@@ -3722,6 +3262,39 @@
         ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "bs_roformer_karaoke_frazer_becruily.ckpt",
+          "artifact_names": [
+            "bs_roformer_karaoke_frazer_becruily.ckpt",
+            "config_karaoke_frazer_becruily.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_roformer_karaoke_frazer_becruily.ckpt",
+              "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/bs_roformer_karaoke_frazer_becruily.ckpt",
+              "sha256": "eb90ee24c1154d83fbcfd27e96182f19e061557cc6e4746953125e08c29389f9"
+            },
+            {
+              "name": "config_karaoke_frazer_becruily.yaml",
+              "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
+              "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
+            }
+          ]
+        },
         "mvsepless": {
           "state": "listed",
           "validated": false,
@@ -3753,320 +3326,6 @@
               "name": "config_karaoke_frazer_becruily.yaml",
               "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
               "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
-            }
-          ]
-        }
-      }
-    },
-    "mvsep-mega-53-stems": {
-      "name": "MVSep Mega 53 Stems",
-      "architecture": "bs_roformer_multistem",
-      "status": "specialist",
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/oulianov/mvsep_mega_53",
-        "revision": "911881e9f5c306e3f4f021fc6c4f61890ef32955",
-        "artifacts": [
-          {
-            "name": "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-            "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-            "sha256": "c62820893bbf86d4e734f966bd142d9157cfc8bb8e79e9d8f9ea553f3ff3519f"
-          },
-          {
-            "name": "mvsep_mega_model_bs_roformer_53_stems.yaml",
-            "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems.yaml",
-            "sha256": "7e198062a251587088adb91215a4f44ab59e67bd62fcc805cf54d6e7dfc51103"
-          }
-        ]
-      },
-      "backends": {
-        "mvsepless": {
-          "state": "listed",
-          "validated": false,
-          "catalog_id": "bs_mega_53stem_full_mvsep",
-          "catalog_snapshot": "mvsepless-catalogue-2026-08-13",
-          "artifact_names": [
-            "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-            "mvsep_mega_model_bs_roformer_53_stems.yaml"
-          ],
-          "outputs": [
-            {
-              "runtime_key": "accordion",
-              "capability": "accordion",
-              "label": "Accordion"
-            },
-            {
-              "runtime_key": "acoustic-guitar",
-              "capability": "acoustic_guitar",
-              "label": "Acoustic guitar"
-            },
-            {
-              "runtime_key": "back-vocal",
-              "capability": "backing_vocals",
-              "label": "Backing vocals"
-            },
-            {
-              "runtime_key": "banjo",
-              "capability": "banjo",
-              "label": "Banjo"
-            },
-            {
-              "runtime_key": "bass",
-              "capability": "bass",
-              "label": "Bass"
-            },
-            {
-              "runtime_key": "bassoon",
-              "capability": "bassoon",
-              "label": "Bassoon"
-            },
-            {
-              "runtime_key": "bells",
-              "capability": "bells",
-              "label": "Bells"
-            },
-            {
-              "runtime_key": "bowed_strings",
-              "capability": "bowed_strings",
-              "label": "Bowed Strings"
-            },
-            {
-              "runtime_key": "brass",
-              "capability": "brass",
-              "label": "Brass"
-            },
-            {
-              "runtime_key": "cello",
-              "capability": "cello",
-              "label": "Cello"
-            },
-            {
-              "runtime_key": "clarinet",
-              "capability": "clarinet",
-              "label": "Clarinet"
-            },
-            {
-              "runtime_key": "congas",
-              "capability": "congas",
-              "label": "Congas"
-            },
-            {
-              "runtime_key": "digital-piano",
-              "capability": "digital_piano",
-              "label": "Digital piano"
-            },
-            {
-              "runtime_key": "dobro",
-              "capability": "dobro",
-              "label": "Dobro"
-            },
-            {
-              "runtime_key": "double-bass",
-              "capability": "double_bass",
-              "label": "Double bass"
-            },
-            {
-              "runtime_key": "drums",
-              "capability": "drums",
-              "label": "Drums"
-            },
-            {
-              "runtime_key": "electric-guitar",
-              "capability": "electric_guitar",
-              "label": "Electric guitar"
-            },
-            {
-              "runtime_key": "flute",
-              "capability": "flute",
-              "label": "Flute"
-            },
-            {
-              "runtime_key": "french-horn",
-              "capability": "french_horn",
-              "label": "French horn"
-            },
-            {
-              "runtime_key": "glockenspiel",
-              "capability": "glockenspiel",
-              "label": "Glockenspiel"
-            },
-            {
-              "runtime_key": "guitar",
-              "capability": "guitar",
-              "label": "Guitar"
-            },
-            {
-              "runtime_key": "harmonica",
-              "capability": "harmonica",
-              "label": "Harmonica"
-            },
-            {
-              "runtime_key": "harp",
-              "capability": "harp",
-              "label": "Harp"
-            },
-            {
-              "runtime_key": "harpsichord",
-              "capability": "harpsichord",
-              "label": "Harpsichord"
-            },
-            {
-              "runtime_key": "hh",
-              "capability": "hihat",
-              "label": "Hi-hat"
-            },
-            {
-              "runtime_key": "keys",
-              "capability": "keys",
-              "label": "Keys"
-            },
-            {
-              "runtime_key": "kick",
-              "capability": "kick",
-              "label": "Kick"
-            },
-            {
-              "runtime_key": "lead-vocal",
-              "capability": "lead_vocals",
-              "label": "Lead vocals"
-            },
-            {
-              "runtime_key": "mandolin",
-              "capability": "mandolin",
-              "label": "Mandolin"
-            },
-            {
-              "runtime_key": "marimba",
-              "capability": "marimba",
-              "label": "Marimba"
-            },
-            {
-              "runtime_key": "oboe",
-              "capability": "oboe",
-              "label": "Oboe"
-            },
-            {
-              "runtime_key": "organ",
-              "capability": "organ",
-              "label": "Organ"
-            },
-            {
-              "runtime_key": "percussion",
-              "capability": "percussion",
-              "label": "Percussion"
-            },
-            {
-              "runtime_key": "piano",
-              "capability": "piano",
-              "label": "Piano"
-            },
-            {
-              "runtime_key": "saxophone",
-              "capability": "saxophone",
-              "label": "Saxophone"
-            },
-            {
-              "runtime_key": "sitar",
-              "capability": "sitar",
-              "label": "Sitar"
-            },
-            {
-              "runtime_key": "snare",
-              "capability": "snare",
-              "label": "Snare"
-            },
-            {
-              "runtime_key": "strings",
-              "capability": "strings",
-              "label": "Strings"
-            },
-            {
-              "runtime_key": "synth",
-              "capability": "synth",
-              "label": "Synth"
-            },
-            {
-              "runtime_key": "tambourine",
-              "capability": "tambourine",
-              "label": "Tambourine"
-            },
-            {
-              "runtime_key": "timpani",
-              "capability": "timpani",
-              "label": "Timpani"
-            },
-            {
-              "runtime_key": "toms",
-              "capability": "toms",
-              "label": "Toms"
-            },
-            {
-              "runtime_key": "triangle",
-              "capability": "triangle",
-              "label": "Triangle"
-            },
-            {
-              "runtime_key": "trombone",
-              "capability": "trombone",
-              "label": "Trombone"
-            },
-            {
-              "runtime_key": "trumpet",
-              "capability": "trumpet",
-              "label": "Trumpet"
-            },
-            {
-              "runtime_key": "tuba",
-              "capability": "tuba",
-              "label": "Tuba"
-            },
-            {
-              "runtime_key": "ukulele",
-              "capability": "ukulele",
-              "label": "Ukulele"
-            },
-            {
-              "runtime_key": "viola",
-              "capability": "viola",
-              "label": "Viola"
-            },
-            {
-              "runtime_key": "violin",
-              "capability": "violin",
-              "label": "Violin"
-            },
-            {
-              "runtime_key": "vocal",
-              "capability": "vocals",
-              "label": "Vocals"
-            },
-            {
-              "runtime_key": "wind",
-              "capability": "wind",
-              "label": "Wind"
-            },
-            {
-              "runtime_key": "wind-chimes",
-              "capability": "wind_chimes",
-              "label": "Wind chimes"
-            },
-            {
-              "runtime_key": "woodwind",
-              "capability": "woodwinds",
-              "label": "Woodwinds"
-            }
-          ],
-          "artifacts": [
-            {
-              "name": "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-              "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-              "sha256": "c62820893bbf86d4e734f966bd142d9157cfc8bb8e79e9d8f9ea553f3ff3519f"
-            },
-            {
-              "name": "mvsep_mega_model_bs_roformer_53_stems.yaml",
-              "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems.yaml",
-              "sha256": "7e198062a251587088adb91215a4f44ab59e67bd62fcc805cf54d6e7dfc51103"
             }
           ]
         }
@@ -4131,75 +3390,6 @@
         }
       }
     },
-    "scnet-choirsep-experimental": {
-      "name": "SCNet ChoirSep Experimental",
-      "architecture": "scnet",
-      "status": "experimental",
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
-        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
-        "artifacts": [
-          {
-            "name": "scnet_choirsep_exp.ckpt",
-            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp.ckpt",
-            "sha256": "1e104ce6f6733542f8356ac2e59f2b7ece49ebfd2713d1ff635806de5ceb483f"
-          },
-          {
-            "name": "scnet_choirsep_exp_config.yaml",
-            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp_config.yaml",
-            "sha256": "278ad150cd1892f9adc185f393e9e3c31d74fc7f7184fb53fa7286dd958148e4"
-          }
-        ]
-      },
-      "backends": {
-        "mvsepless": {
-          "state": "listed",
-          "validated": false,
-          "catalog_id": "scnet_choirsep_exp",
-          "catalog_snapshot": "mvsepless-catalogue-2026-08-13",
-          "artifact_names": [
-            "scnet_choirsep_exp.ckpt",
-            "scnet_choirsep_exp_config.yaml"
-          ],
-          "outputs": [
-            {
-              "runtime_key": "alto",
-              "capability": "alto_vocals",
-              "label": "Alto vocals"
-            },
-            {
-              "runtime_key": "bass",
-              "capability": "bass_vocals",
-              "label": "Bass vocals"
-            },
-            {
-              "runtime_key": "tenor",
-              "capability": "tenor_vocals",
-              "label": "Tenor vocals"
-            },
-            {
-              "runtime_key": "soprano",
-              "capability": "soprano_vocals",
-              "label": "Soprano vocals"
-            }
-          ],
-          "artifacts": [
-            {
-              "name": "scnet_choirsep_exp.ckpt",
-              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp.ckpt",
-              "sha256": "1e104ce6f6733542f8356ac2e59f2b7ece49ebfd2713d1ff635806de5ceb483f"
-            },
-            {
-              "name": "scnet_choirsep_exp_config.yaml",
-              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp_config.yaml",
-              "sha256": "278ad150cd1892f9adc185f393e9e3c31d74fc7f7184fb53fa7286dd958148e4"
-            }
-          ]
-        }
-      }
-    },
     "viperx-1297": {
       "name": "BS RoFormer Viperx 12.9755",
       "architecture": "bs_roformer",
@@ -4239,249 +3429,34 @@
     "smoke_validation_gaps": [],
     "unavailable": [
       {
-        "capability": "accordion",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "acoustic_guitar",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "alto_vocals",
-        "model": "scnet-choirsep-experimental",
-        "reason": "missing_exact_output_contract"
-      },
-      {
         "capability": "backing_vocals",
         "model": "karaoke-frazer-becruily",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "banjo",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "bass_vocals",
-        "model": "scnet-choirsep-experimental",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "bassoon",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "bells",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
+        "reason": "smoke_validation_pending"
       },
       {
         "capability": "bowed_strings",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "brass",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "cello",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "clarinet",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "congas",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
+        "model": "gilliaan-bowed-strings-duality",
+        "reason": "smoke_validation_pending"
       },
       {
         "capability": "cymbals",
         "model": "jarredou-drumsep-5",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "digital_piano",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "dobro",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "double_bass",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
+        "reason": "smoke_validation_pending"
       },
       {
         "capability": "electric_guitar",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "flute",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "french_horn",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "glockenspiel",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "harmonica",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "harp",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "harpsichord",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "keys",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
+        "model": "becruily-guitar",
+        "reason": "smoke_validation_pending"
       },
       {
         "capability": "lead_vocals",
         "model": "karaoke-frazer-becruily",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "mandolin",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "marimba",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "oboe",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "organ",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "percussion",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "saxophone",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "sitar",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "soprano_vocals",
-        "model": "scnet-choirsep-experimental",
-        "reason": "missing_exact_output_contract"
+        "reason": "smoke_validation_pending"
       },
       {
         "capability": "strings",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "synth",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "tambourine",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "tenor_vocals",
-        "model": "scnet-choirsep-experimental",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "timpani",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "triangle",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "trombone",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "trumpet",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "tuba",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "ukulele",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "viola",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "violin",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "wind",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "wind_chimes",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
-      },
-      {
-        "capability": "woodwinds",
-        "model": "mvsep-mega-53-stems",
-        "reason": "missing_exact_output_contract"
+        "model": "gilliaan-bowed-strings-duality",
+        "reason": "smoke_validation_pending"
       }
     ]
   }

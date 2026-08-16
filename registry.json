@@ -1,5 +1,5 @@
 {
-  "schema": 3,
+  "schema": 4,
   "generated_at": "2026-08-16",
   "baseline": false,
   "scope": {
@@ -32,14 +32,18 @@
       "source": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/models.json",
       "fetched_at": "2026-08-13",
       "sha256": "b36e8b285331b6ad987ea83ba2ce461995c4043147c26491cb6d259c1ed750e1"
+    },
+    "deton24-google-doc-2026-08-16": {
+      "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+      "fetched_at": "2026-08-16",
+      "sha256": "6aa8d27ff012d65c3c428972973d2bdd0fd9b6feea69fe04a73fd7b7f60323ae",
+      "tiers": {
+        "qualitative": "tier_2",
+        "measured": "tier_2"
+      }
     }
   },
-  "evidence_policy": {
-    "primary_sources": [
-      "deton24-google-doc-2026-08-12",
-      "mvsep-quality-checker"
-    ]
-  },
+  "evidence_policy": {},
   "metric_definitions": {
     "sdr_db": {
       "label": "SDR",
@@ -107,77 +111,45 @@
       "unit": "score",
       "better": "higher"
     },
+    "artifact_control": {
+      "label": "Artifact Control",
+      "kind": "ordinal"
+    },
     "bleed_control": {
-      "label": "Bleed control",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+      "label": "Bleed Control",
+      "kind": "ordinal"
+    },
+    "drumsep_input_suitability": {
+      "label": "Drumsep Input Suitability",
+      "kind": "ordinal"
     },
     "fullness_preservation": {
-      "label": "Fullness / target preservation",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+      "label": "Fullness Preservation",
+      "kind": "ordinal"
     },
-    "artifact_control": {
-      "label": "Artifact control",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+    "overall_quality": {
+      "label": "Overall Quality",
+      "kind": "ordinal"
     },
     "robustness": {
       "label": "Robustness",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+      "kind": "ordinal"
     },
-    "tonal_fidelity": {
-      "label": "Tonal fidelity",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
-    },
-    "transient_preservation": {
-      "label": "Transient preservation",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+    "sfx_vocal_handling": {
+      "label": "Sfx Vocal Handling",
+      "kind": "ordinal"
     },
     "target_isolation": {
-      "label": "Target isolation",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+      "label": "Target Isolation",
+      "kind": "ordinal"
     },
-    "reconstruction_fidelity": {
-      "label": "Reconstruction fidelity",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+    "target_preservation": {
+      "label": "Target Preservation",
+      "kind": "ordinal"
     },
-    "reverb_control": {
-      "label": "Reverb control",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
-    },
-    "noise_control": {
-      "label": "Noise control",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
-    },
-    "speech_preservation": {
-      "label": "Speech preservation",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
-    },
-    "music_rejection": {
-      "label": "Music rejection",
-      "kind": "semantic",
-      "unit": "score",
-      "better": "higher"
+    "tonal_fidelity": {
+      "label": "Tonal Fidelity",
+      "kind": "ordinal"
     }
   },
   "benchmark_suites": {
@@ -353,56 +325,6 @@
           }
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "becruily-deux-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 93,
-            "artifact_control": 82,
-            "robustness": 91,
-            "tonal_fidelity": 92
-          },
-          "confidence": 0.9,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 49,
-            "line_end": 83
-          },
-          "tags": [
-            "all_rounder",
-            "preserves_instruments",
-            "no_phase_fix_required",
-            "vhs_weakness"
-          ]
-        },
-        {
-          "id": "becruily-deux-deton24-2",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 67,
-            "fullness_preservation": 91,
-            "artifact_control": 80,
-            "robustness": 84,
-            "tonal_fidelity": 89
-          },
-          "confidence": 0.82,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 49,
-            "line_end": 83
-          },
-          "tags": [
-            "all_rounder",
-            "high_fullness"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/becruily/mel-band-roformer-deux"
@@ -449,8 +371,25 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "not_listed",
-          "validated": false
+          "state": "compatible_unvalidated",
+          "model_filename": "bs_leap_xe_voc.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "bs_leap_xe_voc.ckpt",
+            "leap_xe_config_voc.yaml"
+          ]
         },
         "mlx_audio_separator": {
           "state": "unknown",
@@ -495,259 +434,11 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "bs-roformer-leap-xe-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 90,
-            "artifact_control": 80,
-            "robustness": 68,
-            "tonal_fidelity": 84
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 180,
-            "line_end": 240
-          },
-          "tags": [
-            "full",
-            "low_noise",
-            "song_dependent",
-            "bv_bleed"
-          ]
-        },
-        {
-          "id": "bs-roformer-leap-xe-deton24-2",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 85,
-            "fullness_preservation": 67,
-            "artifact_control": 84,
-            "robustness": 70,
-            "tonal_fidelity": 82
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 180,
-            "line_end": 240
-          },
-          "tags": [
-            "clean",
-            "misses_backing_vocals"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/pcunwa/BS-Roformer-Leap"
       ],
       "released_at": "2026-06-30"
-    },
-    {
-      "id": "hyperace-v2-instrumental",
-      "name": "BS RoFormer HyperACE v2 Instrumental",
-      "author": "Unwa",
-      "architecture": "bs_roformer_hyperace",
-      "status": "current",
-      "tasks": [
-        "instrumental"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE",
-        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059",
-        "artifacts": [
-          {
-            "name": "bs_roformer_inst_hyperacev2.ckpt",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/bs_roformer_inst_hyperacev2.ckpt",
-            "sha256": "4d61178ef966d2b4e9ad456ffbbc6fd5b2828df07a7af32931142c1a5ff1fe6f"
-          },
-          {
-            "name": "config.yaml",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/config.yaml",
-            "sha256": "85d10906007df21ee48dbb86faa09205609274eb38ea224dce767e2844d0a934"
-          }
-        ]
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "unsupported",
-          "validated": false
-        },
-        "pymss": {
-          "state": "listed",
-          "catalog_id": "bs_roformer_inst_hyperacev2.ckpt",
-          "validated": false,
-          "outputs": [
-            {
-              "runtime_key": "instrumental",
-              "capability": "instrumental",
-              "label": "Instrumental"
-            }
-          ],
-          "artifact_names": [
-            "bs_roformer_inst_hyperacev2.ckpt",
-            "config.yaml"
-          ],
-          "catalog_snapshot": "pymss-catalogue-2026-08-13"
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "instrumental",
-          "values": {
-            "sdr_db": 17.4007,
-            "si_sdr_db": 17.3154,
-            "l1_freq": 39.9287,
-            "log_wmse": 14.1031,
-            "aura_stft": 16.567,
-            "aura_mrstft": 22.8199,
-            "mvsep_bleedless": 37.8745,
-            "mvsep_fullness": 38.0255
-          },
-          "source": "https://mvsep.com/quality_checker/entry/9475",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "hyperace-v2-instrumental-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 74,
-            "fullness_preservation": 95,
-            "artifact_control": 58,
-            "robustness": 75,
-            "tonal_fidelity": 79
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 84,
-            "line_end": 108
-          },
-          "tags": [
-            "very_full",
-            "noisy",
-            "acoustic_strength",
-            "synth_muffling"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/pcunwa/BS-Roformer-HyperACE"
-      ]
-    },
-    {
-      "id": "hyperace-v2-vocals",
-      "name": "BS RoFormer HyperACE v2 Vocals",
-      "author": "Unwa",
-      "architecture": "bs_roformer_hyperace",
-      "status": "current",
-      "tasks": [
-        "vocals"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE",
-        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059",
-        "artifacts": [
-          {
-            "name": "bs_roformer_voc_hyperacev2.ckpt",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_voc/bs_roformer_voc_hyperacev2.ckpt",
-            "sha256": "54cf516f621f2f460bf660ed137e244b8931bf7a2ce85ddceecff816dbc4d668"
-          },
-          {
-            "name": "config.yaml",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_voc/config.yaml",
-            "sha256": "033e57abee226a480ef410e0631b9fe00e8b7bc9a3bb5fe55659d0b43a238701"
-          }
-        ]
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "unsupported",
-          "validated": false
-        },
-        "pymss": {
-          "state": "listed",
-          "catalog_id": "bs_roformer_voc_hyperacev2.ckpt",
-          "validated": false,
-          "outputs": [
-            {
-              "runtime_key": "vocals",
-              "capability": "vocals",
-              "label": "Vocals"
-            }
-          ],
-          "artifact_names": [
-            "bs_roformer_voc_hyperacev2.ckpt",
-            "config.yaml"
-          ],
-          "catalog_snapshot": "pymss-catalogue-2026-08-13"
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "vocals",
-          "values": {
-            "sdr_db": 11.3957,
-            "si_sdr_db": 10.9629,
-            "l1_freq": 39.5419,
-            "log_wmse": 14.3935,
-            "aura_stft": 10.2444,
-            "aura_mrstft": 12.8111,
-            "mvsep_bleedless": 34.0758,
-            "mvsep_fullness": 19.0952
-          },
-          "source": "https://mvsep.com/quality_checker/entry/9470",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "hyperace-v2-vocals-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 83,
-            "fullness_preservation": 86,
-            "artifact_control": 83,
-            "robustness": 78,
-            "tonal_fidelity": 86
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1320,
-            "line_end": 1410
-          },
-          "tags": [
-            "all_rounder",
-            "full"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/pcunwa/BS-Roformer-HyperACE"
-      ]
     },
     {
       "id": "resurrection-instrumental",
@@ -816,33 +507,6 @@
           },
           "source": "https://mvsep.com/quality_checker/entry/8816",
           "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "resurrection-instrumental-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 87,
-            "artifact_control": 78,
-            "robustness": 84,
-            "tonal_fidelity": 82
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 109,
-            "line_end": 130
-          },
-          "tags": [
-            "clean_fullness",
-            "piano_guitar_strength",
-            "muddy",
-            "can_drop_instruments"
-          ]
         }
       ],
       "sources": [
@@ -919,32 +583,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "resurrection-vocals-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 90,
-            "fullness_preservation": 74,
-            "artifact_control": 86,
-            "robustness": 84,
-            "tonal_fidelity": 84
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1328,
-            "line_end": 1410
-          },
-          "tags": [
-            "bleedless",
-            "fast",
-            "all_rounder"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/pcunwa/BS-Roformer-Resurrection"
@@ -1014,32 +652,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "mel-v1e-plus-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 62,
-            "fullness_preservation": 96,
-            "artifact_control": 48,
-            "robustness": 72,
-            "tonal_fidelity": 79
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 132,
-            "line_end": 152
-          },
-          "tags": [
-            "maximum_fullness",
-            "noise",
-            "phase_fix_recommended"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/pcunwa/Mel-Band-Roformer-Inst"
@@ -1073,6 +685,22 @@
         ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "inst_gaboxFlowersV10.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "inst_gaboxFlowersV10.ckpt",
+            "v10.yaml"
+          ]
+        },
         "pymss": {
           "state": "listed",
           "catalog_id": "inst_gaboxFlowersV10.ckpt",
@@ -1102,33 +730,6 @@
           },
           "source": "https://mvsep.com/quality_checker/",
           "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "gabox-flowers-v10-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 68,
-            "fullness_preservation": 94,
-            "artifact_control": 64,
-            "robustness": 82,
-            "tonal_fidelity": 88
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 198,
-            "line_end": 212
-          },
-          "tags": [
-            "clarity",
-            "vocal_chops",
-            "sfx_preservation",
-            "buzzing"
-          ]
         }
       ],
       "sources": [
@@ -1194,112 +795,9 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "gabox-fv7z-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 94,
-            "fullness_preservation": 72,
-            "artifact_control": 91,
-            "robustness": 77,
-            "tonal_fidelity": 80
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 223,
-            "line_end": 239
-          },
-          "tags": [
-            "bleedless",
-            "low_noise",
-            "drums_preserved"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/GaboxR67/MelBandRoformers"
-      ]
-    },
-    {
-      "id": "bs-roformer-inst-fno",
-      "name": "BS RoFormer Instrumental FNO",
-      "author": "Unwa",
-      "architecture": "bs_roformer",
-      "status": "specialist",
-      "tasks": [
-        "instrumental"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO",
-        "revision": "d23c266984fecf4fcc87866f5fb9caeec2398af4",
-        "artifacts": [
-          {
-            "name": "bs_roformer_fno.ckpt",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bs_roformer_fno.ckpt",
-            "sha256": "f35bf6d87b2863372388e85c2d9679e5b7651e5c2ddd23aab1480f7af10b90ca"
-          },
-          {
-            "name": "bsrofo_fno.yaml",
-            "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bsrofo_fno.yaml",
-            "sha256": "8e79699a9d75c31c407f02e84b00521d9c8e59ae323a4449f911dd8c10defeac"
-          }
-        ]
-      },
-      "backends": {
-        "pymss": {
-          "state": "declared",
-          "validated": false
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "instrumental",
-          "values": {
-            "sdr_db": 17.6,
-            "mvsep_bleedless": 42.87,
-            "mvsep_fullness": 32.03
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "bs-roformer-inst-fno-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 89,
-            "fullness_preservation": 78,
-            "artifact_control": 88,
-            "robustness": 78,
-            "tonal_fidelity": 83
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1500,
-            "line_end": 1650
-          },
-          "tags": [
-            "public_high_sdr",
-            "clean",
-            "fullness_tradeoff"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO"
       ]
     },
     {
@@ -1364,32 +862,6 @@
           },
           "source": "https://mvsep.com/quality_checker/",
           "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "becruily-instrumental-2024-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 87,
-            "fullness_preservation": 82,
-            "artifact_control": 84,
-            "robustness": 76,
-            "tonal_fidelity": 85
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 271,
-            "line_end": 287
-          },
-          "tags": [
-            "clean",
-            "vocal_chops",
-            "low_passed_vocals_weakness"
-          ]
         }
       ],
       "sources": [
@@ -1458,55 +930,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "viperx-1297-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 79,
-            "fullness_preservation": 67,
-            "artifact_control": 73,
-            "robustness": 70,
-            "tonal_fidelity": 68
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 5310,
-            "line_end": 5335
-          },
-          "tags": [
-            "historical",
-            "muddy",
-            "instrument_recognition_weakness"
-          ]
-        },
-        {
-          "id": "viperx-1297-deton24-2",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 72,
-            "artifact_control": 79,
-            "robustness": 77,
-            "tonal_fidelity": 76
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 5310,
-            "line_end": 5335
-          },
-          "tags": [
-            "historical",
-            "voice_cleaning"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
@@ -1573,56 +996,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "viperx-1296-deton24-1",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 78,
-            "fullness_preservation": 70,
-            "artifact_control": 74,
-            "robustness": 71,
-            "tonal_fidelity": 70
-          },
-          "confidence": 0.7,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 5310,
-            "line_end": 5335
-          },
-          "tags": [
-            "historical",
-            "phase_fixer_reference",
-            "less_instrumental_than_1297"
-          ]
-        },
-        {
-          "id": "viperx-1296-deton24-2",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 83,
-            "fullness_preservation": 76,
-            "artifact_control": 78,
-            "robustness": 76,
-            "tonal_fidelity": 75
-          },
-          "confidence": 0.74,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 5310,
-            "line_end": 5335
-          },
-          "tags": [
-            "historical",
-            "better_vocals_than_1297",
-            "voice_cleaning"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://github.com/nomadkaraoke/python-audio-separator",
@@ -1676,53 +1049,6 @@
           },
           "source": "https://github.com/nomadkaraoke/python-audio-separator",
           "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "kimberley-melband-vocals-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 82,
-            "fullness_preservation": 78,
-            "artifact_control": 80,
-            "robustness": 78,
-            "tonal_fidelity": 81
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 7558,
-            "line_end": 7560
-          },
-          "tags": [
-            "historical_all_rounder"
-          ]
-        },
-        {
-          "id": "kimberley-melband-vocals-deton24-2",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 92,
-            "fullness_preservation": 66,
-            "artifact_control": 72,
-            "robustness": 72,
-            "tonal_fidelity": 70
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 7558,
-            "line_end": 7560
-          },
-          "tags": [
-            "inverted_vocal_model",
-            "muddy"
-          ]
         }
       ],
       "sources": [
@@ -1795,31 +1121,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "big-beta-4-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 80,
-            "fullness_preservation": 80,
-            "artifact_control": 78,
-            "robustness": 78,
-            "tonal_fidelity": 81
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1156,
-            "line_end": 1170
-          },
-          "tags": [
-            "historical",
-            "balanced"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/pcunwa/Mel-Band-Roformer-big"
@@ -1878,53 +1179,6 @@
         }
       },
       "benchmarks": [],
-      "semantic_evidence": [
-        {
-          "id": "big-beta-5e-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 82,
-            "fullness_preservation": 84,
-            "artifact_control": 84,
-            "robustness": 84,
-            "tonal_fidelity": 84
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 8204,
-            "line_end": 8225
-          },
-          "tags": [
-            "current_all_rounder"
-          ]
-        },
-        {
-          "id": "big-beta-5e-deton24-2",
-          "task": "instrumental",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 86,
-            "fullness_preservation": 68,
-            "artifact_control": 82,
-            "robustness": 82,
-            "tonal_fidelity": 76
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 8204,
-            "line_end": 8225
-          },
-          "tags": [
-            "clean",
-            "muddy"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/pcunwa/Mel-Band-Roformer-big"
@@ -1993,53 +1247,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "big-beta-6x-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 82,
-            "fullness_preservation": 86,
-            "artifact_control": 81,
-            "robustness": 78,
-            "tonal_fidelity": 83
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1328,
-            "line_end": 1370
-          },
-          "tags": [
-            "fullness",
-            "rvc"
-          ]
-        },
-        {
-          "id": "big-beta-6x-deton24-2",
-          "task": "rvc_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 88,
-            "artifact_control": 84,
-            "robustness": 84,
-            "tonal_fidelity": 87
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1328,
-            "line_end": 1370
-          },
-          "tags": [
-            "rvc_recommended"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/pcunwa/Mel-Band-Roformer-big"
@@ -2075,6 +1282,27 @@
         ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "bs_roformer_karaoke_frazer_becruily.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifact_names": [
+            "bs_roformer_karaoke_frazer_becruily.ckpt",
+            "config_karaoke_frazer_becruily.yaml"
+          ]
+        },
         "mvsepless": {
           "state": "listed",
           "catalog_id": "bs_karaoke_becruily",
@@ -2128,53 +1356,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "karaoke-frazer-becruily-deton24-1",
-          "task": "lead_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 88,
-            "fullness_preservation": 86,
-            "artifact_control": 84,
-            "robustness": 85,
-            "target_isolation": 92
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 9913,
-            "line_end": 10290
-          },
-          "tags": [
-            "stereo_lead_strength",
-            "harmonies"
-          ]
-        },
-        {
-          "id": "karaoke-frazer-becruily-deton24-2",
-          "task": "backing_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 90,
-            "artifact_control": 82,
-            "robustness": 82,
-            "target_isolation": 89
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 9913,
-            "line_end": 10290
-          },
-          "tags": [
-            "harmony_preservation"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/becruily/bs-roformer-karaoke"
@@ -2210,6 +1391,27 @@
         ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "bs_karaoke_anvuew.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifact_names": [
+            "bs_karaoke_anvuew.ckpt",
+            "bs_karaoke_anvuew_config.yaml"
+          ]
+        },
         "mvsepless": {
           "state": "listed",
           "catalog_id": "bs_karaoke_anvuew",
@@ -2258,52 +1460,6 @@
           },
           "source": "https://mvsep.com/quality_checker/entry/9180",
           "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "karaoke-anvuew-deton24-1",
-          "task": "lead_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 86,
-            "fullness_preservation": 84,
-            "artifact_control": 85,
-            "robustness": 86,
-            "target_isolation": 88
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 9913,
-            "line_end": 10290
-          },
-          "tags": [
-            "consistent"
-          ]
-        },
-        {
-          "id": "karaoke-anvuew-deton24-2",
-          "task": "backing_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 82,
-            "fullness_preservation": 86,
-            "artifact_control": 84,
-            "robustness": 84,
-            "target_isolation": 86
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 9913,
-            "line_end": 10290
-          },
-          "tags": [
-            "full_lead"
-          ]
         }
       ],
       "sources": [
@@ -2365,54 +1521,6 @@
         }
       },
       "benchmarks": [],
-      "semantic_evidence": [
-        {
-          "id": "mel-karaoke-becruily-deton24-1",
-          "task": "lead_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 82,
-            "fullness_preservation": 92,
-            "artifact_control": 82,
-            "robustness": 76,
-            "target_isolation": 90
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 9913,
-            "line_end": 10290
-          },
-          "tags": [
-            "full",
-            "lead_background_understanding",
-            "preprocess_recommended"
-          ]
-        },
-        {
-          "id": "mel-karaoke-becruily-deton24-2",
-          "task": "backing_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 80,
-            "fullness_preservation": 92,
-            "artifact_control": 80,
-            "robustness": 74,
-            "target_isolation": 90
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 9913,
-            "line_end": 10290
-          },
-          "tags": [
-            "dual_model"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/becruily/mel-band-roformer-karaoke"
@@ -2534,120 +1642,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "bs-roformer-sw-deton24-1",
-          "task": "drums",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 93,
-            "fullness_preservation": 72,
-            "artifact_control": 84,
-            "robustness": 88,
-            "transient_preservation": 84
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10566,
-            "line_end": 10640
-          },
-          "tags": [
-            "percussive_overcapture",
-            "live_recording_strength"
-          ]
-        },
-        {
-          "id": "bs-roformer-sw-deton24-2",
-          "task": "bass",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 89,
-            "fullness_preservation": 90,
-            "artifact_control": 86,
-            "robustness": 84,
-            "tonal_fidelity": 86
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10566,
-            "line_end": 10640
-          },
-          "tags": [
-            "high_sdr",
-            "electric_bass_edge_case"
-          ]
-        },
-        {
-          "id": "bs-roformer-sw-deton24-3",
-          "task": "piano",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 84,
-            "fullness_preservation": 82,
-            "artifact_control": 84,
-            "robustness": 86,
-            "tonal_fidelity": 87
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10566,
-            "line_end": 10640
-          },
-          "tags": [
-            "best_single_6stem"
-          ]
-        },
-        {
-          "id": "bs-roformer-sw-deton24-4",
-          "task": "guitar",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 86,
-            "fullness_preservation": 88,
-            "artifact_control": 86,
-            "robustness": 88,
-            "tonal_fidelity": 90
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10566,
-            "line_end": 10640
-          },
-          "tags": [
-            "strong_guitar"
-          ]
-        },
-        {
-          "id": "bs-roformer-sw-deton24-5",
-          "task": "multitrack",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 86,
-            "fullness_preservation": 86,
-            "artifact_control": 84,
-            "robustness": 88,
-            "reconstruction_fidelity": 60
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10566,
-            "line_end": 10640
-          },
-          "tags": [
-            "best_single_six_stem"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
@@ -2710,6 +1704,42 @@
         ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "kick",
+              "capability": "kick",
+              "label": "Kick"
+            },
+            {
+              "runtime_key": "snare",
+              "capability": "snare",
+              "label": "Snare"
+            },
+            {
+              "runtime_key": "toms",
+              "capability": "toms",
+              "label": "Toms"
+            },
+            {
+              "runtime_key": "hh",
+              "capability": "hihat",
+              "label": "Hi-hat"
+            },
+            {
+              "runtime_key": "cymbals",
+              "capability": "cymbals",
+              "label": "Cymbals"
+            }
+          ],
+          "artifact_names": [
+            "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+            "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml"
+          ]
+        },
         "mvsepless": {
           "state": "listed",
           "catalog_id": "mdx23c_drumsep_5stem_aufr33_jarredou",
@@ -2795,33 +1825,6 @@
           },
           "source": "https://mvsep.com/quality_checker/",
           "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "jarredou-drumsep-5-deton24-1",
-          "task": "drum_substems",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 78,
-            "fullness_preservation": 88,
-            "artifact_control": 72,
-            "robustness": 78,
-            "transient_preservation": 86,
-            "target_isolation": 86
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10743,
-            "line_end": 10792
-          },
-          "tags": [
-            "higher_sdr",
-            "fullness_side",
-            "toms_artifacts"
-          ]
         }
       ],
       "sources": [
@@ -3002,32 +2005,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "jarredou-drumsep-6-deton24-1",
-          "task": "drum_substems",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 86,
-            "fullness_preservation": 75,
-            "artifact_control": 74,
-            "robustness": 80,
-            "transient_preservation": 84,
-            "target_isolation": 82
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 19417,
-            "line_end": 19750
-          },
-          "tags": [
-            "better_debleeding",
-            "ride_crash_split"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
@@ -3119,76 +2096,6 @@
           "config": {}
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "htdemucs-ft-deton24-1",
-          "task": "bass",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 82,
-            "fullness_preservation": 87,
-            "artifact_control": 84,
-            "robustness": 91,
-            "tonal_fidelity": 89
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10793,
-            "line_end": 10920
-          },
-          "tags": [
-            "waveform_strength",
-            "historical"
-          ]
-        },
-        {
-          "id": "htdemucs-ft-deton24-2",
-          "task": "drums",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 78,
-            "fullness_preservation": 82,
-            "artifact_control": 76,
-            "robustness": 88,
-            "transient_preservation": 80
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10793,
-            "line_end": 10920
-          },
-          "tags": [
-            "compressed",
-            "good_drumsep_input"
-          ]
-        },
-        {
-          "id": "htdemucs-ft-deton24-3",
-          "task": "multitrack",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 78,
-            "fullness_preservation": 80,
-            "artifact_control": 78,
-            "robustness": 91,
-            "reconstruction_fidelity": 60
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10793,
-            "line_end": 10920
-          },
-          "tags": [
-            "historical_baseline"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://github.com/facebookresearch/demucs"
@@ -3212,547 +2119,6 @@
       }
     },
     {
-      "id": "scnet-xl-ihf-4stem",
-      "name": "SCNet XL IHF 4-Stem",
-      "author": "ZFTurbo",
-      "architecture": "scnet",
-      "status": "historical",
-      "tasks": [
-        "vocals",
-        "drums",
-        "bass",
-        "other",
-        "multitrack"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
-        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
-        "artifacts": [
-          {
-            "name": "scnet_xl_ihf_4stem_zfturbo.ckpt",
-            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_xl_ihf_4stem_zfturbo.ckpt",
-            "sha256": "ac25975f0f5704f3d1a3c3c251505b7a0f417a22eafe82773440ee4f7e14b74f"
-          },
-          {
-            "name": "scnet_xl_ihf_4stem_zfturbo_config.yaml",
-            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_xl_ihf_4stem_zfturbo_config.yaml",
-            "sha256": "ec3b0a6106024d0509782c4884e44c28c4d3a790c637de0d955de18f8774d2d9"
-          }
-        ]
-      },
-      "backends": {
-        "mvsepless": {
-          "state": "listed",
-          "catalog_id": "scnet_xl_ihf_4stem_zfturbo",
-          "validated": false,
-          "outputs": [
-            {
-              "runtime_key": "vocals",
-              "capability": "vocals",
-              "label": "Vocals"
-            },
-            {
-              "runtime_key": "drums",
-              "capability": "drums",
-              "label": "Drums"
-            },
-            {
-              "runtime_key": "bass",
-              "capability": "bass",
-              "label": "Bass"
-            },
-            {
-              "runtime_key": "other",
-              "capability": "other",
-              "label": "Other"
-            }
-          ],
-          "artifact_names": [
-            "scnet_xl_ihf_4stem_zfturbo.ckpt",
-            "scnet_xl_ihf_4stem_zfturbo_config.yaml"
-          ],
-          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "bass",
-          "values": {
-            "sdr_db": 11.94
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        },
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "drums",
-          "values": {
-            "sdr_db": 11.58
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        },
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "other",
-          "values": {
-            "sdr_db": 6.49
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        },
-        {
-          "suite": "mvsep-multisong-v1",
-          "stem": "vocals",
-          "values": {
-            "sdr_db": 9.69
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "scnet-xl-ihf-4stem-deton24-1",
-          "task": "multitrack",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 78,
-            "fullness_preservation": 84,
-            "artifact_control": 74,
-            "robustness": 72,
-            "reconstruction_fidelity": 58
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10840,
-            "line_end": 10920
-          },
-          "tags": [
-            "busy_mix_strength",
-            "buzzing_risk"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ],
-      "decompositions": {
-        "general_music_4": {
-          "scope": "general_music",
-          "hierarchy": "top_level",
-          "outputs": [
-            "vocals",
-            "drums",
-            "bass",
-            "other"
-          ],
-          "remainder": "other",
-          "reconstruction": {
-            "mode": "residual_to_remainder",
-            "validated": false
-          }
-        }
-      }
-    },
-    {
-      "id": "mvsep-mega-53-stems",
-      "name": "MVSep Mega 53 Stems",
-      "author": "MVSep Team",
-      "architecture": "bs_roformer_multistem",
-      "status": "specialist",
-      "tasks": [
-        "vocals",
-        "lead_vocals",
-        "backing_vocals",
-        "drums",
-        "bass",
-        "kick",
-        "snare",
-        "toms",
-        "hihat",
-        "electric_guitar",
-        "acoustic_guitar",
-        "guitar",
-        "piano",
-        "strings",
-        "bowed_strings",
-        "wind",
-        "saxophone",
-        "synth",
-        "organ",
-        "percussion",
-        "accordion",
-        "banjo",
-        "bassoon",
-        "bells",
-        "brass",
-        "cello",
-        "clarinet",
-        "congas",
-        "digital_piano",
-        "dobro",
-        "double_bass",
-        "flute",
-        "french_horn",
-        "glockenspiel",
-        "harmonica",
-        "harp",
-        "harpsichord",
-        "keys",
-        "mandolin",
-        "marimba",
-        "oboe",
-        "sitar",
-        "tambourine",
-        "timpani",
-        "triangle",
-        "trombone",
-        "trumpet",
-        "tuba",
-        "ukulele",
-        "viola",
-        "violin",
-        "wind_chimes",
-        "woodwinds"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/oulianov/mvsep_mega_53",
-        "revision": "911881e9f5c306e3f4f021fc6c4f61890ef32955",
-        "artifacts": [
-          {
-            "name": "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-            "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-            "sha256": "c62820893bbf86d4e734f966bd142d9157cfc8bb8e79e9d8f9ea553f3ff3519f"
-          },
-          {
-            "name": "mvsep_mega_model_bs_roformer_53_stems.yaml",
-            "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems.yaml",
-            "sha256": "7e198062a251587088adb91215a4f44ab59e67bd62fcc805cf54d6e7dfc51103"
-          }
-        ]
-      },
-      "backends": {
-        "mvsepless": {
-          "state": "listed",
-          "catalog_id": "bs_mega_53stem_full_mvsep",
-          "validated": false,
-          "outputs": [
-            {
-              "runtime_key": "accordion",
-              "capability": "accordion",
-              "label": "Accordion"
-            },
-            {
-              "runtime_key": "acoustic-guitar",
-              "capability": "acoustic_guitar",
-              "label": "Acoustic guitar"
-            },
-            {
-              "runtime_key": "back-vocal",
-              "capability": "backing_vocals",
-              "label": "Backing vocals"
-            },
-            {
-              "runtime_key": "banjo",
-              "capability": "banjo",
-              "label": "Banjo"
-            },
-            {
-              "runtime_key": "bass",
-              "capability": "bass",
-              "label": "Bass"
-            },
-            {
-              "runtime_key": "bassoon",
-              "capability": "bassoon",
-              "label": "Bassoon"
-            },
-            {
-              "runtime_key": "bells",
-              "capability": "bells",
-              "label": "Bells"
-            },
-            {
-              "runtime_key": "bowed_strings",
-              "capability": "bowed_strings",
-              "label": "Bowed Strings"
-            },
-            {
-              "runtime_key": "brass",
-              "capability": "brass",
-              "label": "Brass"
-            },
-            {
-              "runtime_key": "cello",
-              "capability": "cello",
-              "label": "Cello"
-            },
-            {
-              "runtime_key": "clarinet",
-              "capability": "clarinet",
-              "label": "Clarinet"
-            },
-            {
-              "runtime_key": "congas",
-              "capability": "congas",
-              "label": "Congas"
-            },
-            {
-              "runtime_key": "digital-piano",
-              "capability": "digital_piano",
-              "label": "Digital piano"
-            },
-            {
-              "runtime_key": "dobro",
-              "capability": "dobro",
-              "label": "Dobro"
-            },
-            {
-              "runtime_key": "double-bass",
-              "capability": "double_bass",
-              "label": "Double bass"
-            },
-            {
-              "runtime_key": "drums",
-              "capability": "drums",
-              "label": "Drums"
-            },
-            {
-              "runtime_key": "electric-guitar",
-              "capability": "electric_guitar",
-              "label": "Electric guitar"
-            },
-            {
-              "runtime_key": "flute",
-              "capability": "flute",
-              "label": "Flute"
-            },
-            {
-              "runtime_key": "french-horn",
-              "capability": "french_horn",
-              "label": "French horn"
-            },
-            {
-              "runtime_key": "glockenspiel",
-              "capability": "glockenspiel",
-              "label": "Glockenspiel"
-            },
-            {
-              "runtime_key": "guitar",
-              "capability": "guitar",
-              "label": "Guitar"
-            },
-            {
-              "runtime_key": "harmonica",
-              "capability": "harmonica",
-              "label": "Harmonica"
-            },
-            {
-              "runtime_key": "harp",
-              "capability": "harp",
-              "label": "Harp"
-            },
-            {
-              "runtime_key": "harpsichord",
-              "capability": "harpsichord",
-              "label": "Harpsichord"
-            },
-            {
-              "runtime_key": "hh",
-              "capability": "hihat",
-              "label": "Hi-hat"
-            },
-            {
-              "runtime_key": "keys",
-              "capability": "keys",
-              "label": "Keys"
-            },
-            {
-              "runtime_key": "kick",
-              "capability": "kick",
-              "label": "Kick"
-            },
-            {
-              "runtime_key": "lead-vocal",
-              "capability": "lead_vocals",
-              "label": "Lead vocals"
-            },
-            {
-              "runtime_key": "mandolin",
-              "capability": "mandolin",
-              "label": "Mandolin"
-            },
-            {
-              "runtime_key": "marimba",
-              "capability": "marimba",
-              "label": "Marimba"
-            },
-            {
-              "runtime_key": "oboe",
-              "capability": "oboe",
-              "label": "Oboe"
-            },
-            {
-              "runtime_key": "organ",
-              "capability": "organ",
-              "label": "Organ"
-            },
-            {
-              "runtime_key": "percussion",
-              "capability": "percussion",
-              "label": "Percussion"
-            },
-            {
-              "runtime_key": "piano",
-              "capability": "piano",
-              "label": "Piano"
-            },
-            {
-              "runtime_key": "saxophone",
-              "capability": "saxophone",
-              "label": "Saxophone"
-            },
-            {
-              "runtime_key": "sitar",
-              "capability": "sitar",
-              "label": "Sitar"
-            },
-            {
-              "runtime_key": "snare",
-              "capability": "snare",
-              "label": "Snare"
-            },
-            {
-              "runtime_key": "strings",
-              "capability": "strings",
-              "label": "Strings"
-            },
-            {
-              "runtime_key": "synth",
-              "capability": "synth",
-              "label": "Synth"
-            },
-            {
-              "runtime_key": "tambourine",
-              "capability": "tambourine",
-              "label": "Tambourine"
-            },
-            {
-              "runtime_key": "timpani",
-              "capability": "timpani",
-              "label": "Timpani"
-            },
-            {
-              "runtime_key": "toms",
-              "capability": "toms",
-              "label": "Toms"
-            },
-            {
-              "runtime_key": "triangle",
-              "capability": "triangle",
-              "label": "Triangle"
-            },
-            {
-              "runtime_key": "trombone",
-              "capability": "trombone",
-              "label": "Trombone"
-            },
-            {
-              "runtime_key": "trumpet",
-              "capability": "trumpet",
-              "label": "Trumpet"
-            },
-            {
-              "runtime_key": "tuba",
-              "capability": "tuba",
-              "label": "Tuba"
-            },
-            {
-              "runtime_key": "ukulele",
-              "capability": "ukulele",
-              "label": "Ukulele"
-            },
-            {
-              "runtime_key": "viola",
-              "capability": "viola",
-              "label": "Viola"
-            },
-            {
-              "runtime_key": "violin",
-              "capability": "violin",
-              "label": "Violin"
-            },
-            {
-              "runtime_key": "vocal",
-              "capability": "vocals",
-              "label": "Vocals"
-            },
-            {
-              "runtime_key": "wind",
-              "capability": "wind",
-              "label": "Wind"
-            },
-            {
-              "runtime_key": "wind-chimes",
-              "capability": "wind_chimes",
-              "label": "Wind chimes"
-            },
-            {
-              "runtime_key": "woodwind",
-              "capability": "woodwinds",
-              "label": "Woodwinds"
-            }
-          ],
-          "artifact_names": [
-            "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
-            "mvsep_mega_model_bs_roformer_53_stems.yaml"
-          ],
-          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
-        }
-      },
-      "benchmarks": [],
-      "semantic_evidence": [
-        {
-          "id": "mvsep-mega-53-stems-deton24-1",
-          "task": "vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 62,
-            "fullness_preservation": 68,
-            "artifact_control": 50,
-            "robustness": 48,
-            "reconstruction_fidelity": 35
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10600,
-            "line_end": 10680
-          },
-          "tags": [
-            "very_broad",
-            "muddy",
-            "independent_non_additive_stems",
-            "model_wide_assessment"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/oulianov/mvsep_mega_53"
-      ]
-    },
-    {
       "id": "gilliaan-bowed-strings-duality",
       "name": "BS RoFormer Bowed Strings Duality",
       "author": "Gilliaan",
@@ -3765,9 +2131,43 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "8e2b6945d510001642bb18bb1d209f661fc5b7b0",
+        "artifacts": [
+          {
+            "name": "bs_bowed_str_gilliaaan.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan.ckpt",
+            "sha256": "282fabc28fb106edcc5e5e8383ea36559602fe53d0c406c736e08f58d66710fc"
+          },
+          {
+            "name": "bs_bowed_str_gilliaaan_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
+            "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+          }
+        ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "bs_bowed_str_gilliaaan.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "strings",
+              "capability": "strings",
+              "label": "Strings"
+            },
+            {
+              "runtime_key": "strings",
+              "capability": "bowed_strings",
+              "label": "Bowed strings"
+            }
+          ],
+          "artifact_names": [
+            "bs_bowed_str_gilliaaan.ckpt",
+            "bs_bowed_str_gilliaaan_config.yaml"
+          ]
+        },
         "mvsepless": {
           "state": "declared",
           "catalog_id": "bs_bowed_str_gilliaaan",
@@ -3794,33 +2194,6 @@
           }
         }
       ],
-      "semantic_evidence": [
-        {
-          "id": "gilliaan-bowed-strings-duality-deton24-1",
-          "task": "strings",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 70,
-            "fullness_preservation": 88,
-            "artifact_control": 76,
-            "robustness": 69,
-            "tonal_fidelity": 84,
-            "target_isolation": 80
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 10960,
-            "line_end": 11022
-          },
-          "tags": [
-            "fullness",
-            "overlap_sensitive",
-            "non_orchestral_training"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
@@ -3839,9 +2212,43 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/becruily/mel-band-roformer-guitar"
+        "repository": "https://huggingface.co/becruily/mel-band-roformer-guitar",
+        "revision": "6409e7f88754b07ef7ca3bd1b76a15f010f1672a",
+        "artifacts": [
+          {
+            "name": "becruily_guitar.ckpt",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/becruily_guitar.ckpt",
+            "sha256": "83472bbf125774af5282d2e0b86df89eaf2dd45e8a4ec8d68e820ebf3e42a83c"
+          },
+          {
+            "name": "config_guitar_becruily.yaml",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-guitar/resolve/6409e7f88754b07ef7ca3bd1b76a15f010f1672a/config_guitar_becruily.yaml",
+            "sha256": "b681c3f886251b04b666b3f06e87ce65d7ec610e40b5d75915c01782e5444b0e"
+          }
+        ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "becruily_guitar.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Guitar",
+              "capability": "guitar",
+              "label": "Guitar"
+            },
+            {
+              "runtime_key": "Guitar",
+              "capability": "electric_guitar",
+              "label": "Electric guitar"
+            }
+          ],
+          "artifact_names": [
+            "becruily_guitar.ckpt",
+            "config_guitar_becruily.yaml"
+          ]
+        },
         "pymss": {
           "state": "listed",
           "catalog_id": "becruily_guitar.ckpt",
@@ -3857,160 +2264,20 @@
         }
       },
       "benchmarks": [],
-      "semantic_evidence": [
-        {
-          "id": "becruily-guitar-deton24-1",
-          "task": "electric_guitar",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 70,
-            "fullness_preservation": 82,
-            "artifact_control": 72,
-            "robustness": 68,
-            "tonal_fidelity": 80,
-            "target_isolation": 79
-          },
-          "confidence": 0.68,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11023,
-            "line_end": 11055
-          },
-          "tags": [
-            "efficient",
-            "not_sota",
-            "wide_guitar_capture"
-          ]
-        }
-      ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/becruily/mel-band-roformer-guitar"
       ]
-    },
-    {
-      "id": "scnet-choirsep-experimental",
-      "name": "SCNet ChoirSep Experimental",
-      "author": "Community",
-      "architecture": "scnet",
-      "status": "experimental",
-      "tasks": [
-        "alto_vocals",
-        "bass_vocals",
-        "tenor_vocals",
-        "soprano_vocals"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
-        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
-        "artifacts": [
-          {
-            "name": "scnet_choirsep_exp.ckpt",
-            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp.ckpt",
-            "sha256": "1e104ce6f6733542f8356ac2e59f2b7ece49ebfd2713d1ff635806de5ceb483f"
-          },
-          {
-            "name": "scnet_choirsep_exp_config.yaml",
-            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp_config.yaml",
-            "sha256": "278ad150cd1892f9adc185f393e9e3c31d74fc7f7184fb53fa7286dd958148e4"
-          }
-        ]
-      },
-      "backends": {
-        "mvsepless": {
-          "state": "listed",
-          "catalog_id": "scnet_choirsep_exp",
-          "validated": false,
-          "outputs": [
-            {
-              "runtime_key": "alto",
-              "capability": "alto_vocals",
-              "label": "Alto vocals"
-            },
-            {
-              "runtime_key": "bass",
-              "capability": "bass_vocals",
-              "label": "Bass vocals"
-            },
-            {
-              "runtime_key": "tenor",
-              "capability": "tenor_vocals",
-              "label": "Tenor vocals"
-            },
-            {
-              "runtime_key": "soprano",
-              "capability": "soprano_vocals",
-              "label": "Soprano vocals"
-            }
-          ],
-          "artifact_names": [
-            "scnet_choirsep_exp.ckpt",
-            "scnet_choirsep_exp_config.yaml"
-          ],
-          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
-        }
-      },
-      "benchmarks": [],
-      "semantic_evidence": [
-        {
-          "id": "scnet-choirsep-deton24-1",
-          "task": "alto_vocals",
-          "method": "llm_derived",
-          "values": {
-            "bleed_control": 38,
-            "fullness_preservation": 58,
-            "artifact_control": 35,
-            "robustness": 42,
-            "tonal_fidelity": 52,
-            "target_isolation": 55
-          },
-          "confidence": 0.76,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 1438,
-            "line_end": 1442
-          },
-          "tags": [
-            "proof_of_concept",
-            "noisy",
-            "high_bleed",
-            "model_wide_assessment"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
     }
   ],
   "recommendations": {
-    "accordion": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "acoustic_guitar": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "backing_vocals": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "karaoke-frazer-becruily",
       "alternatives": []
     },
-    "banjo": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "bass": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "bs-roformer-sw",
       "alternatives": [
         {
@@ -4019,78 +2286,28 @@
         }
       ]
     },
-    "bassoon": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "bells": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "bowed_strings": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": [
-        {
-          "model": "gilliaan-bowed-strings-duality",
-          "specialty": "qualitative_candidate_unverified_runtime"
-        }
-      ]
-    },
-    "brass": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "cello": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "clarinet": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "congas": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
+      "policy": "ordinal-quality-v1",
+      "model": "gilliaan-bowed-strings-duality",
       "alternatives": []
     },
     "crash": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-6",
       "alternatives": []
     },
     "cymbals": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-5",
       "alternatives": []
     },
-    "digital_piano": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "dobro": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "double_bass": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "drum_substems": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-5",
       "alternatives": []
     },
     "drums": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "bs-roformer-sw",
       "alternatives": [
         {
@@ -4100,32 +2317,12 @@
       ]
     },
     "electric_guitar": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": [
-        {
-          "model": "becruily-guitar",
-          "specialty": "qualitative_candidate_unverified_runtime"
-        }
-      ]
-    },
-    "flute": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "french_horn": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "glockenspiel": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
+      "policy": "ordinal-quality-v1",
+      "model": "becruily-guitar",
       "alternatives": []
     },
     "guitar": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "bs-roformer-sw",
       "alternatives": [
         {
@@ -4134,23 +2331,8 @@
         }
       ]
     },
-    "harmonica": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "harp": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "harpsichord": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "hihat": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-5",
       "alternatives": [
         {
@@ -4160,20 +2342,12 @@
       ]
     },
     "instrumental": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "becruily-deux",
       "alternatives": [
         {
-          "model": "hyperace-v2-instrumental",
-          "specialty": "fullness"
-        },
-        {
           "model": "gabox-fv7z",
           "specialty": "low_noise_bleedless"
-        },
-        {
-          "model": "bs-roformer-inst-fno",
-          "specialty": "bleed_control"
         },
         {
           "model": "viperx-1297",
@@ -4182,7 +2356,7 @@
       ]
     },
     "karaoke": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "karaoke-frazer-becruily",
       "alternatives": [
         {
@@ -4195,13 +2369,8 @@
         }
       ]
     },
-    "keys": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "kick": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-5",
       "alternatives": [
         {
@@ -4211,67 +2380,32 @@
       ]
     },
     "lead_vocals": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "karaoke-frazer-becruily",
       "alternatives": []
     },
-    "mandolin": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "marimba": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "oboe": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "organ": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "other": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "bs-roformer-sw",
       "alternatives": []
     },
-    "percussion": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "piano": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "bs-roformer-sw",
       "alternatives": []
     },
     "ride": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-6",
       "alternatives": []
     },
     "rvc_vocals": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "big-beta-6x",
       "alternatives": []
     },
-    "saxophone": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "sitar": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "snare": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-5",
       "alternatives": [
         {
@@ -4281,32 +2415,12 @@
       ]
     },
     "strings": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": [
-        {
-          "model": "gilliaan-bowed-strings-duality",
-          "specialty": "qualitative_candidate_unverified_runtime"
-        }
-      ]
-    },
-    "synth": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "tambourine": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "timpani": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
+      "policy": "ordinal-quality-v1",
+      "model": "gilliaan-bowed-strings-duality",
       "alternatives": []
     },
     "toms": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "jarredou-drumsep-5",
       "alternatives": [
         {
@@ -4315,43 +2429,8 @@
         }
       ]
     },
-    "triangle": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "trombone": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "trumpet": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "tuba": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "ukulele": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "viola": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "violin": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
     "vocals": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "becruily-deux",
       "alternatives": [
         {
@@ -4368,46 +2447,1334 @@
         }
       ]
     },
-    "wind": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "wind_chimes": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "woodwinds": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "alto_vocals": {
-      "policy": "balanced-quality-v1",
-      "model": "scnet-choirsep-experimental",
-      "alternatives": []
-    },
-    "bass_vocals": {
-      "policy": "balanced-quality-v1",
-      "model": "scnet-choirsep-experimental",
-      "alternatives": []
-    },
-    "tenor_vocals": {
-      "policy": "balanced-quality-v1",
-      "model": "scnet-choirsep-experimental",
-      "alternatives": []
-    },
-    "soprano_vocals": {
-      "policy": "balanced-quality-v1",
-      "model": "scnet-choirsep-experimental",
-      "alternatives": []
-    },
     "multitrack": {
-      "policy": "balanced-quality-v1",
+      "policy": "ordinal-quality-v1",
       "model": "bs-roformer-sw",
       "decomposition": "general_music_6",
       "alternatives": []
     }
-  }
+  },
+  "evidence_contexts": {
+    "deton24-live-backing_vocals-10302-10304": {
+      "scope": "Backing-plus-instrumental output. Lead vocals are reported to leak into Anvuew's instrumental output, while Frazer/Becruily does not have that problem.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "backing_vocals": "backing_vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-bass-effected-electric-bass": {
+      "scope": "For some effected electric-bass material, HTDemucs-ft can outperform SW; SW may confuse pedal-processed electric bass with electric guitar.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "bass": "bass"
+      },
+      "conditions": []
+    },
+    "deton24-live-drum-substems-overall-debleeding": {
+      "scope": "The guide directly describes the older six-stem model as better for debleeding than the five-stem model.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "drum_substems": "drum_substems"
+      },
+      "conditions": []
+    },
+    "deton24-live-drum-substems-perceived-cleanness": {
+      "scope": "The five-stem release is described as quite cleaner than the previous six-stem model, although it also has independent noise and tom-artifact caveats.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "drum_substems": "drum_substems"
+      },
+      "conditions": []
+    },
+    "deton24-live-drum-substems-summary": {
+      "scope": "The DrumSep summary directly calls the five-stem checkpoint the newer, better model, while identifying debleeding as a separate exception in favor of the six-stem checkpoint.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "drum_substems": "drum_substems"
+      },
+      "conditions": []
+    },
+    "deton24-live-drums-drumsep-input": {
+      "scope": "HTDemucs-ft is described as a frequently better DrumSep input; SW can over-capture non-standard percussion that confuses DrumSep models.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "drums": "drums"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-18563-18572": {
+      "scope": "MDX23 Colab v2.5 ensemble only; replacing 1296 with 1297 produced muddier instrumentals and more sudden dynamic jumps from residues.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7013-7015": {
+      "scope": "Mostly-piano test of single-model instrumental outputs; the source says Deux was more bleedless.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7017-7017": {
+      "scope": "Perceptual comparison; V1e+ was judged fuller and more open.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7020-7020": {
+      "scope": "Tiny or quiet sounds; Deux was reported more sensitive to retaining them.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7052-7052": {
+      "scope": "General comparison; Resurrection is described as muddier than V1e+.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7057-7104": {
+      "scope": "Reports conflict by song and instrument: several examples say V1e+ retained saxophone, guitar, or other sounds that Resurrection lost, while another tester found Resurrection retained substantially more wind instruments and instruments overall.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7075-7198": {
+      "scope": "Fine instrumental details and general recognition; Becruily instrumental retained details V1e+ lost and recognized more instruments correctly.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7122-7128": {
+      "scope": "One evaluator's multi-model listening tests; Flowers sounded fuller than Leap XE.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7126-7126": {
+      "scope": "One evaluator's multi-model listening tests; Leap XE sounded fuller than Deux.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-7144-7152": {
+      "scope": "Some songs with vocal reverb or vocal-shaped noise; V1e+ was reported a little better.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-8232-8235": {
+      "scope": "Instrumental output from vocal-model inversion; Big Beta 5e was described as lacking the noise present in V1e+.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-8393-23362": {
+      "scope": "Standalone guide wording favors 1297, while the MDX23 Colab ensemble report and a source-reported L1freqMag comparison favor 1296. The workflows and evidence types differ, so no global ordering is supported.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-instrumental-8393-8395": {
+      "scope": "Standalone instrumental use; the guide says 1297 tends to be better for instrumentals than 1296.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "instrumental": "instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-live-karaoke-10299-10304": {
+      "scope": "The source gives an explicit context conflict: Anvuew is better for extracting lead vocals and handling radio-effect vocals, while Frazer/Becruily avoids the lead leakage observed in Anvuew's backing/instrumental output. No overall pairwise ordering follows.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "karaoke": "karaoke"
+      },
+      "conditions": []
+    },
+    "deton24-live-lead_vocals-10299-10302": {
+      "scope": "Direct lead-vocal extraction. Anvuew is called the current best lead extractor and is said to extract lead slightly better than Frazer/Becruily.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "lead_vocals": "lead_vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-lead_vocals-10302-10302": {
+      "scope": "Vocals with radio effects. Anvuew handled vocals that Frazer/Becruily failed to detect.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "lead_vocals": "lead_vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-conversation-denoising": {
+      "scope": "A grouped conversation-denoising test reports Big Beta 5e and 6 as better than a comparison set that explicitly includes Viperx 1297.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-general-vocal-separation": {
+      "scope": "Big Beta 6X is reported to have much less vocal-output noise than Big Beta 5e, while 5e is described as noisy or grainy under loud accompaniment.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-historical-general-vocal-use": {
+      "scope": "The historical model guidance says 1297 tends to be better for instrumentals and 1296 for vocals.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-loud-accompaniment": {
+      "scope": "A listener reports that 5e becomes noisy and grainy when accompaniment is loud and prefers Beta 4 overall.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-reverb-tail-preservation": {
+      "scope": "Big Beta 5e is explicitly said to handle reverb tails better than Big Beta 6X.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-rvc-dataset-preparation": {
+      "scope": "Deton24 explicitly records Big Beta 5e as worse for RVC than Beta 4.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-speech-separation": {
+      "scope": "A speech-separation recommendation names both models but makes 5e the current go-to because it sounds less filtered.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    },
+    "deton24-live-vocals-viperx-cross-evidence": {
+      "scope": "Historical general-vocal guidance favors 1296, while a later L1Freq observation favors 1297; the evidence types and contexts differ, so no overall order is supported.",
+      "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
+      "stem_mapping": {
+        "vocals": "vocals"
+      },
+      "conditions": []
+    }
+  },
+  "ordinal_evidence": [
+    {
+      "id": "deton24-live-backing-frazer-vs-anvuew-bleed",
+      "task": "backing_vocals",
+      "metric": "bleed_control",
+      "context": "deton24-live-backing_vocals-10302-10304",
+      "left": {
+        "model": "karaoke-anvuew"
+      },
+      "right": {
+        "model": "karaoke-frazer-becruily"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10302,
+          "end": 10304
+        }
+      },
+      "summary": "Backing-plus-instrumental output. Lead vocals are reported to leak into Anvuew's instrumental output, while Frazer/Becruily does not have that problem.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-backing-mel-vs-anvuew-bleed",
+      "task": "backing_vocals",
+      "metric": "bleed_control",
+      "context": "deton24-live-backing_vocals-10302-10304",
+      "left": {
+        "model": "karaoke-anvuew"
+      },
+      "right": {
+        "model": "mel-karaoke-becruily"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10302,
+          "end": 10304
+        }
+      },
+      "summary": "Backing-plus-instrumental output. The same comparison says Mel Becruily does not show Anvuew's lead-vocal leakage problem.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-bass-htdemucs-vs-sw-effected-electric-bass",
+      "task": "bass",
+      "metric": "robustness",
+      "context": "deton24-live-bass-effected-electric-bass",
+      "left": {
+        "model": "bs-roformer-sw"
+      },
+      "right": {
+        "model": "htdemucs-ft"
+      },
+      "relation": "worse",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10623,
+          "end": 10624
+        }
+      },
+      "summary": "For some effected electric-bass material, HTDemucs-ft can outperform SW; SW may confuse pedal-processed electric bass with electric guitar.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-drum-substems-jarredou-5-vs-6-cleanness",
+      "task": "drum_substems",
+      "metric": "artifact_control",
+      "context": "deton24-live-drum-substems-perceived-cleanness",
+      "left": {
+        "model": "jarredou-drumsep-5"
+      },
+      "right": {
+        "model": "jarredou-drumsep-6"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 19503,
+          "end": 19503
+        }
+      },
+      "summary": "The five-stem release is described as quite cleaner than the previous six-stem model, although it also has independent noise and tom-artifact caveats.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-drum-substems-jarredou-5-vs-6-overall",
+      "task": "drum_substems",
+      "metric": "overall_quality",
+      "context": "deton24-live-drum-substems-summary",
+      "left": {
+        "model": "jarredou-drumsep-5"
+      },
+      "right": {
+        "model": "jarredou-drumsep-6"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10786,
+          "end": 10790
+        }
+      },
+      "summary": "The DrumSep summary directly calls the five-stem checkpoint the newer, better model, while identifying debleeding as a separate exception in favor of the six-stem checkpoint.",
+      "tags": [
+        "debleeding_exception"
+      ]
+    },
+    {
+      "id": "deton24-live-drum-substems-jarredou-6-vs-5-debleeding",
+      "task": "drum_substems",
+      "metric": "bleed_control",
+      "context": "deton24-live-drum-substems-overall-debleeding",
+      "left": {
+        "model": "jarredou-drumsep-5"
+      },
+      "right": {
+        "model": "jarredou-drumsep-6"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10786,
+          "end": 10793
+        }
+      },
+      "summary": "The guide directly describes the older six-stem model as better for debleeding than the five-stem model.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-drums-htdemucs-vs-sw-drumsep-input",
+      "task": "drums",
+      "metric": "drumsep_input_suitability",
+      "context": "deton24-live-drums-drumsep-input",
+      "left": {
+        "model": "bs-roformer-sw"
+      },
+      "right": {
+        "model": "htdemucs-ft"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10642,
+          "end": 10802
+        }
+      },
+      "summary": "HTDemucs-ft is described as a frequently better DrumSep input; SW can over-capture non-standard percussion that confuses DrumSep models.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-artifact_control-7013-becruily-deux-vs-resurrection-instrumental",
+      "task": "instrumental",
+      "metric": "artifact_control",
+      "context": "deton24-live-instrumental-7013-7015",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "resurrection-instrumental"
+      },
+      "relation": "incomparable",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7013,
+          "end": 7015
+        }
+      },
+      "summary": "The same source section contains opposite reports: Deux may have slightly more noise in a mostly-piano test, while Resurrection is described as noisier on other material and prone to retaining intentional noise. No context-free ordering is supported.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-artifact_control-8232-big-beta-5e-vs-mel-v1e-plus",
+      "task": "instrumental",
+      "metric": "artifact_control",
+      "context": "deton24-live-instrumental-8232-8235",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "mel-v1e-plus"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8232,
+          "end": 8235
+        }
+      },
+      "summary": "Instrumental output from vocal-model inversion; Big Beta 5e was described as lacking the noise present in V1e+.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-bleed_control-7013-becruily-deux-vs-resurrection-instrumental",
+      "task": "instrumental",
+      "metric": "bleed_control",
+      "context": "deton24-live-instrumental-7013-7015",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "resurrection-instrumental"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7013,
+          "end": 7015
+        }
+      },
+      "summary": "Mostly-piano test of single-model instrumental outputs; the source says Deux was more bleedless.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-bleed_control-7144-mel-v1e-plus-vs-gabox-fv7z",
+      "task": "instrumental",
+      "metric": "bleed_control",
+      "context": "deton24-live-instrumental-7144-7152",
+      "left": {
+        "model": "gabox-fv7z"
+      },
+      "right": {
+        "model": "mel-v1e-plus"
+      },
+      "relation": "worse",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7144,
+          "end": 7152
+        }
+      },
+      "summary": "Some songs with vocal reverb or vocal-shaped noise; V1e+ was reported a little better.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-fullness_preservation-7013-resurrection-instrumental-vs-becruily-deux",
+      "task": "instrumental",
+      "metric": "fullness_preservation",
+      "context": "deton24-live-instrumental-7013-7015",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "resurrection-instrumental"
+      },
+      "relation": "worse",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7013,
+          "end": 7015
+        }
+      },
+      "summary": "Some tracks only; Resurrection is reported to sound fuller at times.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-fullness_preservation-7017-mel-v1e-plus-vs-becruily-deux",
+      "task": "instrumental",
+      "metric": "fullness_preservation",
+      "context": "deton24-live-instrumental-7017-7017",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "mel-v1e-plus"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7017,
+          "end": 7017
+        }
+      },
+      "summary": "Perceptual comparison; V1e+ was judged fuller and more open.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-fullness_preservation-7122-gabox-flowers-v10-vs-bs-roformer-leap-xe",
+      "task": "instrumental",
+      "metric": "fullness_preservation",
+      "context": "deton24-live-instrumental-7122-7128",
+      "left": {
+        "model": "bs-roformer-leap-xe"
+      },
+      "right": {
+        "model": "gabox-flowers-v10"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7122,
+          "end": 7128
+        }
+      },
+      "summary": "One evaluator's multi-model listening tests; Flowers sounded fuller than Leap XE.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-fullness_preservation-7126-bs-roformer-leap-xe-vs-becruily-deux",
+      "task": "instrumental",
+      "metric": "fullness_preservation",
+      "context": "deton24-live-instrumental-7126-7126",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "bs-roformer-leap-xe"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7126,
+          "end": 7126
+        }
+      },
+      "summary": "One evaluator's multi-model listening tests; Leap XE sounded fuller than Deux.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-overall_quality-8393-viperx-1297-vs-viperx-1296",
+      "task": "instrumental",
+      "metric": "overall_quality",
+      "context": "deton24-live-instrumental-8393-23362",
+      "left": {
+        "model": "viperx-1296"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "incomparable",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8393,
+          "end": 23362
+        }
+      },
+      "summary": "Standalone guide wording favors 1297, while the MDX23 Colab ensemble report and a source-reported L1freqMag comparison favor 1296. The workflows and evidence types differ, so no global ordering is supported.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-robustness-7126-becruily-deux-vs-bs-roformer-leap-xe",
+      "task": "instrumental",
+      "metric": "robustness",
+      "context": "deton24-live-instrumental-7126-7126",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "bs-roformer-leap-xe"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7126,
+          "end": 7126
+        }
+      },
+      "summary": "Across tested songs; Leap XE was song-dependent while Deux was reported not to share that weakness.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-robustness-8232-big-beta-5e-vs-kimberley-melband-vocals",
+      "task": "instrumental",
+      "metric": "robustness",
+      "context": "deton24-live-instrumental-8232-8235",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "kimberley-melband-vocals"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8232,
+          "end": 8235
+        }
+      },
+      "summary": "Sudden instrumental passages; Big Beta 5e was described as more consistent and less prone to sudden muffling than base Kim Mel.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-sfx_vocal_handling-7126-gabox-flowers-v10-vs-becruily-deux",
+      "task": "instrumental",
+      "metric": "sfx_vocal_handling",
+      "context": "deton24-live-instrumental-7126-7126",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "gabox-flowers-v10"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7126,
+          "end": 7126
+        }
+      },
+      "summary": "SFX vocals; Flowers was reported to shine while Deux did not.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-sfx_vocal_handling-7126-gabox-flowers-v10-vs-bs-roformer-leap-xe",
+      "task": "instrumental",
+      "metric": "sfx_vocal_handling",
+      "context": "deton24-live-instrumental-7126-7126",
+      "left": {
+        "model": "bs-roformer-leap-xe"
+      },
+      "right": {
+        "model": "gabox-flowers-v10"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7126,
+          "end": 7126
+        }
+      },
+      "summary": "SFX vocals; Flowers was reliable where Leap XE variably kept or removed them.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-target_preservation-7020-becruily-deux-vs-gabox-flowers-v10",
+      "task": "instrumental",
+      "metric": "target_preservation",
+      "context": "deton24-live-instrumental-7020-7020",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "gabox-flowers-v10"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7020,
+          "end": 7020
+        }
+      },
+      "summary": "Tiny or quiet sounds; Deux was reported more sensitive to retaining them.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-target_preservation-7057-mel-v1e-plus-vs-resurrection-instrumental",
+      "task": "instrumental",
+      "metric": "target_preservation",
+      "context": "deton24-live-instrumental-7057-7104",
+      "left": {
+        "model": "mel-v1e-plus"
+      },
+      "right": {
+        "model": "resurrection-instrumental"
+      },
+      "relation": "incomparable",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7057,
+          "end": 7104
+        }
+      },
+      "summary": "Reports conflict by song and instrument: several examples say V1e+ retained saxophone, guitar, or other sounds that Resurrection lost, while another tester found Resurrection retained substantially more wind instruments and instruments overall.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-target_preservation-7075-becruily-instrumental-2024-vs-mel-v1e-plus",
+      "task": "instrumental",
+      "metric": "target_preservation",
+      "context": "deton24-live-instrumental-7075-7198",
+      "left": {
+        "model": "becruily-instrumental-2024"
+      },
+      "right": {
+        "model": "mel-v1e-plus"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7075,
+          "end": 7198
+        }
+      },
+      "summary": "Fine instrumental details and general recognition; Becruily instrumental retained details V1e+ lost and recognized more instruments correctly.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-target_preservation-7126-becruily-deux-vs-bs-roformer-leap-xe",
+      "task": "instrumental",
+      "metric": "target_preservation",
+      "context": "deton24-live-instrumental-7126-7126",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "bs-roformer-leap-xe"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7126,
+          "end": 7126
+        }
+      },
+      "summary": "One evaluator's multi-model listening tests; Deux kept instruments better than Leap XE.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-target_preservation-8393-viperx-1297-vs-viperx-1296",
+      "task": "instrumental",
+      "metric": "target_preservation",
+      "context": "deton24-live-instrumental-8393-8395",
+      "left": {
+        "model": "viperx-1296"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "worse",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8393,
+          "end": 8395
+        }
+      },
+      "summary": "Standalone instrumental use; the guide says 1297 tends to be better for instrumentals than 1296.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-tonal_fidelity-18563-viperx-1296-vs-viperx-1297",
+      "task": "instrumental",
+      "metric": "tonal_fidelity",
+      "context": "deton24-live-instrumental-18563-18572",
+      "left": {
+        "model": "viperx-1296"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 18563,
+          "end": 18572
+        }
+      },
+      "summary": "MDX23 Colab v2.5 ensemble only; replacing 1296 with 1297 produced muddier instrumentals and more sudden dynamic jumps from residues.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-tonal_fidelity-7013-becruily-deux-vs-resurrection-instrumental",
+      "task": "instrumental",
+      "metric": "tonal_fidelity",
+      "context": "deton24-live-instrumental-7013-7015",
+      "left": {
+        "model": "becruily-deux"
+      },
+      "right": {
+        "model": "resurrection-instrumental"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7013,
+          "end": 7015
+        }
+      },
+      "summary": "Mostly-piano test; Deux sounded considerably less muddy than Resurrection.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-instrumental-tonal_fidelity-7052-mel-v1e-plus-vs-resurrection-instrumental",
+      "task": "instrumental",
+      "metric": "tonal_fidelity",
+      "context": "deton24-live-instrumental-7052-7052",
+      "left": {
+        "model": "mel-v1e-plus"
+      },
+      "right": {
+        "model": "resurrection-instrumental"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7052,
+          "end": 7052
+        }
+      },
+      "summary": "General comparison; Resurrection is described as muddier than V1e+.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-karaoke-anvuew-frazer-context-incomparability",
+      "task": "karaoke",
+      "metric": "overall_quality",
+      "context": "deton24-live-karaoke-10299-10304",
+      "left": {
+        "model": "karaoke-anvuew"
+      },
+      "right": {
+        "model": "karaoke-frazer-becruily"
+      },
+      "relation": "incomparable",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10299,
+          "end": 10304
+        }
+      },
+      "summary": "The source gives an explicit context conflict: Anvuew is better for extracting lead vocals and handling radio-effect vocals, while Frazer/Becruily avoids the lead leakage observed in Anvuew's backing/instrumental output. No overall pairwise ordering follows.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-lead-anvuew-vs-frazer-radio-robustness",
+      "task": "lead_vocals",
+      "metric": "robustness",
+      "context": "deton24-live-lead_vocals-10302-10302",
+      "left": {
+        "model": "karaoke-anvuew"
+      },
+      "right": {
+        "model": "karaoke-frazer-becruily"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10302,
+          "end": 10302
+        }
+      },
+      "summary": "Vocals with radio effects. Anvuew handled vocals that Frazer/Becruily failed to detect.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-lead-anvuew-vs-frazer-target-isolation",
+      "task": "lead_vocals",
+      "metric": "target_isolation",
+      "context": "deton24-live-lead_vocals-10299-10302",
+      "left": {
+        "model": "karaoke-anvuew"
+      },
+      "right": {
+        "model": "karaoke-frazer-becruily"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 10299,
+          "end": 10302
+        }
+      },
+      "summary": "Direct lead-vocal extraction. Anvuew is called the current best lead extractor and is said to extract lead slightly better than Frazer/Becruily.",
+      "tags": []
+    },
+    {
+      "id": "deton24-live-vocals-viperx-cross-evidence-incomparable",
+      "task": "vocals",
+      "metric": "overall_quality",
+      "context": "deton24-live-vocals-viperx-cross-evidence",
+      "left": {
+        "model": "viperx-1296"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "incomparable",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 5344,
+          "end": 23362
+        }
+      },
+      "summary": "Historical general-vocal guidance favors 1296, while a later L1Freq observation favors 1297; the evidence types and contexts differ, so no overall order is supported.",
+      "tags": [
+        "cross_context_conflict"
+      ]
+    },
+    {
+      "id": "deton24-vocals-big-beta-4-vs-big-beta-5e-noise",
+      "task": "vocals",
+      "metric": "artifact_control",
+      "context": "deton24-live-vocals-loud-accompaniment",
+      "left": {
+        "model": "big-beta-4"
+      },
+      "right": {
+        "model": "big-beta-5e"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8873,
+          "end": 8881
+        }
+      },
+      "summary": "A listener reports that 5e becomes noisy and grainy when accompaniment is loud and prefers Beta 4 overall.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-4-vs-big-beta-5e-rvc",
+      "task": "vocals",
+      "metric": "robustness",
+      "context": "deton24-live-vocals-rvc-dataset-preparation",
+      "left": {
+        "model": "big-beta-4"
+      },
+      "right": {
+        "model": "big-beta-5e"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8882,
+          "end": 8885
+        }
+      },
+      "summary": "Deton24 explicitly records Big Beta 5e as worse for RVC than Beta 4.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-5e-vs-big-beta-4-speech-filtering",
+      "task": "vocals",
+      "metric": "tonal_fidelity",
+      "context": "deton24-live-vocals-speech-separation",
+      "left": {
+        "model": "big-beta-4"
+      },
+      "right": {
+        "model": "big-beta-5e"
+      },
+      "relation": "worse",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 9494,
+          "end": 9505
+        }
+      },
+      "summary": "A speech-separation recommendation names both models but makes 5e the current go-to because it sounds less filtered.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-5e-vs-big-beta-6x-fullness",
+      "task": "vocals",
+      "metric": "fullness_preservation",
+      "context": "deton24-live-vocals-general-vocal-separation",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "big-beta-6x"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8991,
+          "end": 8995
+        }
+      },
+      "summary": "Unwa describes Big Beta 6 as avoiding 5e's output-noise problem by sacrificing fullness and being more conservative.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-5e-vs-big-beta-6x-reverb",
+      "task": "vocals",
+      "metric": "fullness_preservation",
+      "context": "deton24-live-vocals-reverb-tail-preservation",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "big-beta-6x"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8873,
+          "end": 8885
+        }
+      },
+      "summary": "Big Beta 5e is explicitly said to handle reverb tails better than Big Beta 6X.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-5e-vs-viperx-1297-conversation-denoise",
+      "task": "vocals",
+      "metric": "robustness",
+      "context": "deton24-live-vocals-conversation-denoising",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 11840,
+          "end": 11845
+        }
+      },
+      "summary": "A grouped conversation-denoising test reports Big Beta 5e and 6 as better than a comparison set that explicitly includes Viperx 1297.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-6x-vs-big-beta-5e-noise",
+      "task": "vocals",
+      "metric": "artifact_control",
+      "context": "deton24-live-vocals-general-vocal-separation",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "big-beta-6x"
+      },
+      "relation": "worse",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 8737,
+          "end": 8742
+        }
+      },
+      "summary": "Big Beta 6X is reported to have much less vocal-output noise than Big Beta 5e, while 5e is described as noisy or grainy under loud accompaniment.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-big-beta-6x-vs-viperx-1297-conversation-denoise",
+      "task": "vocals",
+      "metric": "robustness",
+      "context": "deton24-live-vocals-conversation-denoising",
+      "left": {
+        "model": "big-beta-6x"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 11840,
+          "end": 11845
+        }
+      },
+      "summary": "A grouped conversation-denoising test reports Big Beta 5e and 6 as better than a comparison set that explicitly includes Viperx 1297.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-kimberley-vs-viperx-1296-muddiness",
+      "task": "vocals",
+      "metric": "artifact_control",
+      "context": "deton24-live-vocals-general-vocal-separation",
+      "left": {
+        "model": "kimberley-melband-vocals"
+      },
+      "right": {
+        "model": "viperx-1296"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 5330,
+          "end": 5347
+        }
+      },
+      "summary": "Kim's Mel-Band RoFormer is explicitly described as less muddy than the Viperx 1296 and 1297 models.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-kimberley-vs-viperx-1297-muddiness",
+      "task": "vocals",
+      "metric": "artifact_control",
+      "context": "deton24-live-vocals-general-vocal-separation",
+      "left": {
+        "model": "kimberley-melband-vocals"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "better",
+      "confidence": "high",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 5330,
+          "end": 5347
+        }
+      },
+      "summary": "Kim's Mel-Band RoFormer is explicitly described as less muddy than the Viperx 1296 and 1297 models.",
+      "tags": []
+    },
+    {
+      "id": "deton24-vocals-viperx-1296-vs-viperx-1297-general",
+      "task": "vocals",
+      "metric": "robustness",
+      "context": "deton24-live-vocals-historical-general-vocal-use",
+      "left": {
+        "model": "viperx-1296"
+      },
+      "right": {
+        "model": "viperx-1297"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-08-16",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 5344,
+          "end": 5347
+        }
+      },
+      "summary": "The historical model guidance says 1297 tends to be better for instrumentals and 1296 for vocals.",
+      "tags": []
+    }
+  ]
 }

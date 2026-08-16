@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from evidence_policy import RECOMMENDATION_POLICIES
+from evidence_policy import ORDINAL_RECOMMENDATION_POLICIES
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -43,6 +43,21 @@ def changed_keys(before: dict, after: dict) -> list[tuple[str, str]]:
             continue
         change = "Added" if key not in before else "Removed" if key not in after else "Updated"
         output.append((change, key))
+    return output
+
+
+def rows_changed_by_id(before: list[dict], after: list[dict]) -> list[tuple[str, dict]]:
+    """Describe stable evidence records without rendering updates as remove/add."""
+
+    before_rows = {row["id"]: row for row in before if isinstance(row.get("id"), str)}
+    after_rows = {row["id"]: row for row in after if isinstance(row.get("id"), str)}
+    output: list[tuple[str, dict]] = []
+    for evidence_id in sorted(before_rows.keys() | after_rows.keys()):
+        old = before_rows.get(evidence_id)
+        new = after_rows.get(evidence_id)
+        if old is not None and new is not None and stable(old) == stable(new):
+            continue
+        output.append(("Added" if old is None else "Removed" if new is None else "Updated", new or old))
     return output
 
 
@@ -79,6 +94,21 @@ def task_model(recommendation: dict | None) -> str:
     decomposition = recommendation.get("decomposition")
     suffix = f" / `{decomposition}`" if decomposition else ""
     return f"`{recommendation['model']}`{suffix}"
+
+
+def selection_signature(recommendation: dict | None) -> tuple[object, object]:
+    recommendation = recommendation or {}
+    return recommendation.get("model"), recommendation.get("decomposition")
+
+
+def source_location(source: dict[str, Any]) -> str:
+    location = source.get("location", {})
+    kind = location.get("kind")
+    if kind == "line_range":
+        return f"lines {location.get('start')}–{location.get('end')}"
+    if kind == "page":
+        return f"page {location.get('page')}"
+    return str(location.get("value", "—"))
 
 
 def track_filename(track: object) -> str:
@@ -128,12 +158,22 @@ def main() -> int:
         semantic_added.extend((model_id, row) for row in added)
         semantic_removed.extend((model_id, row) for row in removed)
 
+    ordinal_changes = rows_changed_by_id(
+        before.get("ordinal_evidence", []), after.get("ordinal_evidence", [])
+    )
+
     before_recommendations = before.get("recommendations", {})
     after_recommendations = after.get("recommendations", {})
     changed_tasks = [
         task
         for task in sorted(before_recommendations.keys() | after_recommendations.keys())
         if stable(before_recommendations.get(task)) != stable(after_recommendations.get(task))
+    ]
+    selection_changed_tasks = [
+        task
+        for task in sorted(before_recommendations.keys() | after_recommendations.keys())
+        if selection_signature(before_recommendations.get(task))
+        != selection_signature(after_recommendations.get(task))
     ]
     baseline_replacement = before.get("schema") != after.get("schema") or (
         before.get("baseline") is not True and after.get("baseline") is True
@@ -143,6 +183,11 @@ def main() -> int:
         or stable(before.get("source_snapshots", {})) != stable(after.get("source_snapshots", {}))
         or (before.get("baseline") is True and after.get("baseline") is False)
     )
+    if len(selection_changed_tasks) > 1 and not baseline_replacement:
+        raise RuntimeError(
+            "A PR may change at most one recommendation selection: "
+            + ", ".join(selection_changed_tasks)
+        )
     recommendation_rows = []
     for task in changed_tasks:
         old = before_recommendations.get(task)
@@ -201,6 +246,46 @@ def main() -> int:
                 ]
             )
 
+    ordinal_rows = []
+    for change, observation in ordinal_changes:
+        source = observation.get("source", {})
+        snapshot_id = source.get("snapshot")
+        snapshots = (
+            before.get("source_snapshots", {})
+            if change == "Removed"
+            else after.get("source_snapshots", {})
+        )
+        snapshot = snapshots.get(snapshot_id, {})
+        tier = snapshot.get("tiers", {}).get("qualitative", "—")
+        ordinal_rows.append(
+            [
+                change,
+                f"`{observation.get('id', '—')}`",
+                str(observation.get("task", "—")),
+                f"`{observation.get('context', '—')}`",
+                f"`{observation.get('metric', '—')}`",
+                f"`{observation.get('left', {}).get('model', '—')}`",
+                str(observation.get("relation", "—")),
+                f"`{observation.get('right', {}).get('model', '—')}`",
+                str(observation.get("confidence", "—")),
+                str(tier),
+                source_link(source["entry_url"]) if source.get("entry_url") else "—",
+                source_location(source),
+                str(observation.get("summary", "—")),
+            ]
+        )
+    ordinal_change_counts = {
+        change: sum(item_change == change for item_change, unused in ordinal_changes)
+        for change in ("Added", "Updated", "Removed")
+    }
+    ordinal_affected_tasks = sorted(
+        {
+            observation.get("task")
+            for unused, observation in ordinal_changes
+            if isinstance(observation.get("task"), str)
+        }
+    )
+
     metric_changes = changed_keys(
         before.get("metric_definitions", {}), after.get("metric_definitions", {})
     )
@@ -217,10 +302,19 @@ def main() -> int:
     overview_rows = [
         ["Models", f"+{len(added_models)} / ~{len(updated_models)} / -{len(removed_models)}"],
         ["Measured results", f"+{len(benchmark_added)} / -{len(benchmark_removed)}"],
-        ["Semantic observations", f"+{len(semantic_added)} / -{len(semantic_removed)}"],
+        ["Legacy semantic observations", f"+{len(semantic_added)} / -{len(semantic_removed)}"],
+        [
+            "Ordinal comparisons",
+            f"+{ordinal_change_counts['Added']} / "
+            f"~{ordinal_change_counts['Updated']} / -{ordinal_change_counts['Removed']}",
+        ],
+        ["Evidence-affected tasks", ", ".join(ordinal_affected_tasks) or "none"],
         ["Metric definitions", str(len(metric_changes))],
         ["Benchmark suites", str(len(suite_changes))],
-        ["Code policy", ", ".join(sorted(RECOMMENDATION_POLICIES))],
+        [
+            "Code policy",
+            ", ".join(sorted(ORDINAL_RECOMMENDATION_POLICIES)),
+        ],
         [
             "Recommendation task",
             changed_tasks[0]
@@ -229,8 +323,16 @@ def main() -> int:
             if changed_tasks
             else "unchanged",
         ],
+        [
+            "Selection change",
+            selection_changed_tasks[0]
+            if len(selection_changed_tasks) == 1
+            else "baseline migration"
+            if selection_changed_tasks
+            else "unchanged",
+        ],
     ]
-    listening_required = bool(changed_tasks) and not baseline_replacement
+    listening_required = bool(selection_changed_tasks) and not baseline_replacement
     if listening_required:
         overview_rows.append(
             ["Test tracks", "<br>".join(f"`{track}`" for track in tracks) or "private manifest not present"]
@@ -247,6 +349,27 @@ def main() -> int:
     lines.extend(table(["Change", "Model", "Stem", "Suite", "Values", "Evidence"], benchmark_rows))
     lines.extend(["", "### Structured semantic evidence", ""])
     lines.extend(table(["Change", "Model", "Task", "Values", "Confidence", "Evidence"], semantic_rows))
+    lines.extend(["", "### Ordinal evidence", ""])
+    lines.extend(
+        table(
+            [
+                "Change",
+                "Evidence",
+                "Task",
+                "Context",
+                "Metric",
+                "Left",
+                "Relation",
+                "Right",
+                "Confidence",
+                "Tier",
+                "Source",
+                "Location",
+                "Summary",
+            ],
+            ordinal_rows,
+        )
+    )
     lines.extend(["", "### Recommendations", ""])
     lines.extend(
         table(
@@ -256,7 +379,7 @@ def main() -> int:
     )
     lines.extend(["", "## Listening comparison", ""])
     if listening_required:
-        lines.append("- Tasks: " + ", ".join(f"`{task}`" for task in changed_tasks))
+        lines.append("- Task: " + f"`{selection_changed_tasks[0]}`")
         if tracks:
             lines.append("- Test tracks:")
             lines.extend(f"  - `{track}`" for track in tracks)
@@ -267,7 +390,7 @@ def main() -> int:
             if args.artifact_url
             else "- Artifact: pending"
         )
-        lines.append("- [ ] Accept all recommendation changes in this registry refresh")
+        lines.append(f"- [ ] Accept recommendation change for `{selection_changed_tasks[0]}`")
     else:
         lines.append(
             "Not required for this baseline replacement."
