@@ -19,6 +19,15 @@ jobs:
         run: python3 scripts/validate.py
       - name: Validate generated product catalogue
         run: python3 scripts/product_catalog.py --check
+      - name: Require smoke evidence for validated backend changes
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+        run: |
+          git show "$BASE_REF:registry.json" > /tmp/base-registry.json
+          python3 scripts/smoke_audio_separator.py verify-transitions \
+            --base-registry /tmp/base-registry.json \
+            --registry registry.json
       - name: Compile scripts
         run: python3 -m py_compile scripts/*.py
       - name: Test product policy

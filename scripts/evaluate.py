@@ -142,13 +142,16 @@ def changed_tasks(base: dict[str, Any], proposed: dict[str, Any]) -> list[str]:
     requested = [
         item.strip() for item in os.environ.get("STEMS", "").split(",") if item.strip()
     ]
+    def selection(registry: dict[str, Any], task: str) -> tuple[object, object]:
+        recommendation = registry.get("recommendations", {}).get(task, {})
+        return recommendation.get("model"), recommendation.get("decomposition")
+
     changes = [
         task
         for task in sorted(
             set(base.get("recommendations", {})) | set(proposed.get("recommendations", {}))
         )
-        if base.get("recommendations", {}).get(task)
-        != proposed.get("recommendations", {}).get(task)
+        if selection(base, task) != selection(proposed, task)
     ]
     if requested:
         unknown = set(requested) - set(changes)

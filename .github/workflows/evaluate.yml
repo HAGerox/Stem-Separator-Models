@@ -1,6 +1,9 @@
 name: Compare registry recommendations
 
 on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths: [registry.json]
   workflow_dispatch:
     inputs:
       pr_number:
@@ -12,40 +15,95 @@ permissions:
   contents: read
   pull-requests: write
 
+concurrency:
+  group: recommendation-comparison-${{ github.event.pull_request.number || inputs.pr_number }}
+  cancel-in-progress: true
+
 jobs:
   compare:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.draft == false &&
+       github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: [self-hosted, stem-evaluation]
     timeout-minutes: 120
     steps:
+      - name: Resolve pull request
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          gh api "repos/$REPOSITORY/pulls/$PR_NUMBER" > "$RUNNER_TEMP/pr.json"
+          python3 - "$RUNNER_TEMP/pr.json" "$GITHUB_OUTPUT" <<'PY'
+          import json, pathlib, sys
+          pr = json.loads(pathlib.Path(sys.argv[1]).read_text())
+          if pr["head"]["repo"]["full_name"] != pr["base"]["repo"]["full_name"]:
+              raise SystemExit("Automatic listening runs only for same-repository PRs")
+          with pathlib.Path(sys.argv[2]).open("a") as output:
+              output.write(f"number={pr['number']}\n")
+              output.write(f"base_sha={pr['base']['sha']}\n")
+          PY
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: main
+          ref: ${{ steps.pr.outputs.base_sha }}
           fetch-depth: 0
       - name: Read proposed registry from the PR
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ inputs.pr_number }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
         run: |
           git fetch origin "pull/$PR_NUMBER/head"
           git show FETCH_HEAD:registry.json > proposed-registry.json
           python3 scripts/validate.py proposed-registry.json
+      - name: Detect a runnable recommendation selection change
+        id: delta
+        run: |
+          python3 - "$GITHUB_OUTPUT" <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0, "scripts")
+          from evaluate import changed_tasks
+          base = json.loads(pathlib.Path("registry.json").read_text())
+          proposed = json.loads(pathlib.Path("proposed-registry.json").read_text())
+          tasks = changed_tasks(base, proposed)
+          ready = False
+          if len(tasks) == 1:
+              task = tasks[0]
+              selected = proposed["recommendations"][task]["model"]
+              model = next(model for model in proposed["models"] if model["id"] == selected)
+              backend = model.get("backends", {}).get("audio_separator", {})
+              ready = backend.get("state") == "validated" and backend.get("validated") is True
+          with pathlib.Path(sys.argv[1]).open("a") as output:
+              output.write(f"count={len(tasks)}\n")
+              output.write(f"task={tasks[0] if len(tasks) == 1 else ''}\n")
+              output.write(f"ready={'true' if ready else 'false'}\n")
+          PY
       - name: Compare current and proposed models
+        if: steps.delta.outputs.count == '1' && steps.delta.outputs.ready == 'true'
         env:
           PROPOSED_REGISTRY: proposed-registry.json
           TRACKS_FILE: evaluation/tracks.local.json
           AUDIO_DIR: ${{ vars.EVALUATION_AUDIO_DIR || '/opt/stem-registry/tracks' }}
           OUTPUT_DIR: evaluation/results/${{ github.run_id }}
         run: python3 scripts/evaluate.py
+      - name: Require one recommendation selection per comparison
+        if: steps.delta.outputs.count != '0' && steps.delta.outputs.count != '1'
+        run: |
+          echo "A registry PR may change at most one recommendation selection." >&2
+          exit 1
       - id: artifact
+        if: steps.delta.outputs.count == '1' && steps.delta.outputs.ready == 'true'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: comparison-pr-${{ inputs.pr_number }}
+          name: comparison-pr-${{ steps.pr.outputs.number }}
           path: evaluation/results/${{ github.run_id }}
           retention-days: 14
       - name: Write the artifact into the structured PR body
+        if: steps.delta.outputs.count == '1' && steps.delta.outputs.ready == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ inputs.pr_number }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
           ARTIFACT_URL: ${{ steps.artifact.outputs.artifact-url }}
           TRACKS_FILE: evaluation/tracks.local.json
         run: |
@@ -55,3 +113,13 @@ jobs:
             --artifact-url "$ARTIFACT_URL" \
             --output PR_BODY.md
           gh pr edit "$PR_NUMBER" --body-file PR_BODY.md
+      - name: Explain why comparison was deferred
+        if: steps.delta.outputs.count == '1' && steps.delta.outputs.ready != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          REPOSITORY: ${{ github.repository }}
+          TASK: ${{ steps.delta.outputs.task }}
+        run: >-
+          gh pr comment "$PR_NUMBER" --repo "$REPOSITORY"
+          --body "Listening comparison for \`$TASK\` will run automatically after its proposed model passes the exact-checkpoint Audio Separator smoke."

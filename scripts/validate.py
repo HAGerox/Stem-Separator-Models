@@ -18,6 +18,7 @@ from evidence_policy import (
     SOURCE_TIER_ORDER,
 )
 from product_policy import EXCLUDED_CAPABILITIES, multitrack_policy_errors
+from smoke_policy import smoke_evidence_errors
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -460,6 +461,15 @@ def main() -> int:
                     errors.append(
                         f"{where}.backends.audio_separator: compatible_unvalidated requires selected checkpoint and YAML artifacts"
                     )
+            if isinstance(audio_separator, dict) and "smoke_validation" in audio_separator:
+                if audio_separator.get("state") != "validated" or audio_separator.get("validated") is not True:
+                    errors.append(
+                        f"{where}.backends.audio_separator: smoke_validation requires validated state"
+                    )
+                errors.extend(
+                    f"{where}.backends.audio_separator: {error}"
+                    for error in smoke_evidence_errors(model, audio_separator)
+                )
             if not locally_runnable:
                 errors.append(f"{where}: at least one local backend path is required")
         output_capabilities_by_model[model_id] = model_output_capabilities
