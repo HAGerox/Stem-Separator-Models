@@ -10,6 +10,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from evidence_policy import RECOMMENDATION_POLICIES
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -75,7 +76,9 @@ def table(headers: list[str], rows: list[list[str]], empty: str = "None") -> lis
 def task_model(recommendation: dict | None) -> str:
     if not recommendation or not recommendation.get("model"):
         return "—"
-    return f"`{recommendation['model']}`"
+    decomposition = recommendation.get("decomposition")
+    suffix = f" / `{decomposition}`" if decomposition else ""
+    return f"`{recommendation['model']}`{suffix}"
 
 
 def track_filename(track: object) -> str:
@@ -140,9 +143,6 @@ def main() -> int:
         or stable(before.get("source_snapshots", {})) != stable(after.get("source_snapshots", {}))
         or (before.get("baseline") is True and after.get("baseline") is False)
     )
-    if len(changed_tasks) > 1 and not baseline_replacement and not maintenance_change:
-        raise RuntimeError("Recommendation PRs must change no more than one task")
-
     recommendation_rows = []
     for task in changed_tasks:
         old = before_recommendations.get(task)
@@ -207,9 +207,6 @@ def main() -> int:
     suite_changes = changed_keys(
         before.get("benchmark_suites", {}), after.get("benchmark_suites", {})
     )
-    policy_changes = changed_keys(
-        before.get("recommendation_policies", {}), after.get("recommendation_policies", {})
-    )
     tracks_path = ROOT / os.environ.get("TRACKS_FILE", "evaluation/tracks.local.json")
     tracks = (
         [track_filename(track) for track in load(tracks_path)["tracks"]]
@@ -223,7 +220,7 @@ def main() -> int:
         ["Semantic observations", f"+{len(semantic_added)} / -{len(semantic_removed)}"],
         ["Metric definitions", str(len(metric_changes))],
         ["Benchmark suites", str(len(suite_changes))],
-        ["Policies", str(len(policy_changes))],
+        ["Code policy", ", ".join(sorted(RECOMMENDATION_POLICIES))],
         [
             "Recommendation task",
             changed_tasks[0]
@@ -233,7 +230,7 @@ def main() -> int:
             else "unchanged",
         ],
     ]
-    listening_required = len(changed_tasks) == 1 and not baseline_replacement and not maintenance_change
+    listening_required = bool(changed_tasks) and not baseline_replacement
     if listening_required:
         overview_rows.append(
             ["Test tracks", "<br>".join(f"`{track}`" for track in tracks) or "private manifest not present"]
@@ -259,7 +256,7 @@ def main() -> int:
     )
     lines.extend(["", "## Listening comparison", ""])
     if listening_required:
-        lines.append(f"- Task: `{changed_tasks[0]}`")
+        lines.append("- Tasks: " + ", ".join(f"`{task}`" for task in changed_tasks))
         if tracks:
             lines.append("- Test tracks:")
             lines.extend(f"  - `{track}`" for track in tracks)
@@ -270,7 +267,7 @@ def main() -> int:
             if args.artifact_url
             else "- Artifact: pending"
         )
-        lines.append("- [ ] Accept the recommendation change")
+        lines.append("- [ ] Accept all recommendation changes in this registry refresh")
     else:
         lines.append(
             "Not required for this baseline replacement."

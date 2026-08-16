@@ -1,6 +1,6 @@
 {
   "schema": 3,
-  "generated_at": "2026-08-13",
+  "generated_at": "2026-08-16",
   "baseline": false,
   "scope": {
     "execution": "local_only",
@@ -38,25 +38,7 @@
     "primary_sources": [
       "deton24-google-doc-2026-08-12",
       "mvsep-quality-checker"
-    ],
-    "rules": [
-      "Only models with publicly downloadable weights and a local inference path belong in the registry.",
-      "Provider-only models may be used as evidence but are never registry models or recommendation targets.",
-      "Qualitative evidence is structured from Deton24 and remains source-attributed.",
-      "MVSep metrics are copied without filling missing values.",
-      "Benchmark values are comparable only within the same suite.",
-      "Missing evidence reduces coverage and is never treated as zero."
-    ],
-    "semantic_scale": {
-      "severe_negative": 20,
-      "negative": 35,
-      "mixed_negative": 45,
-      "neutral": 50,
-      "mixed_positive": 60,
-      "positive": 75,
-      "strong_positive": 90,
-      "exceptional": 95
-    }
+    ]
   },
   "metric_definitions": {
     "sdr_db": {
@@ -129,97 +111,73 @@
       "label": "Bleed control",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "fullness_preservation": {
       "label": "Fullness / target preservation",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "artifact_control": {
       "label": "Artifact control",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "robustness": {
       "label": "Robustness",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "tonal_fidelity": {
       "label": "Tonal fidelity",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "transient_preservation": {
       "label": "Transient preservation",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "target_isolation": {
       "label": "Target isolation",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "reconstruction_fidelity": {
       "label": "Reconstruction fidelity",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "reverb_control": {
       "label": "Reverb control",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "noise_control": {
       "label": "Noise control",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "speech_preservation": {
       "label": "Speech preservation",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     },
     "music_rejection": {
       "label": "Music rejection",
       "kind": "semantic",
       "unit": "score",
-      "better": "higher",
-      "min": 0,
-      "max": 100
+      "better": "higher"
     }
   },
   "benchmark_suites": {
@@ -266,12 +224,6 @@
       "standardized": true,
       "source": "https://mvsep.com/quality_checker/"
     },
-    "mvsep-dereverb-v1": {
-      "name": "MVSep DeReverb",
-      "version": 1,
-      "standardized": true,
-      "source": "https://mvsep.com/quality_checker/"
-    },
     "audio-separator-catalogue-2026-08": {
       "name": "python-audio-separator catalogue",
       "version": 1,
@@ -283,52 +235,6 @@
       "version": 1,
       "standardized": false,
       "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing"
-    }
-  },
-  "recommendation_policies": {
-    "balanced-quality-v1": {
-      "measured_weight": 0.5,
-      "semantic_weight": 0.5,
-      "missing": "reduce_coverage",
-      "default_task_weights": "specialist",
-      "task_weights": {
-        "vocals": {
-          "sdr_db": 0.14285714,
-          "si_sdr_db": 0.06349206,
-          "mvsep_bleedless": 0.13492064,
-          "mvsep_fullness": 0.0952381,
-          "l1_freq": 0.06349206,
-          "bleed_control": 0.16216216,
-          "fullness_preservation": 0.13513514,
-          "artifact_control": 0.10810811,
-          "robustness": 0.05405405,
-          "tonal_fidelity": 0.04054054
-        },
-        "instrumental": {
-          "sdr_db": 0.13157895,
-          "si_sdr_db": 0.05263158,
-          "mvsep_bleedless": 0.12280702,
-          "mvsep_fullness": 0.12280702,
-          "l1_freq": 0.07017543,
-          "bleed_control": 0.13953488,
-          "fullness_preservation": 0.15116279,
-          "artifact_control": 0.09302326,
-          "robustness": 0.05813953,
-          "tonal_fidelity": 0.05813954
-        },
-        "specialist": {
-          "sdr_db": 0.16363636,
-          "si_sdr_db": 0.06363636,
-          "mvsep_bleedless": 0.10909091,
-          "mvsep_fullness": 0.09090909,
-          "l1_freq": 0.07272728,
-          "target_isolation": 0.16666667,
-          "artifact_control": 0.11111111,
-          "robustness": 0.08888889,
-          "tonal_fidelity": 0.07777778,
-          "fullness_preservation": 0.05555555
-        }
-      }
     }
   },
   "models": [
@@ -362,8 +268,25 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "not_listed",
-          "validated": false
+          "state": "validated",
+          "model_filename": "becruily_deux.ckpt",
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "becruily_deux.ckpt",
+            "config_deux_becruily.yaml"
+          ]
         },
         "mlx_audio_separator": {
           "state": "unknown",
@@ -372,7 +295,24 @@
         "pymss": {
           "state": "listed",
           "catalog_id": "becruily_deux.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "becruily_deux.ckpt",
+            "config_deux_becruily.yaml"
+          ],
+          "catalog_snapshot": "pymss-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -483,7 +423,29 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/BS-Roformer-Leap",
-        "revision": "4e47d6662ae82eaa8b4ac4329fe66099a843b48e"
+        "revision": "4e47d6662ae82eaa8b4ac4329fe66099a843b48e",
+        "artifacts": [
+          {
+            "name": "bs_leap_xe_inst.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_inst.ckpt",
+            "sha256": "33ee9415f491d257fa7a79f6e92a80d647bc71ed622bfef9a137b6e4250307d3"
+          },
+          {
+            "name": "bs_leap_xe_voc.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_voc.ckpt",
+            "sha256": "b739c1d2d87a81cd3dd3844ed9ad0bd678708c7a0a761a03a1aaff9af79a096d"
+          },
+          {
+            "name": "leap_xe_config_inst.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_inst.yaml",
+            "sha256": "bc188276085e07840757e5117285ead7ec5631f94329c1c6f5f0aff385adea4d"
+          },
+          {
+            "name": "leap_xe_config_voc.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_voc.yaml",
+            "sha256": "d3cb8c84be2e9bcbc64c1086e2256dc097ab5addebc5ce507818e90ff8cbdc25"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
@@ -602,7 +564,19 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE",
-        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059"
+        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059",
+        "artifacts": [
+          {
+            "name": "bs_roformer_inst_hyperacev2.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/bs_roformer_inst_hyperacev2.ckpt",
+            "sha256": "4d61178ef966d2b4e9ad456ffbbc6fd5b2828df07a7af32931142c1a5ff1fe6f"
+          },
+          {
+            "name": "config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_inst/config.yaml",
+            "sha256": "85d10906007df21ee48dbb86faa09205609274eb38ea224dce767e2844d0a934"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
@@ -612,7 +586,19 @@
         "pymss": {
           "state": "listed",
           "catalog_id": "bs_roformer_inst_hyperacev2.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "bs_roformer_inst_hyperacev2.ckpt",
+            "config.yaml"
+          ],
+          "catalog_snapshot": "pymss-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -678,7 +664,19 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE",
-        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059"
+        "revision": "5b1f8283125d5e4a3614d0e3635a636e09c84059",
+        "artifacts": [
+          {
+            "name": "bs_roformer_voc_hyperacev2.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_voc/bs_roformer_voc_hyperacev2.ckpt",
+            "sha256": "54cf516f621f2f460bf660ed137e244b8931bf7a2ce85ddceecff816dbc4d668"
+          },
+          {
+            "name": "config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-HyperACE/resolve/5b1f8283125d5e4a3614d0e3635a636e09c84059/v2_voc/config.yaml",
+            "sha256": "033e57abee226a480ef410e0631b9fe00e8b7bc9a3bb5fe55659d0b43a238701"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
@@ -688,7 +686,19 @@
         "pymss": {
           "state": "listed",
           "catalog_id": "bs_roformer_voc_hyperacev2.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            }
+          ],
+          "artifact_names": [
+            "bs_roformer_voc_hyperacev2.ckpt",
+            "config.yaml"
+          ],
+          "catalog_snapshot": "pymss-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -752,13 +762,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/BS-Roformer-Resurrection",
-        "revision": "8fc1a62f765e3e738db8394d7e87e379acc4c675"
+        "revision": "8fc1a62f765e3e738db8394d7e87e379acc4c675",
+        "artifacts": [
+          {
+            "name": "BS-Roformer-Resurrection-Inst.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Resurrection/resolve/8fc1a62f765e3e738db8394d7e87e379acc4c675/BS-Roformer-Resurrection-Inst.ckpt",
+            "sha256": "16311025a5133ae6411760ccfe9e3e66b31a01d9d8bec0a03fa7ec4bedac7a15"
+          },
+          {
+            "name": "BS-Roformer-Resurrection-Inst-Config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Resurrection/resolve/8fc1a62f765e3e738db8394d7e87e379acc4c675/BS-Roformer-Resurrection-Inst-Config.yaml",
+            "sha256": "0c67e988e1d608a4d3414f602dd3593ec927913c60618d1ff981baec40455cb0"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "bs_roformer_instrumental_resurrection_unwa.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "BS-Roformer-Resurrection-Inst.ckpt",
+            "BS-Roformer-Resurrection-Inst-Config.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -824,13 +863,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/BS-Roformer-Resurrection",
-        "revision": "8fc1a62f765e3e738db8394d7e87e379acc4c675"
+        "revision": "8fc1a62f765e3e738db8394d7e87e379acc4c675",
+        "artifacts": [
+          {
+            "name": "BS-Roformer-Resurrection.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Resurrection/resolve/8fc1a62f765e3e738db8394d7e87e379acc4c675/BS-Roformer-Resurrection.ckpt",
+            "sha256": "9dbfe5cb572e4ed32a15ec727d7bd06c8d7aba97509e6fda5bc008bb1e0b2dd5"
+          },
+          {
+            "name": "BS-Roformer-Resurrection-Config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Resurrection/resolve/8fc1a62f765e3e738db8394d7e87e379acc4c675/BS-Roformer-Resurrection-Config.yaml",
+            "sha256": "79c65b6158c8e9236c9f02247cbb2fb6eb0007c42c47799e9de8e86f474556c6"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "bs_roformer_vocals_resurrection_unwa.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "BS-Roformer-Resurrection.ckpt",
+            "BS-Roformer-Resurrection-Config.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -895,13 +963,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/Mel-Band-Roformer-Inst",
-        "revision": "f86cd9e99d63eb9499b00fca424bc4ed8a8aeaba"
+        "revision": "f86cd9e99d63eb9499b00fca424bc4ed8a8aeaba",
+        "artifacts": [
+          {
+            "name": "inst_v1e_plus.ckpt",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-Inst/resolve/f86cd9e99d63eb9499b00fca424bc4ed8a8aeaba/inst_v1e_plus.ckpt",
+            "sha256": "6a4ddba739f0352407fb6e18b29206b82318ec427fe37fcedb0f83241e4e15fb"
+          },
+          {
+            "name": "config_melbandroformer_inst.yaml",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-Inst/resolve/f86cd9e99d63eb9499b00fca424bc4ed8a8aeaba/config_melbandroformer_inst.yaml",
+            "sha256": "64c0cf23730f299c9c73470e4ba4b32120d8fec4fb1a0326dde1d61378cc6fc8"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "melband_roformer_inst_v1e_plus.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "inst_v1e_plus.ckpt",
+            "config_melbandroformer_inst.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -961,13 +1058,37 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/GaboxR67/MelBandRoformers",
-        "revision": "7860d31d8cc1c73b46c1cbdc2b497210c97478ae"
+        "revision": "7860d31d8cc1c73b46c1cbdc2b497210c97478ae",
+        "artifacts": [
+          {
+            "name": "inst_gaboxFlowersV10.ckpt",
+            "url": "https://huggingface.co/GaboxR67/MelBandRoformers/resolve/7860d31d8cc1c73b46c1cbdc2b497210c97478ae/melbandroformers/instrumental/inst_gaboxFlowersV10.ckpt",
+            "sha256": "fe3aa51927beb60ff345b8b672c11760fb8bdaa6039d8c61631416a5b4f7a047"
+          },
+          {
+            "name": "v10.yaml",
+            "url": "https://huggingface.co/GaboxR67/MelBandRoformers/resolve/7860d31d8cc1c73b46c1cbdc2b497210c97478ae/melbandroformers/instrumental/v10.yaml",
+            "sha256": "e4a8d2ebb57986ce154ce066bca5674b6a3aeda3ed9d623fb49af450335efe1e"
+          }
+        ]
       },
       "backends": {
         "pymss": {
           "state": "listed",
           "catalog_id": "inst_gaboxFlowersV10.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "inst_gaboxFlowersV10.ckpt",
+            "v10.yaml"
+          ],
+          "catalog_snapshot": "pymss-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1028,13 +1149,36 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/GaboxR67/MelBandRoformers",
-        "revision": "7860d31d8cc1c73b46c1cbdc2b497210c97478ae"
+        "revision": "7860d31d8cc1c73b46c1cbdc2b497210c97478ae",
+        "artifacts": [
+          {
+            "name": "Inst_GaboxFv7z.ckpt",
+            "url": "https://huggingface.co/GaboxR67/MelBandRoformers/resolve/7860d31d8cc1c73b46c1cbdc2b497210c97478ae/melbandroformers/instrumental/Inst_GaboxFv7z.ckpt",
+            "sha256": "ef229f0dcd370c1767e4292981c59e5248814da45f32bfacebcc0f28adaa30a1"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "mel_band_roformer_instrumental_fv7z_gabox.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "Inst_GaboxFv7z.ckpt"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1094,7 +1238,19 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO",
-        "revision": "d23c266984fecf4fcc87866f5fb9caeec2398af4"
+        "revision": "d23c266984fecf4fcc87866f5fb9caeec2398af4",
+        "artifacts": [
+          {
+            "name": "bs_roformer_fno.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bs_roformer_fno.ckpt",
+            "sha256": "f35bf6d87b2863372388e85c2d9679e5b7651e5c2ddd23aab1480f7af10b90ca"
+          },
+          {
+            "name": "bsrofo_fno.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Inst-FNO/resolve/d23c266984fecf4fcc87866f5fb9caeec2398af4/bsrofo_fno.yaml",
+            "sha256": "8e79699a9d75c31c407f02e84b00521d9c8e59ae323a4449f911dd8c10defeac"
+          }
+        ]
       },
       "backends": {
         "pymss": {
@@ -1159,13 +1315,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/becruily/mel-band-roformer-instrumental",
-        "revision": "1bbef428121cc700899a57c8a50d6dce13aa7e98"
+        "revision": "1bbef428121cc700899a57c8a50d6dce13aa7e98",
+        "artifacts": [
+          {
+            "name": "mel_band_roformer_instrumental_becruily.ckpt",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-instrumental/resolve/1bbef428121cc700899a57c8a50d6dce13aa7e98/mel_band_roformer_instrumental_becruily.ckpt",
+            "sha256": "a8da6632a1c25efb1c9be783ce9ea367d226d4b918cd6c3717c8b1d7a396041d"
+          },
+          {
+            "name": "config_instrumental_becruily.yaml",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-instrumental/resolve/1bbef428121cc700899a57c8a50d6dce13aa7e98/config_instrumental_becruily.yaml",
+            "sha256": "a222235643d329817a1123d82d8eb38392d919e90ed597e053de49c092d3b442"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "mel_band_roformer_instrumental_becruily.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            },
+            {
+              "runtime_key": "Vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            }
+          ],
+          "artifact_names": [
+            "mel_band_roformer_instrumental_becruily.ckpt",
+            "config_instrumental_becruily.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1231,7 +1416,20 @@
         "audio_separator": {
           "state": "validated",
           "model_filename": "model_bs_roformer_ep_317_sdr_12.9755.ckpt",
-          "validated": true
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1333,7 +1531,20 @@
         "audio_separator": {
           "state": "validated",
           "model_filename": "model_bs_roformer_ep_368_sdr_12.9628.ckpt",
-          "validated": true
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "instrumental",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1437,7 +1648,20 @@
         "audio_separator": {
           "state": "validated",
           "model_filename": "vocals_mel_band_roformer.ckpt",
-          "validated": true
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1519,13 +1743,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big",
-        "revision": "1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74"
+        "revision": "1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74",
+        "artifacts": [
+          {
+            "name": "melband_roformer_big_beta4.ckpt",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big/resolve/1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74/melband_roformer_big_beta4.ckpt",
+            "sha256": "700a9bd3831d4f7f44cc0019b238774e31045bcbc361fbb69235535c40fc1454"
+          },
+          {
+            "name": "config_melbandroformer_big_beta4.yaml",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big/resolve/1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74/config_melbandroformer_big_beta4.yaml",
+            "sha256": "464f21925d2744be6af64cf9ee78d5937d11cfde0b91f819cb1f631acccab603"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "validated",
           "model_filename": "melband_roformer_big_beta4.ckpt",
-          "validated": true
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "melband_roformer_big_beta4.ckpt",
+            "config_melbandroformer_big_beta4.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1586,13 +1839,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big",
-        "revision": "1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74"
+        "revision": "1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74",
+        "artifacts": [
+          {
+            "name": "big_beta5e.ckpt",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big/resolve/1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74/big_beta5e.ckpt",
+            "sha256": "32b876e1163716a9a007438b5a5107069586aa9b9ca653a5f63013b1edf6920c"
+          },
+          {
+            "name": "big_beta5e.yaml",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big/resolve/1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74/big_beta5e.yaml",
+            "sha256": "2e62059b2cca71f6ef6f71a8202e979acc8008593c1fc75035663d1c750a4b7b"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "melband_roformer_big_beta5e.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "big_beta5e.ckpt",
+            "big_beta5e.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [],
@@ -1662,13 +1944,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big",
-        "revision": "1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74"
+        "revision": "1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74",
+        "artifacts": [
+          {
+            "name": "big_beta6x.ckpt",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big/resolve/1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74/big_beta6x.ckpt",
+            "sha256": "e16d702f4e20f13d60b293541c1dea75cb4414a5846b36780e28ef70352a4e5c"
+          },
+          {
+            "name": "big_beta6x.yaml",
+            "url": "https://huggingface.co/pcunwa/Mel-Band-Roformer-big/resolve/1508d1ed7c54cb0017b2cbfaabdaf3ca87d2cf74/big_beta6x.yaml",
+            "sha256": "42a037e9d80dc1dbc91005047cd20f4afe7c1267163fc878a9fbaf6be21959f3"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "melband_roformer_big_beta6x.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "big_beta6x.ckpt",
+            "big_beta6x.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1749,13 +2060,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/becruily/bs-roformer-karaoke",
-        "revision": "f7849ae934209184dc288d1018cd8a76a7fc8b3c"
+        "revision": "f7849ae934209184dc288d1018cd8a76a7fc8b3c",
+        "artifacts": [
+          {
+            "name": "bs_roformer_karaoke_frazer_becruily.ckpt",
+            "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/bs_roformer_karaoke_frazer_becruily.ckpt",
+            "sha256": "eb90ee24c1154d83fbcfd27e96182f19e061557cc6e4746953125e08c29389f9"
+          },
+          {
+            "name": "config_karaoke_frazer_becruily.yaml",
+            "url": "https://huggingface.co/becruily/bs-roformer-karaoke/resolve/f7849ae934209184dc288d1018cd8a76a7fc8b3c/config_karaoke_frazer_becruily.yaml",
+            "sha256": "1d3b58b473025183d0d3c91e7a444cb5f1418d9f34e8f46b8d2fb10d2cc8ab34"
+          }
+        ]
       },
       "backends": {
         "mvsepless": {
           "state": "listed",
           "catalog_id": "bs_karaoke_becruily",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifact_names": [
+            "bs_roformer_karaoke_frazer_becruily.ckpt",
+            "config_karaoke_frazer_becruily.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1854,13 +2194,43 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
+        "artifacts": [
+          {
+            "name": "bs_karaoke_anvuew.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/bs_roformer/bs_karaoke_anvuew.ckpt",
+            "sha256": "206d04757cb5f75ca3b55f8a0a48f5c26aa2351d4ff3c7adbfc9affa30ea3ae4"
+          },
+          {
+            "name": "bs_karaoke_anvuew_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/bs_roformer/bs_karaoke_anvuew_config.yaml",
+            "sha256": "c19deed20d939664fee89d02fd13c3609b14fd049945a1613446b77f000eb694"
+          }
+        ]
       },
       "backends": {
         "mvsepless": {
           "state": "listed",
           "catalog_id": "bs_karaoke_anvuew",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifact_names": [
+            "bs_karaoke_anvuew.ckpt",
+            "bs_karaoke_anvuew_config.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -1956,13 +2326,42 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/becruily/mel-band-roformer-karaoke",
-        "revision": "0c149975cfaa261c7d87baf54330a9da85bcf888"
+        "revision": "0c149975cfaa261c7d87baf54330a9da85bcf888",
+        "artifacts": [
+          {
+            "name": "mel_band_roformer_karaoke_becruily.ckpt",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-karaoke/resolve/0c149975cfaa261c7d87baf54330a9da85bcf888/mel_band_roformer_karaoke_becruily.ckpt",
+            "sha256": "d3aa262ac01df870b9fc033e9c7b6cad33fe04fc9c148b6c40841326a515a0e0"
+          },
+          {
+            "name": "config_karaoke_becruily.yaml",
+            "url": "https://huggingface.co/becruily/mel-band-roformer-karaoke/resolve/0c149975cfaa261c7d87baf54330a9da85bcf888/config_karaoke_becruily.yaml",
+            "sha256": "cd37b0dcc285fc22d88090415722ac7127ee1d9ea2f3346c3b8d8fcc61e0c74b"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
           "state": "listed",
           "model_filename": "mel_band_roformer_karaoke_becruily.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "Vocals",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "Instrumental",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            }
+          ],
+          "artifact_names": [
+            "mel_band_roformer_karaoke_becruily.ckpt",
+            "config_karaoke_becruily.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [],
@@ -2032,18 +2431,67 @@
         "guitar",
         "vocals",
         "other",
-        "multitrack_6"
+        "multitrack"
       ],
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "artifacts": [
+          {
+            "name": "BS-Roformer-SW.ckpt",
+            "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/BS-Roformer-SW.ckpt",
+            "sha256": "24e7d35ee9c64415673d3fd33e06a67cac2c103c5df6267ba1576459c775916e"
+          },
+          {
+            "name": "BS-Roformer-SW.yaml",
+            "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/BS-Roformer-SW.yaml",
+            "sha256": "b558996f1e25eb48798bd6502505a5de94c4f966d6edfb1a0420f06cc40b501a"
+          }
+        ]
       },
       "backends": {
         "audio_separator": {
-          "state": "listed",
+          "state": "validated",
           "model_filename": "BS-Roformer-SW.ckpt",
-          "validated": false
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "bass",
+              "capability": "bass",
+              "label": "Bass"
+            },
+            {
+              "runtime_key": "drums",
+              "capability": "drums",
+              "label": "Drums"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other"
+            },
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "guitar",
+              "capability": "guitar",
+              "label": "Guitar"
+            },
+            {
+              "runtime_key": "piano",
+              "capability": "piano",
+              "label": "Piano"
+            }
+          ],
+          "artifact_names": [
+            "BS-Roformer-SW.ckpt",
+            "BS-Roformer-SW.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -2179,7 +2627,7 @@
         },
         {
           "id": "bs-roformer-sw-deton24-5",
-          "task": "multitrack_6",
+          "task": "multitrack",
           "method": "llm_derived",
           "values": {
             "bleed_control": 86,
@@ -2203,7 +2651,31 @@
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
+      ],
+      "decompositions": {
+        "general_music_6": {
+          "scope": "general_music",
+          "hierarchy": "top_level",
+          "outputs": [
+            "vocals",
+            "drums",
+            "bass",
+            "guitar",
+            "piano",
+            "other"
+          ],
+          "remainder": "other",
+          "reconstruction": {
+            "mode": "residual_to_remainder",
+            "validated": true,
+            "validation_scope": "exact_checkpoint_smoke",
+            "suite": "stem-separator-synthetic-reconstruction-v1",
+            "fixture": "2s_stereo_two_tone",
+            "residual_rms_ratio": 0.0383464,
+            "residual_db": -28.3255
+          }
+        }
+      }
     },
     {
       "id": "jarredou-drumsep-5",
@@ -2222,13 +2694,58 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
+        "artifacts": [
+          {
+            "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+            "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
+          },
+          {
+            "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+            "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
+          }
+        ]
       },
       "backends": {
-        "audio_separator": {
+        "mvsepless": {
           "state": "listed",
-          "model_filename": "MDX23C-DrumSep-aufr33-jarredou.ckpt",
-          "validated": false
+          "catalog_id": "mdx23c_drumsep_5stem_aufr33_jarredou",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "kick",
+              "capability": "kick",
+              "label": "Kick"
+            },
+            {
+              "runtime_key": "snare",
+              "capability": "snare",
+              "label": "Snare"
+            },
+            {
+              "runtime_key": "toms",
+              "capability": "toms",
+              "label": "Toms"
+            },
+            {
+              "runtime_key": "hh",
+              "capability": "hihat",
+              "label": "Hi-hat"
+            },
+            {
+              "runtime_key": "cymbals",
+              "capability": "cymbals",
+              "label": "Cymbals"
+            }
+          ],
+          "artifact_names": [
+            "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+            "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -2330,13 +2847,110 @@
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
+        "artifacts": [
+          {
+            "name": "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
+            "sha256": "d2a4aa53eb584d21eead358a4e66d1882ad182911be018f052b5da73be9096d0"
+          },
+          {
+            "name": "mdx23c_drumsep_6stem_aufr33_jarredou_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_6stem_aufr33_jarredou_config.yaml",
+            "sha256": "bd6f471e3bfdd81ef9d9cd9f57a86e3d5e11b8941a5951db8a3c8585a6b4cfc1"
+          },
+          {
+            "name": "config_drumsep_mdx23c.yaml",
+            "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/config_drumsep_mdx23c.yaml",
+            "sha256": "17d1649a227f841165bdb4c11a42082898192a1ea3ceab7e7e0b9293d6589dd6"
+          }
+        ]
       },
       "backends": {
+        "audio_separator": {
+          "state": "validated",
+          "model_filename": "MDX23C-DrumSep-aufr33-jarredou.ckpt",
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "kick",
+              "capability": "kick",
+              "label": "Kick"
+            },
+            {
+              "runtime_key": "snare",
+              "capability": "snare",
+              "label": "Snare"
+            },
+            {
+              "runtime_key": "toms",
+              "capability": "toms",
+              "label": "Toms"
+            },
+            {
+              "runtime_key": "hh",
+              "capability": "hihat",
+              "label": "Hi-hat"
+            },
+            {
+              "runtime_key": "ride",
+              "capability": "ride",
+              "label": "Ride"
+            },
+            {
+              "runtime_key": "crash",
+              "capability": "crash",
+              "label": "Crash"
+            }
+          ],
+          "artifact_names": [
+            "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
+            "config_drumsep_mdx23c.yaml"
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
+        },
         "mvsepless": {
           "state": "listed",
           "catalog_id": "mdx23c_drumsep_6stem_aufr33_jarredou",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "kick",
+              "capability": "kick",
+              "label": "Kick"
+            },
+            {
+              "runtime_key": "snare",
+              "capability": "snare",
+              "label": "Snare"
+            },
+            {
+              "runtime_key": "toms",
+              "capability": "toms",
+              "label": "Toms"
+            },
+            {
+              "runtime_key": "hh",
+              "capability": "hihat",
+              "label": "Hi-hat"
+            },
+            {
+              "runtime_key": "ride",
+              "capability": "ride",
+              "label": "Ride"
+            },
+            {
+              "runtime_key": "crash",
+              "capability": "crash",
+              "label": "Crash"
+            }
+          ],
+          "artifact_names": [
+            "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
+            "mdx23c_drumsep_6stem_aufr33_jarredou_config.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -2430,7 +3044,7 @@
         "drums",
         "bass",
         "other",
-        "multitrack_4"
+        "multitrack"
       ],
       "availability": {
         "state": "public_weights",
@@ -2441,7 +3055,30 @@
         "audio_separator": {
           "state": "listed",
           "model_filename": "htdemucs_ft.yaml",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "drums",
+              "capability": "drums",
+              "label": "Drums"
+            },
+            {
+              "runtime_key": "bass",
+              "capability": "bass",
+              "label": "Bass"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other"
+            }
+          ],
+          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -2531,7 +3168,7 @@
         },
         {
           "id": "htdemucs-ft-deton24-3",
-          "task": "multitrack_4",
+          "task": "multitrack",
           "method": "llm_derived",
           "values": {
             "bleed_control": 78,
@@ -2555,7 +3192,24 @@
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://github.com/facebookresearch/demucs"
-      ]
+      ],
+      "decompositions": {
+        "general_music_4": {
+          "scope": "general_music",
+          "hierarchy": "top_level",
+          "outputs": [
+            "vocals",
+            "drums",
+            "bass",
+            "other"
+          ],
+          "remainder": "other",
+          "reconstruction": {
+            "mode": "residual_to_remainder",
+            "validated": false
+          }
+        }
+      }
     },
     {
       "id": "scnet-xl-ihf-4stem",
@@ -2568,18 +3222,58 @@
         "drums",
         "bass",
         "other",
-        "multitrack_4"
+        "multitrack"
       ],
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
+        "artifacts": [
+          {
+            "name": "scnet_xl_ihf_4stem_zfturbo.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_xl_ihf_4stem_zfturbo.ckpt",
+            "sha256": "ac25975f0f5704f3d1a3c3c251505b7a0f417a22eafe82773440ee4f7e14b74f"
+          },
+          {
+            "name": "scnet_xl_ihf_4stem_zfturbo_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_xl_ihf_4stem_zfturbo_config.yaml",
+            "sha256": "ec3b0a6106024d0509782c4884e44c28c4d3a790c637de0d955de18f8774d2d9"
+          }
+        ]
       },
       "backends": {
         "mvsepless": {
           "state": "listed",
           "catalog_id": "scnet_xl_ihf_4stem_zfturbo",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "drums",
+              "capability": "drums",
+              "label": "Drums"
+            },
+            {
+              "runtime_key": "bass",
+              "capability": "bass",
+              "label": "Bass"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other"
+            }
+          ],
+          "artifact_names": [
+            "scnet_xl_ihf_4stem_zfturbo.ckpt",
+            "scnet_xl_ihf_4stem_zfturbo_config.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [
@@ -2623,7 +3317,7 @@
       "semantic_evidence": [
         {
           "id": "scnet-xl-ihf-4stem-deton24-1",
-          "task": "multitrack_4",
+          "task": "multitrack",
           "method": "llm_derived",
           "values": {
             "bleed_control": 78,
@@ -2648,7 +3342,24 @@
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
+      ],
+      "decompositions": {
+        "general_music_4": {
+          "scope": "general_music",
+          "hierarchy": "top_level",
+          "outputs": [
+            "vocals",
+            "drums",
+            "bass",
+            "other"
+          ],
+          "remainder": "other",
+          "reconstruction": {
+            "mode": "residual_to_remainder",
+            "validated": false
+          }
+        }
+      }
     },
     {
       "id": "mvsep-mega-53-stems",
@@ -2657,7 +3368,6 @@
       "architecture": "bs_roformer_multistem",
       "status": "specialist",
       "tasks": [
-        "multitrack_many",
         "vocals",
         "lead_vocals",
         "backing_vocals",
@@ -2716,20 +3426,304 @@
         "state": "public_weights",
         "license": "unknown",
         "repository": "https://huggingface.co/oulianov/mvsep_mega_53",
-        "revision": "911881e9f5c306e3f4f021fc6c4f61890ef32955"
+        "revision": "911881e9f5c306e3f4f021fc6c4f61890ef32955",
+        "artifacts": [
+          {
+            "name": "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
+            "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
+            "sha256": "c62820893bbf86d4e734f966bd142d9157cfc8bb8e79e9d8f9ea553f3ff3519f"
+          },
+          {
+            "name": "mvsep_mega_model_bs_roformer_53_stems.yaml",
+            "url": "https://huggingface.co/oulianov/mvsep_mega_53/resolve/911881e9f5c306e3f4f021fc6c4f61890ef32955/mvsep_mega_model_bs_roformer_53_stems.yaml",
+            "sha256": "7e198062a251587088adb91215a4f44ab59e67bd62fcc805cf54d6e7dfc51103"
+          }
+        ]
       },
       "backends": {
         "mvsepless": {
           "state": "listed",
           "catalog_id": "bs_mega_53stem_full_mvsep",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "accordion",
+              "capability": "accordion",
+              "label": "Accordion"
+            },
+            {
+              "runtime_key": "acoustic-guitar",
+              "capability": "acoustic_guitar",
+              "label": "Acoustic guitar"
+            },
+            {
+              "runtime_key": "back-vocal",
+              "capability": "backing_vocals",
+              "label": "Backing vocals"
+            },
+            {
+              "runtime_key": "banjo",
+              "capability": "banjo",
+              "label": "Banjo"
+            },
+            {
+              "runtime_key": "bass",
+              "capability": "bass",
+              "label": "Bass"
+            },
+            {
+              "runtime_key": "bassoon",
+              "capability": "bassoon",
+              "label": "Bassoon"
+            },
+            {
+              "runtime_key": "bells",
+              "capability": "bells",
+              "label": "Bells"
+            },
+            {
+              "runtime_key": "bowed_strings",
+              "capability": "bowed_strings",
+              "label": "Bowed Strings"
+            },
+            {
+              "runtime_key": "brass",
+              "capability": "brass",
+              "label": "Brass"
+            },
+            {
+              "runtime_key": "cello",
+              "capability": "cello",
+              "label": "Cello"
+            },
+            {
+              "runtime_key": "clarinet",
+              "capability": "clarinet",
+              "label": "Clarinet"
+            },
+            {
+              "runtime_key": "congas",
+              "capability": "congas",
+              "label": "Congas"
+            },
+            {
+              "runtime_key": "digital-piano",
+              "capability": "digital_piano",
+              "label": "Digital piano"
+            },
+            {
+              "runtime_key": "dobro",
+              "capability": "dobro",
+              "label": "Dobro"
+            },
+            {
+              "runtime_key": "double-bass",
+              "capability": "double_bass",
+              "label": "Double bass"
+            },
+            {
+              "runtime_key": "drums",
+              "capability": "drums",
+              "label": "Drums"
+            },
+            {
+              "runtime_key": "electric-guitar",
+              "capability": "electric_guitar",
+              "label": "Electric guitar"
+            },
+            {
+              "runtime_key": "flute",
+              "capability": "flute",
+              "label": "Flute"
+            },
+            {
+              "runtime_key": "french-horn",
+              "capability": "french_horn",
+              "label": "French horn"
+            },
+            {
+              "runtime_key": "glockenspiel",
+              "capability": "glockenspiel",
+              "label": "Glockenspiel"
+            },
+            {
+              "runtime_key": "guitar",
+              "capability": "guitar",
+              "label": "Guitar"
+            },
+            {
+              "runtime_key": "harmonica",
+              "capability": "harmonica",
+              "label": "Harmonica"
+            },
+            {
+              "runtime_key": "harp",
+              "capability": "harp",
+              "label": "Harp"
+            },
+            {
+              "runtime_key": "harpsichord",
+              "capability": "harpsichord",
+              "label": "Harpsichord"
+            },
+            {
+              "runtime_key": "hh",
+              "capability": "hihat",
+              "label": "Hi-hat"
+            },
+            {
+              "runtime_key": "keys",
+              "capability": "keys",
+              "label": "Keys"
+            },
+            {
+              "runtime_key": "kick",
+              "capability": "kick",
+              "label": "Kick"
+            },
+            {
+              "runtime_key": "lead-vocal",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "mandolin",
+              "capability": "mandolin",
+              "label": "Mandolin"
+            },
+            {
+              "runtime_key": "marimba",
+              "capability": "marimba",
+              "label": "Marimba"
+            },
+            {
+              "runtime_key": "oboe",
+              "capability": "oboe",
+              "label": "Oboe"
+            },
+            {
+              "runtime_key": "organ",
+              "capability": "organ",
+              "label": "Organ"
+            },
+            {
+              "runtime_key": "percussion",
+              "capability": "percussion",
+              "label": "Percussion"
+            },
+            {
+              "runtime_key": "piano",
+              "capability": "piano",
+              "label": "Piano"
+            },
+            {
+              "runtime_key": "saxophone",
+              "capability": "saxophone",
+              "label": "Saxophone"
+            },
+            {
+              "runtime_key": "sitar",
+              "capability": "sitar",
+              "label": "Sitar"
+            },
+            {
+              "runtime_key": "snare",
+              "capability": "snare",
+              "label": "Snare"
+            },
+            {
+              "runtime_key": "strings",
+              "capability": "strings",
+              "label": "Strings"
+            },
+            {
+              "runtime_key": "synth",
+              "capability": "synth",
+              "label": "Synth"
+            },
+            {
+              "runtime_key": "tambourine",
+              "capability": "tambourine",
+              "label": "Tambourine"
+            },
+            {
+              "runtime_key": "timpani",
+              "capability": "timpani",
+              "label": "Timpani"
+            },
+            {
+              "runtime_key": "toms",
+              "capability": "toms",
+              "label": "Toms"
+            },
+            {
+              "runtime_key": "triangle",
+              "capability": "triangle",
+              "label": "Triangle"
+            },
+            {
+              "runtime_key": "trombone",
+              "capability": "trombone",
+              "label": "Trombone"
+            },
+            {
+              "runtime_key": "trumpet",
+              "capability": "trumpet",
+              "label": "Trumpet"
+            },
+            {
+              "runtime_key": "tuba",
+              "capability": "tuba",
+              "label": "Tuba"
+            },
+            {
+              "runtime_key": "ukulele",
+              "capability": "ukulele",
+              "label": "Ukulele"
+            },
+            {
+              "runtime_key": "viola",
+              "capability": "viola",
+              "label": "Viola"
+            },
+            {
+              "runtime_key": "violin",
+              "capability": "violin",
+              "label": "Violin"
+            },
+            {
+              "runtime_key": "vocal",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "wind",
+              "capability": "wind",
+              "label": "Wind"
+            },
+            {
+              "runtime_key": "wind-chimes",
+              "capability": "wind_chimes",
+              "label": "Wind chimes"
+            },
+            {
+              "runtime_key": "woodwind",
+              "capability": "woodwinds",
+              "label": "Woodwinds"
+            }
+          ],
+          "artifact_names": [
+            "mvsep_mega_model_bs_roformer_53_stems_v1.ckpt",
+            "mvsep_mega_model_bs_roformer_53_stems.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [],
       "semantic_evidence": [
         {
           "id": "mvsep-mega-53-stems-deton24-1",
-          "task": "multitrack_many",
+          "task": "vocals",
           "method": "llm_derived",
           "values": {
             "bleed_control": 62,
@@ -2748,7 +3742,8 @@
           "tags": [
             "very_broad",
             "muddy",
-            "independent_non_additive_stems"
+            "independent_non_additive_stems",
+            "model_wide_assessment"
           ]
         }
       ],
@@ -2774,7 +3769,7 @@
       },
       "backends": {
         "mvsepless": {
-          "state": "listed",
+          "state": "declared",
           "catalog_id": "bs_bowed_str_gilliaaan",
           "validated": false
         }
@@ -2832,313 +3827,6 @@
       ]
     },
     {
-      "id": "anvuew-bs-dereverb",
-      "name": "BS RoFormer DeReverb Stereo",
-      "author": "Anvuew",
-      "architecture": "bs_roformer",
-      "status": "current",
-      "tasks": [
-        "dereverb"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "listed",
-          "model_filename": "deverb_bs_roformer_8_384dim_10depth.ckpt",
-          "validated": false
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "mvsep-dereverb-v1",
-          "stem": "dry",
-          "values": {
-            "sdr_db": 22.505
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "anvuew-bs-dereverb-deton24-1",
-          "task": "dereverb",
-          "method": "llm_derived",
-          "values": {
-            "reverb_control": 94,
-            "artifact_control": 76,
-            "robustness": 78,
-            "tonal_fidelity": 78,
-            "target_isolation": 92
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11450,
-            "line_end": 11530
-          },
-          "tags": [
-            "aggressive",
-            "clean",
-            "vocal_effect_removal",
-            "breathy_voice_risk"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
-    },
-    {
-      "id": "anvuew-mel-dereverb-v2",
-      "name": "MelBand RoFormer DeReverb v2",
-      "author": "Anvuew",
-      "architecture": "mel_band_roformer",
-      "status": "historical",
-      "tasks": [
-        "dereverb"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "listed",
-          "model_filename": "dereverb_mel_band_roformer_anvuew_sdr_19.1729.ckpt",
-          "validated": false
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "mvsep-dereverb-v1",
-          "stem": "dry",
-          "values": {
-            "sdr_db": 19.1729
-          },
-          "source": "https://mvsep.com/quality_checker/",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "anvuew-mel-dereverb-v2-deton24-1",
-          "task": "dereverb",
-          "method": "llm_derived",
-          "values": {
-            "reverb_control": 89,
-            "artifact_control": 79,
-            "robustness": 80,
-            "tonal_fidelity": 80,
-            "target_isolation": 88
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11450,
-            "line_end": 11530
-          },
-          "tags": [
-            "former_best",
-            "aggressive"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
-    },
-    {
-      "id": "aufr33-denoise",
-      "name": "MelBand RoFormer Denoise Aufr33",
-      "author": "Aufr33",
-      "architecture": "mel_band_roformer",
-      "status": "current",
-      "tasks": [
-        "denoise"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "listed",
-          "model_filename": "denoise_mel_band_roformer_aufr33_sdr_27.9959.ckpt",
-          "validated": false
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "source-reported-v1",
-          "stem": "denoised",
-          "values": {
-            "sdr_db": 27.9959
-          },
-          "source": "https://github.com/nomadkaraoke/python-audio-separator",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "aufr33-denoise-deton24-1",
-          "task": "denoise",
-          "method": "llm_derived",
-          "values": {
-            "noise_control": 91,
-            "artifact_control": 88,
-            "robustness": 86,
-            "tonal_fidelity": 88,
-            "target_isolation": 90
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11723,
-            "line_end": 11900
-          },
-          "tags": [
-            "less_aggressive",
-            "music_safe"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
-    },
-    {
-      "id": "aufr33-denoise-aggressive",
-      "name": "MelBand RoFormer Denoise Aufr33 Aggressive",
-      "author": "Aufr33",
-      "architecture": "mel_band_roformer",
-      "status": "specialist",
-      "tasks": [
-        "denoise",
-        "sfx_cleanup"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "listed",
-          "model_filename": "denoise_mel_band_roformer_aufr33_aggr_sdr_27.9768.ckpt",
-          "validated": false
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "source-reported-v1",
-          "stem": "denoised",
-          "values": {
-            "sdr_db": 27.9768
-          },
-          "source": "https://github.com/nomadkaraoke/python-audio-separator",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "aufr33-denoise-aggressive-deton24-1",
-          "task": "denoise",
-          "method": "llm_derived",
-          "values": {
-            "noise_control": 96,
-            "artifact_control": 68,
-            "robustness": 72,
-            "tonal_fidelity": 70,
-            "target_isolation": 94
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11723,
-            "line_end": 11900
-          },
-          "tags": [
-            "aggressive",
-            "sfx_loss_risk"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
-    },
-    {
-      "id": "bandit-v2",
-      "name": "BandIt v2 Multilingual",
-      "author": "Netflix / Georgia Tech",
-      "architecture": "bandit",
-      "status": "historical",
-      "tasks": [
-        "dialogue",
-        "music",
-        "sfx",
-        "cinematic_dnr",
-        "music_sfx_removal"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      },
-      "backends": {
-        "mvsepless": {
-          "state": "listed",
-          "catalog_id": "bandit_v2_multi",
-          "validated": false
-        }
-      },
-      "benchmarks": [],
-      "semantic_evidence": [
-        {
-          "id": "bandit-v2-deton24-1",
-          "task": "cinematic_dnr",
-          "method": "llm_derived",
-          "values": {
-            "speech_preservation": 84,
-            "music_rejection": 82,
-            "artifact_control": 80,
-            "robustness": 80,
-            "target_isolation": 84
-          },
-          "confidence": 0.72,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11312,
-            "line_end": 11449
-          },
-          "tags": [
-            "multilingual",
-            "panning_weakness"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
-    },
-    {
       "id": "becruily-guitar",
       "name": "MelBand RoFormer Guitar",
       "author": "Becruily",
@@ -3157,7 +3845,15 @@
         "pymss": {
           "state": "listed",
           "catalog_id": "becruily_guitar.ckpt",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "guitar",
+              "capability": "guitar",
+              "label": "Guitar"
+            }
+          ],
+          "catalog_snapshot": "pymss-catalogue-2026-08-13"
         }
       },
       "benchmarks": [],
@@ -3200,25 +3896,68 @@
       "architecture": "scnet",
       "status": "experimental",
       "tasks": [
-        "choir"
+        "alto_vocals",
+        "bass_vocals",
+        "tenor_vocals",
+        "soprano_vocals"
       ],
       "availability": {
         "state": "public_weights",
         "license": "unknown",
-        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "52b829140b03681784e03764600ca7f46d85fa86",
+        "artifacts": [
+          {
+            "name": "scnet_choirsep_exp.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp.ckpt",
+            "sha256": "1e104ce6f6733542f8356ac2e59f2b7ece49ebfd2713d1ff635806de5ceb483f"
+          },
+          {
+            "name": "scnet_choirsep_exp_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/scnet/scnet_choirsep_exp_config.yaml",
+            "sha256": "278ad150cd1892f9adc185f393e9e3c31d74fc7f7184fb53fa7286dd958148e4"
+          }
+        ]
       },
       "backends": {
         "mvsepless": {
           "state": "listed",
           "catalog_id": "scnet_choirsep_exp",
-          "validated": false
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "alto",
+              "capability": "alto_vocals",
+              "label": "Alto vocals"
+            },
+            {
+              "runtime_key": "bass",
+              "capability": "bass_vocals",
+              "label": "Bass vocals"
+            },
+            {
+              "runtime_key": "tenor",
+              "capability": "tenor_vocals",
+              "label": "Tenor vocals"
+            },
+            {
+              "runtime_key": "soprano",
+              "capability": "soprano_vocals",
+              "label": "Soprano vocals"
+            }
+          ],
+          "artifact_names": [
+            "scnet_choirsep_exp.ckpt",
+            "scnet_choirsep_exp_config.yaml"
+          ],
+          "catalog_snapshot": "mvsepless-catalogue-2026-08-13"
         }
       },
       "benchmarks": [],
       "semantic_evidence": [
         {
           "id": "scnet-choirsep-deton24-1",
-          "task": "choir",
+          "task": "alto_vocals",
           "method": "llm_derived",
           "values": {
             "bleed_control": 38,
@@ -3238,75 +3977,14 @@
           "tags": [
             "proof_of_concept",
             "noisy",
-            "high_bleed"
+            "high_bleed",
+            "model_wide_assessment"
           ]
         }
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
-      ]
-    },
-    {
-      "id": "aufr33-viperx-decrowd",
-      "name": "MelBand RoFormer De-Crowd",
-      "author": "Aufr33 / Viperx",
-      "architecture": "mel_band_roformer",
-      "status": "current",
-      "tasks": [
-        "decrowd"
-      ],
-      "availability": {
-        "state": "public_weights",
-        "license": "unknown",
-        "repository": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/tag/v.1.0.4"
-      },
-      "backends": {
-        "audio_separator": {
-          "state": "listed",
-          "model_filename": "mel_band_roformer_crowd_aufr33_viperx_sdr_8.7144.ckpt",
-          "validated": false
-        }
-      },
-      "benchmarks": [
-        {
-          "suite": "source-reported-v1",
-          "stem": "crowd",
-          "values": {
-            "sdr_db": 8.7144
-          },
-          "source": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/tag/v.1.0.4",
-          "config": {}
-        }
-      ],
-      "semantic_evidence": [
-        {
-          "id": "aufr33-viperx-decrowd-deton24-1",
-          "task": "decrowd",
-          "method": "llm_derived",
-          "values": {
-            "noise_control": 82,
-            "artifact_control": 72,
-            "robustness": 68,
-            "tonal_fidelity": 76,
-            "target_isolation": 84
-          },
-          "confidence": 0.7,
-          "source_id": "deton24-google-doc-2026-08-12",
-          "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-          "location": {
-            "line_start": 11290,
-            "line_end": 11305
-          },
-          "tags": [
-            "public_weights",
-            "sometimes_more_effective"
-          ]
-        }
-      ],
-      "sources": [
-        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases/tag/v.1.0.4"
       ]
     }
   ],
@@ -3353,11 +4031,11 @@
     },
     "bowed_strings": {
       "policy": "balanced-quality-v1",
-      "model": "gilliaan-bowed-strings-duality",
+      "model": "mvsep-mega-53-stems",
       "alternatives": [
         {
-          "model": "mvsep-mega-53-stems",
-          "specialty": "many_stem_output"
+          "model": "gilliaan-bowed-strings-duality",
+          "specialty": "qualitative_candidate_unverified_runtime"
         }
       ]
     },
@@ -3369,16 +4047,6 @@
     "cello": {
       "policy": "balanced-quality-v1",
       "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "choir": {
-      "policy": "balanced-quality-v1",
-      "model": "scnet-choirsep-experimental",
-      "alternatives": []
-    },
-    "cinematic_dnr": {
-      "policy": "balanced-quality-v1",
-      "model": "bandit-v2",
       "alternatives": []
     },
     "clarinet": {
@@ -3399,36 +4067,6 @@
     "cymbals": {
       "policy": "balanced-quality-v1",
       "model": "jarredou-drumsep-5",
-      "alternatives": []
-    },
-    "decrowd": {
-      "policy": "balanced-quality-v1",
-      "model": "aufr33-viperx-decrowd",
-      "alternatives": []
-    },
-    "denoise": {
-      "policy": "balanced-quality-v1",
-      "model": "aufr33-denoise",
-      "alternatives": [
-        {
-          "model": "aufr33-denoise-aggressive",
-          "specialty": "maximum_noise_removal"
-        }
-      ]
-    },
-    "dereverb": {
-      "policy": "balanced-quality-v1",
-      "model": "anvuew-bs-dereverb",
-      "alternatives": [
-        {
-          "model": "anvuew-mel-dereverb-v2",
-          "specialty": "less_aggressive"
-        }
-      ]
-    },
-    "dialogue": {
-      "policy": "balanced-quality-v1",
-      "model": "bandit-v2",
       "alternatives": []
     },
     "digital_piano": {
@@ -3463,8 +4101,13 @@
     },
     "electric_guitar": {
       "policy": "balanced-quality-v1",
-      "model": "becruily-guitar",
-      "alternatives": []
+      "model": "mvsep-mega-53-stems",
+      "alternatives": [
+        {
+          "model": "becruily-guitar",
+          "specialty": "qualitative_candidate_unverified_runtime"
+        }
+      ]
     },
     "flute": {
       "policy": "balanced-quality-v1",
@@ -3509,7 +4152,12 @@
     "hihat": {
       "policy": "balanced-quality-v1",
       "model": "jarredou-drumsep-5",
-      "alternatives": []
+      "alternatives": [
+        {
+          "model": "jarredou-drumsep-6",
+          "specialty": "split_cymbals_runtime_compatibility"
+        }
+      ]
     },
     "instrumental": {
       "policy": "balanced-quality-v1",
@@ -3526,6 +4174,10 @@
         {
           "model": "bs-roformer-inst-fno",
           "specialty": "bleed_control"
+        },
+        {
+          "model": "viperx-1297",
+          "specialty": "validated_runtime_fallback"
         }
       ]
     },
@@ -3551,7 +4203,12 @@
     "kick": {
       "policy": "balanced-quality-v1",
       "model": "jarredou-drumsep-5",
-      "alternatives": []
+      "alternatives": [
+        {
+          "model": "jarredou-drumsep-6",
+          "specialty": "split_cymbals_runtime_compatibility"
+        }
+      ]
     },
     "lead_vocals": {
       "policy": "balanced-quality-v1",
@@ -3566,46 +4223,6 @@
     "marimba": {
       "policy": "balanced-quality-v1",
       "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "multitrack_4": {
-      "policy": "balanced-quality-v1",
-      "model": "scnet-xl-ihf-4stem",
-      "alternatives": [
-        {
-          "model": "htdemucs-ft",
-          "specialty": "robust_baseline"
-        }
-      ],
-      "delivery": {
-        "sum_to_mix": true,
-        "mode": "residual_to_stem",
-        "residual_stem": "other"
-      }
-    },
-    "multitrack_6": {
-      "policy": "balanced-quality-v1",
-      "model": "bs-roformer-sw",
-      "alternatives": [],
-      "delivery": {
-        "sum_to_mix": true,
-        "mode": "residual_to_stem",
-        "residual_stem": "other"
-      }
-    },
-    "multitrack_many": {
-      "policy": "balanced-quality-v1",
-      "model": "mvsep-mega-53-stems",
-      "alternatives": []
-    },
-    "music": {
-      "policy": "balanced-quality-v1",
-      "model": "bandit-v2",
-      "alternatives": []
-    },
-    "music_sfx_removal": {
-      "policy": "balanced-quality-v1",
-      "model": "bandit-v2",
       "alternatives": []
     },
     "oboe": {
@@ -3648,16 +4265,6 @@
       "model": "mvsep-mega-53-stems",
       "alternatives": []
     },
-    "sfx": {
-      "policy": "balanced-quality-v1",
-      "model": "bandit-v2",
-      "alternatives": []
-    },
-    "sfx_cleanup": {
-      "policy": "balanced-quality-v1",
-      "model": "aufr33-denoise-aggressive",
-      "alternatives": []
-    },
     "sitar": {
       "policy": "balanced-quality-v1",
       "model": "mvsep-mega-53-stems",
@@ -3666,15 +4273,20 @@
     "snare": {
       "policy": "balanced-quality-v1",
       "model": "jarredou-drumsep-5",
-      "alternatives": []
+      "alternatives": [
+        {
+          "model": "jarredou-drumsep-6",
+          "specialty": "split_cymbals_runtime_compatibility"
+        }
+      ]
     },
     "strings": {
       "policy": "balanced-quality-v1",
-      "model": "gilliaan-bowed-strings-duality",
+      "model": "mvsep-mega-53-stems",
       "alternatives": [
         {
-          "model": "mvsep-mega-53-stems",
-          "specialty": "broad_orchestral"
+          "model": "gilliaan-bowed-strings-duality",
+          "specialty": "qualitative_candidate_unverified_runtime"
         }
       ]
     },
@@ -3696,7 +4308,12 @@
     "toms": {
       "policy": "balanced-quality-v1",
       "model": "jarredou-drumsep-5",
-      "alternatives": []
+      "alternatives": [
+        {
+          "model": "jarredou-drumsep-6",
+          "specialty": "split_cymbals_runtime_compatibility"
+        }
+      ]
     },
     "triangle": {
       "policy": "balanced-quality-v1",
@@ -3744,6 +4361,10 @@
         {
           "model": "resurrection-vocals",
           "specialty": "bleed_control"
+        },
+        {
+          "model": "viperx-1297",
+          "specialty": "validated_runtime_fallback"
         }
       ]
     },
@@ -3760,6 +4381,32 @@
     "woodwinds": {
       "policy": "balanced-quality-v1",
       "model": "mvsep-mega-53-stems",
+      "alternatives": []
+    },
+    "alto_vocals": {
+      "policy": "balanced-quality-v1",
+      "model": "scnet-choirsep-experimental",
+      "alternatives": []
+    },
+    "bass_vocals": {
+      "policy": "balanced-quality-v1",
+      "model": "scnet-choirsep-experimental",
+      "alternatives": []
+    },
+    "tenor_vocals": {
+      "policy": "balanced-quality-v1",
+      "model": "scnet-choirsep-experimental",
+      "alternatives": []
+    },
+    "soprano_vocals": {
+      "policy": "balanced-quality-v1",
+      "model": "scnet-choirsep-experimental",
+      "alternatives": []
+    },
+    "multitrack": {
+      "policy": "balanced-quality-v1",
+      "model": "bs-roformer-sw",
+      "decomposition": "general_music_6",
       "alternatives": []
     }
   }

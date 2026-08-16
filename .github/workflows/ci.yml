@@ -17,8 +17,12 @@ jobs:
           fetch-depth: 0
       - name: Validate data
         run: python3 scripts/validate.py
+      - name: Validate generated product catalogue
+        run: python3 scripts/product_catalog.py --check
       - name: Compile scripts
         run: python3 -m py_compile scripts/*.py
+      - name: Test product policy
+        run: python3 -m unittest discover -s tests
       - name: Validate structured PR delta
         if: github.event_name == 'pull_request'
         env:

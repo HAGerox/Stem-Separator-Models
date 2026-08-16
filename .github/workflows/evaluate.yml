@@ -1,4 +1,4 @@
-name: Compare model recommendation
+name: Compare registry recommendations
 
 on:
   workflow_dispatch:
@@ -7,10 +7,6 @@ on:
         description: Pull request containing the proposed recommendation
         required: true
         type: number
-      stem:
-        description: Stem to compare, e.g. vocals or instrumental
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -35,7 +31,6 @@ jobs:
           python3 scripts/validate.py proposed-registry.json
       - name: Compare current and proposed models
         env:
-          STEM: ${{ inputs.stem }}
           PROPOSED_REGISTRY: proposed-registry.json
           TRACKS_FILE: evaluation/tracks.local.json
           AUDIO_DIR: ${{ vars.EVALUATION_AUDIO_DIR || '/opt/stem-registry/tracks' }}
@@ -44,7 +39,7 @@ jobs:
       - id: artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: comparison-pr-${{ inputs.pr_number }}-${{ inputs.stem }}
+          name: comparison-pr-${{ inputs.pr_number }}
           path: evaluation/results/${{ github.run_id }}
           retention-days: 14
       - name: Write the artifact into the structured PR body

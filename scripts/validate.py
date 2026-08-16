@@ -11,12 +11,20 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
+from evidence_policy import (
+    RECOMMENDATION_POLICIES,
+    SEMANTIC_MAX,
+    SEMANTIC_MIN,
+)
+from product_policy import EXCLUDED_CAPABILITIES, multitrack_policy_errors
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ID = re.compile(r"^[a-z0-9]+(?:[-_][a-z0-9]+)*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 REVISION = re.compile(r"^[0-9a-f]{40}$")
 BACKEND_REFERENCE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+OUTPUT_KEY = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 ._-]*$")
 MODEL_STATUSES = {"current", "specialist", "historical", "experimental", "deprecated"}
 AVAILABILITY_STATES = {
     "public_weights",
@@ -31,6 +39,7 @@ BACKEND_STATES = {
     "unknown",
 }
 SEMANTIC_METHODS = {"source_score", "llm_derived", "listening_test"}
+LEGACY_MULTITRACK_TASKS = {"multitrack_4", "multitrack_6", "multitrack_many"}
 
 
 def load(path: Path) -> dict:
@@ -124,8 +133,11 @@ def main() -> int:
         primary_sources = evidence_policy.get("primary_sources")
         if not isinstance(primary_sources, list) or not primary_sources:
             errors.append("evidence_policy.primary_sources must be a non-empty list")
-        if not isinstance(evidence_policy.get("rules"), list) or not evidence_policy["rules"]:
-            errors.append("evidence_policy.rules must be a non-empty list")
+        for procedural_field in ("rules", "semantic_scale"):
+            if procedural_field in evidence_policy:
+                errors.append(
+                    f"evidence_policy.{procedural_field}: procedural policy must live in code"
+                )
         if isinstance(primary_sources, list):
             for source_id in primary_sources:
                 if source_id not in snapshots:
@@ -151,10 +163,8 @@ def main() -> int:
         if metric.get("better") not in {"higher", "lower"}:
             errors.append(f"{where}: better must be higher or lower")
         if metric.get("kind") == "semantic":
-            if not numeric(metric.get("min")) or not numeric(metric.get("max")):
-                errors.append(f"{where}: semantic metrics require numeric min and max")
-            elif metric["min"] >= metric["max"]:
-                errors.append(f"{where}: min must be lower than max")
+            if "min" in metric or "max" in metric:
+                errors.append(f"{where}: semantic range is code-owned")
 
     suites = registry.get("benchmark_suites")
     if not isinstance(suites, dict) or not suites:
@@ -178,10 +188,9 @@ def main() -> int:
         if "dataset" in suite and not valid_url(suite["dataset"]):
             errors.append(f"{where}: dataset must be HTTPS")
 
-    policies = registry.get("recommendation_policies")
-    if not isinstance(policies, dict) or not policies:
-        errors.append("recommendation_policies must be a non-empty object")
-        policies = {}
+    if "recommendation_policies" in registry:
+        errors.append("recommendation_policies: procedural policy must live in code")
+    policies = RECOMMENDATION_POLICIES
     for policy_id, policy in policies.items():
         where = f"recommendation_policies.{policy_id}"
         if not isinstance(policy_id, str) or not ID.fullmatch(policy_id):
@@ -244,6 +253,7 @@ def main() -> int:
     model_ids: set[str] = set()
     evidence_ids: set[str] = set()
     by_id: dict[str, dict] = {}
+    output_capabilities_by_model: dict[str, set[str]] = {}
     for index, model in enumerate(models):
         where = f"models[{index}]"
         if not isinstance(model, dict):
@@ -270,6 +280,12 @@ def main() -> int:
             tasks = []
         elif len(tasks) != len(set(tasks)):
             errors.append(f"{where}: tasks must be unique")
+        legacy_multitrack = set(tasks) & LEGACY_MULTITRACK_TASKS
+        if legacy_multitrack:
+            errors.append(
+                f"{where}: output-count multitrack tasks must be explicit decompositions: "
+                + ", ".join(sorted(legacy_multitrack))
+            )
 
         availability = model.get("availability")
         if not isinstance(availability, dict):
@@ -313,6 +329,7 @@ def main() -> int:
                 if not isinstance(artifact.get("sha256"), str) or not SHA256.fullmatch(artifact["sha256"]):
                     errors.append(f"{artifact_where}: sha256 must be 64 lowercase hex characters")
         backends = model.get("backends")
+        model_output_capabilities: set[str] = set()
         if not isinstance(backends, dict):
             errors.append(f"{where}: backends must be an object")
         else:
@@ -339,11 +356,101 @@ def main() -> int:
                         not isinstance(reference, str) or not BACKEND_REFERENCE.fullmatch(reference)
                     ):
                         errors.append(f"{backend_where}.{field}: unsafe backend reference")
+                catalog_snapshot = details.get("catalog_snapshot")
+                if catalog_snapshot is not None:
+                    if catalog_snapshot not in snapshots:
+                        errors.append(f"{backend_where}.catalog_snapshot: unknown source snapshot")
+                    elif not snapshots[catalog_snapshot].get("sha256"):
+                        errors.append(
+                            f"{backend_where}.catalog_snapshot: snapshot must have a SHA-256"
+                        )
+                outputs = details.get("outputs")
+                if details.get("state") in {"listed", "validated"} and not outputs:
+                    errors.append(f"{backend_where}: listed backends require exact outputs")
+                if outputs is not None:
+                    if not isinstance(outputs, list) or not outputs:
+                        errors.append(f"{backend_where}.outputs: must be a non-empty list")
+                    else:
+                        runtime_keys: set[str] = set()
+                        capabilities: set[str] = set()
+                        for output_index, output in enumerate(outputs):
+                            output_where = f"{backend_where}.outputs[{output_index}]"
+                            if isinstance(output, str):
+                                runtime_key = capability = output
+                            elif isinstance(output, dict):
+                                runtime_key = output.get("runtime_key")
+                                capability = output.get("capability")
+                                if "label" in output and (
+                                    not isinstance(output["label"], str) or not output["label"]
+                                ):
+                                    errors.append(f"{output_where}.label: must be non-empty")
+                            else:
+                                errors.append(f"{output_where}: must be a string or object")
+                                continue
+                            if not isinstance(runtime_key, str) or not OUTPUT_KEY.fullmatch(runtime_key):
+                                errors.append(f"{output_where}.runtime_key: invalid exact output key")
+                            elif runtime_key in runtime_keys:
+                                errors.append(f"{output_where}.runtime_key: duplicate {runtime_key!r}")
+                            else:
+                                runtime_keys.add(runtime_key)
+                            if not isinstance(capability, str) or not ID.fullmatch(capability):
+                                errors.append(f"{output_where}.capability: invalid capability id")
+                            elif capability in capabilities:
+                                errors.append(f"{output_where}.capability: duplicate {capability!r}")
+                            else:
+                                capabilities.add(capability)
+                                model_output_capabilities.add(capability)
+                artifact_names = details.get("artifact_names")
+                if artifact_names is not None:
+                    if (
+                        not isinstance(artifact_names, list)
+                        or not artifact_names
+                        or not all(isinstance(name, str) and name for name in artifact_names)
+                        or len(artifact_names) != len(set(artifact_names))
+                    ):
+                        errors.append(f"{backend_where}.artifact_names: must be a unique string list")
+                    else:
+                        known_artifacts = {
+                            artifact.get("name")
+                            for artifact in artifacts
+                            if isinstance(artifact, dict)
+                        }
+                        missing_artifacts = set(artifact_names) - known_artifacts
+                        if missing_artifacts:
+                            errors.append(
+                                f"{backend_where}.artifact_names: unknown artifacts "
+                                + ", ".join(sorted(missing_artifacts))
+                            )
                 if details.get("state") in {"validated", "listed", "declared", "custom_code"}:
                     locally_runnable = True
             if not locally_runnable:
                 errors.append(f"{where}: at least one local backend path is required")
+        output_capabilities_by_model[model_id] = model_output_capabilities
 
+        decompositions = model.get("decompositions", {})
+        if not isinstance(decompositions, dict):
+            errors.append(f"{where}.decompositions: must be an object")
+        else:
+            for decomposition_id, decomposition in decompositions.items():
+                decomposition_where = f"{where}.decompositions.{decomposition_id}"
+                if not isinstance(decomposition_id, str) or not ID.fullmatch(decomposition_id):
+                    errors.append(f"{decomposition_where}: invalid decomposition id")
+                if not isinstance(decomposition, dict):
+                    errors.append(f"{decomposition_where}: must be an object")
+                    continue
+                decomposition_outputs = decomposition.get("outputs")
+                if not isinstance(decomposition_outputs, list) or not decomposition_outputs or not all(
+                    isinstance(item, str) and ID.fullmatch(item) for item in decomposition_outputs
+                ):
+                    errors.append(f"{decomposition_where}.outputs: must be a non-empty id list")
+                elif len(decomposition_outputs) != len(set(decomposition_outputs)):
+                    errors.append(f"{decomposition_where}.outputs: must be unique")
+                elif not set(decomposition_outputs).issubset(model_output_capabilities):
+                    missing_outputs = set(decomposition_outputs) - model_output_capabilities
+                    errors.append(
+                        f"{decomposition_where}.outputs: missing backend contracts for "
+                        + ", ".join(sorted(missing_outputs))
+                    )
         benchmarks = model.get("benchmarks")
         if not isinstance(benchmarks, list):
             errors.append(f"{where}: benchmarks must be a list")
@@ -410,7 +517,7 @@ def main() -> int:
                         definition = metrics.get(metric_id)
                         if not definition or definition.get("kind") != "semantic":
                             errors.append(f"{observation_where}: {metric_id!r} is not semantic")
-                        elif not numeric(value) or not definition["min"] <= value <= definition["max"]:
+                        elif not numeric(value) or not SEMANTIC_MIN <= value <= SEMANTIC_MAX:
                             errors.append(f"{observation_where}: {metric_id} is outside its range")
                 if not isinstance(observation.get("source_id"), str) or not observation["source_id"]:
                     errors.append(f"{observation_where}: source_id is required")
@@ -446,35 +553,53 @@ def main() -> int:
         if not isinstance(recommendation, dict):
             errors.append(f"{where}: must be an object")
             continue
+        if task in LEGACY_MULTITRACK_TASKS:
+            errors.append(f"{where}: replace output-count recommendation with multitrack")
         if recommendation.get("policy") not in policies:
             errors.append(f"{where}: unknown policy {recommendation.get('policy')!r}")
         else:
             policy = policies[recommendation["policy"]]
             task_weights = policy.get("task_weights", {})
-            if task not in task_weights and policy.get("default_task_weights") not in task_weights:
+            if (
+                task != "multitrack"
+                and task not in task_weights
+                and policy.get("default_task_weights") not in task_weights
+            ):
                 errors.append(f"{where}: policy has no weights for this task and no valid default")
         selected_id = recommendation.get("model")
         if selected_id not in by_id:
             errors.append(f"{where}: unknown model {selected_id!r}")
-        elif task not in by_id[selected_id].get("tasks", []):
-            errors.append(f"{where}: model does not support {task}")
-        elif by_id[selected_id]["availability"].get("state") != "public_weights":
-            errors.append(f"{where}: model does not have public weights")
-        elif by_id[selected_id].get("status") == "deprecated":
-            errors.append(f"{where}: deprecated models cannot be defaults")
-        elif by_id[selected_id].get("status") == "experimental":
-            stable_candidates = [
-                model["id"]
-                for model in models
-                if task in model.get("tasks", [])
-                and model.get("status") not in {"experimental", "deprecated"}
-                and model.get("availability", {}).get("state") == "public_weights"
-            ]
-            if stable_candidates:
-                errors.append(
-                    f"{where}: experimental default is not allowed while stable candidates exist: "
-                    + ", ".join(stable_candidates)
-                )
+        else:
+            selected = by_id[selected_id]
+            if task == "multitrack":
+                decomposition_id = recommendation.get("decomposition")
+                decomposition = selected.get("decompositions", {}).get(decomposition_id)
+                if not isinstance(decomposition_id, str) or not ID.fullmatch(decomposition_id):
+                    errors.append(f"{where}: decomposition id is required")
+                elif decomposition is None:
+                    errors.append(f"{where}: model does not declare decomposition {decomposition_id!r}")
+                else:
+                    for violation in multitrack_policy_errors(decomposition):
+                        errors.append(f"{where}: {violation}")
+            elif task not in selected.get("tasks", []):
+                errors.append(f"{where}: model does not support {task}")
+            if selected["availability"].get("state") != "public_weights":
+                errors.append(f"{where}: model does not have public weights")
+            if selected.get("status") == "deprecated":
+                errors.append(f"{where}: deprecated models cannot be defaults")
+            elif selected.get("status") == "experimental":
+                stable_candidates = [
+                    model["id"]
+                    for model in models
+                    if task in model.get("tasks", [])
+                    and model.get("status") not in {"experimental", "deprecated"}
+                    and model.get("availability", {}).get("state") == "public_weights"
+                ]
+                if stable_candidates:
+                    errors.append(
+                        f"{where}: experimental default is not allowed while stable candidates exist: "
+                        + ", ".join(stable_candidates)
+                    )
         alternatives = recommendation.get("alternatives")
         if not isinstance(alternatives, list):
             errors.append(f"{where}: alternatives must be a list")
@@ -488,6 +613,16 @@ def main() -> int:
                 model_id = alternative.get("model")
                 if model_id not in by_id:
                     errors.append(f"{alt_where}: unknown model {model_id!r}")
+                elif task == "multitrack":
+                    alternative_decomposition = alternative.get("decomposition")
+                    decomposition = by_id[model_id].get("decompositions", {}).get(
+                        alternative_decomposition
+                    )
+                    if decomposition is None:
+                        errors.append(f"{alt_where}: valid decomposition is required")
+                    else:
+                        for violation in multitrack_policy_errors(decomposition):
+                            errors.append(f"{alt_where}: {violation}")
                 elif task not in by_id[model_id].get("tasks", []):
                     errors.append(f"{alt_where}: model does not support {task}")
                 if model_id in seen or model_id == recommendation.get("model"):
@@ -509,7 +644,17 @@ def main() -> int:
                 if not isinstance(residual_stem, str) or residual_stem not in by_id.get(selected_id, {}).get("tasks", []):
                     errors.append(f"{delivery_where}: residual_stem must be produced by the model")
 
+        if (
+            selected_id in output_capabilities_by_model
+            and task not in EXCLUDED_CAPABILITIES
+            and task != "multitrack"
+            and task not in output_capabilities_by_model[selected_id]
+        ):
+            errors.append(f"{where}: selected model has no exact backend output for {task}")
+
     supported_tasks = {task for model in models for task in model.get("tasks", [])}
+    if any(model.get("decompositions") for model in models):
+        supported_tasks.add("multitrack")
     recommendation_tasks = set(recommendations)
     for task in sorted(supported_tasks - recommendation_tasks):
         errors.append(f"recommendations: missing task {task!r}")
