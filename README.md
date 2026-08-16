@@ -19,8 +19,7 @@ compatibility details, supporting evidence, and balanced recommendations.
 
 Publicly downloadable weights are not necessarily open source. Each model has
 its own license and usage terms, which are separate from this repository's
-license. The registry records those terms where they are known; an `unknown`
-license is a prompt for further review, not a grant of permission.
+license. The registry records those terms where they are known.
 
 ## Using the registry
 
