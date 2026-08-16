@@ -371,9 +371,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_leap_xe_voc.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "vocals",
@@ -389,7 +389,22 @@
           "artifact_names": [
             "bs_leap_xe_voc.ckpt",
             "leap_xe_config_voc.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "cc53a7e6841ad0a14bc6b4f71ffc66148a9b6eff961af00a51f36670d2f901c1",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "mlx_audio_separator": {
           "state": "unknown",
@@ -664,7 +679,8 @@
       "architecture": "mel_band_roformer",
       "status": "current",
       "tasks": [
-        "instrumental"
+        "instrumental",
+        "vocals"
       ],
       "availability": {
         "state": "public_weights",
@@ -686,20 +702,40 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "inst_gaboxFlowersV10.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "other",
               "capability": "instrumental",
               "label": "Instrumental"
+            },
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
             }
           ],
           "artifact_names": [
             "inst_gaboxFlowersV10.ckpt",
             "v10.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "f5dc8b3cea51b070738e993704d0aadb2e5f1a45a5e4fbfb673f38b8964f3438",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "pymss": {
           "state": "listed",
@@ -1283,9 +1319,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_roformer_karaoke_frazer_becruily.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "Vocals",
@@ -1301,7 +1337,22 @@
           "artifact_names": [
             "bs_roformer_karaoke_frazer_becruily.ckpt",
             "config_karaoke_frazer_becruily.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "89c8f565148512e60223c8c42b8ec8f5a3df11b49fae2fa0df2ace922b2b0ffe",
+            "outputs": [
+              "Instrumental",
+              "Vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "mvsepless": {
           "state": "listed",
@@ -1392,9 +1443,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_karaoke_anvuew.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "Vocals",
@@ -1410,7 +1461,22 @@
           "artifact_names": [
             "bs_karaoke_anvuew.ckpt",
             "bs_karaoke_anvuew_config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "5fd6ce322c961b918c95546aa4aa72e6a154bc1ad007bafe7b3e5d47bf72fe12",
+            "outputs": [
+              "Instrumental",
+              "Vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "mvsepless": {
           "state": "listed",
@@ -1705,9 +1771,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "kick",
@@ -1738,7 +1804,25 @@
           "artifact_names": [
             "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
             "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "203b2977c1f08b4e78590efbbc2c322e34177429c5228f166a6d7087be38e788",
+            "outputs": [
+              "cymbals",
+              "hh",
+              "kick",
+              "snare",
+              "toms"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "mvsepless": {
           "state": "listed",
@@ -2126,7 +2210,8 @@
       "status": "specialist",
       "tasks": [
         "strings",
-        "bowed_strings"
+        "bowed_strings",
+        "other"
       ],
       "availability": {
         "state": "public_weights",
@@ -2148,9 +2233,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_bowed_str_gilliaaan.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "strings",
@@ -2161,12 +2246,33 @@
               "runtime_key": "strings",
               "capability": "bowed_strings",
               "label": "Bowed strings"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other"
             }
           ],
           "artifact_names": [
             "bs_bowed_str_gilliaaan.ckpt",
             "bs_bowed_str_gilliaaan_config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "baffa01f82d69fc81bde22aee3c7e8a5fdf41103788786874e62c74c6dafdcf7",
+            "outputs": [
+              "other",
+              "strings",
+              "strings"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "mvsepless": {
           "state": "declared",
@@ -2207,7 +2313,8 @@
       "status": "current",
       "tasks": [
         "guitar",
-        "electric_guitar"
+        "electric_guitar",
+        "other"
       ],
       "availability": {
         "state": "public_weights",
@@ -2229,9 +2336,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "becruily_guitar.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "Guitar",
@@ -2242,12 +2349,33 @@
               "runtime_key": "Guitar",
               "capability": "electric_guitar",
               "label": "Electric guitar"
+            },
+            {
+              "runtime_key": "Other",
+              "capability": "other",
+              "label": "Other"
             }
           ],
           "artifact_names": [
             "becruily_guitar.ckpt",
             "config_guitar_becruily.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "e66045e5f0a06206d9ea5062cc7dd53df22d38c0",
+            "fixture": "synthetic-rich-mix-v1",
+            "contract_sha256": "dee004cee6d89ce0108b31a6925885701abaa6f3ce2bdcea4cc3b3415a014cfb",
+            "outputs": [
+              "Guitar",
+              "Guitar",
+              "Other"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-08-16"
+          }
         },
         "pymss": {
           "state": "listed",

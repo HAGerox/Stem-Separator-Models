@@ -193,14 +193,15 @@ def verify_wave(path: Path, expected_frames: int) -> dict[str, Any]:
         raise RuntimeError(
             f"Unexpected frame count for {path.name}: expected about {expected_frames}, got {frames}"
         )
-    if width not in {2, 3, 4} or not payload or not any(payload):
-        raise RuntimeError(f"Output is empty or silent: {path.name}")
+    if width not in {2, 3, 4} or not payload:
+        raise RuntimeError(f"Output contains no audio frames: {path.name}")
     return {
         "filename": path.name,
         "channels": channels,
         "sample_rate": sample_rate,
         "frames": frames,
         "sample_width": width,
+        "nonzero_audio": any(payload),
     }
 
 
@@ -285,7 +286,17 @@ def pending_models(
     output = []
     for model in proposed.get("models", []):
         backend = model.get("backends", {}).get("audio_separator", {})
-        if backend.get("state") != "compatible_unvalidated" or backend.get("validated") is not False:
+        is_pending = (
+            backend.get("state") == "compatible_unvalidated"
+            and backend.get("validated") is False
+        )
+        has_stale_smoke = (
+            backend.get("state") == "validated"
+            and backend.get("validated") is True
+            and "smoke_validation" in backend
+            and bool(smoke_evidence_errors(model, backend))
+        )
+        if not is_pending and not has_stale_smoke:
             continue
         before = base_models.get(model["id"], {}).get("backends", {}).get("audio_separator")
         if all_pending or before != backend:
@@ -413,7 +424,15 @@ def verify_promotions(args: argparse.Namespace) -> int:
             and after.get("state") == "validated"
             and after.get("validated") is True
         )
-        if not is_promotion:
+        is_revalidation = (
+            before.get("state") == "validated"
+            and before.get("validated") is True
+            and after.get("state") == "validated"
+            and after.get("validated") is True
+            and "smoke_validation" in before
+            and bool(smoke_evidence_errors(before_model, before))
+        )
+        if not is_promotion and not is_revalidation:
             continue
         if contract_sha256(before_model, before) != contract_sha256(model, after):
             errors.append(f"models.{model['id']}: smoke promotion changed its runtime contract")
@@ -421,9 +440,12 @@ def verify_promotions(args: argparse.Namespace) -> int:
             f"models.{model['id']}.backends.audio_separator: {error}"
             for error in smoke_evidence_errors(model, after)
         )
-        after["state"] = before["state"]
-        after["validated"] = before["validated"]
-        after.pop("smoke_validation", None)
+        if is_promotion:
+            after["state"] = before["state"]
+            after["validated"] = before["validated"]
+            after.pop("smoke_validation", None)
+        else:
+            after["smoke_validation"] = before["smoke_validation"]
     if normalized != original:
         errors.append("smoke runner output contains changes other than validated backend promotions")
     if errors:

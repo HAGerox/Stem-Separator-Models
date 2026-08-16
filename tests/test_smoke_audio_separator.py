@@ -8,6 +8,7 @@ import os
 import subprocess
 import tempfile
 import unittest
+import wave
 from copy import deepcopy
 from pathlib import Path
 from unittest.mock import patch
@@ -21,7 +22,9 @@ sys.path.insert(0, str(SCRIPTS))
 
 from smoke_audio_separator import (  # noqa: E402
     promote,
+    pending_models,
     smoke_model,
+    verify_wave,
     verify_promotions,
     verify_transitions,
 )
@@ -170,19 +173,11 @@ for token in ('Alpha', 'beta'):
 
     def test_registry_validator_accepts_automated_smoke_evidence(self) -> None:
         registry = json.loads((ROOT / "registry.json").read_text(encoding="utf-8"))
-        model = next(
-            model
-            for model in registry["models"]
-            if model["backends"]["audio_separator"]["state"]
-            == "compatible_unvalidated"
-        )
-        promote(
-            model,
-            {
-                "contract_sha256": contract_sha256(
-                    model, model["backends"]["audio_separator"]
-                )
-            },
+        self.assertTrue(
+            any(
+                "smoke_validation" in model["backends"]["audio_separator"]
+                for model in registry["models"]
+            )
         )
         with tempfile.NamedTemporaryFile(mode="w", suffix=".json", encoding="utf-8") as handle:
             json.dump(registry, handle)
@@ -223,12 +218,76 @@ for token in ('Alpha', 'beta'):
             with contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(verify_promotions(arguments), 1)
 
+    def test_runner_output_allows_stale_runtime_revalidation(self) -> None:
+        original_model = self.model()
+        promote(
+            original_model,
+            {
+                "contract_sha256": contract_sha256(
+                    original_model, original_model["backends"]["audio_separator"]
+                )
+            },
+        )
+        original_model["backends"]["audio_separator"]["smoke_validation"][
+            "runtime_revision"
+        ] = "0" * 40
+        revalidated_model = deepcopy(original_model)
+        promote(
+            revalidated_model,
+            {
+                "contract_sha256": contract_sha256(
+                    revalidated_model,
+                    revalidated_model["backends"]["audio_separator"],
+                )
+            },
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            original = root / "original.json"
+            promoted = root / "promoted.json"
+            original.write_text(json.dumps({"models": [original_model]}), encoding="utf-8")
+            promoted.write_text(
+                json.dumps({"models": [revalidated_model]}), encoding="utf-8"
+            )
+            arguments = argparse.Namespace(registry=original, promoted_registry=promoted)
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(verify_promotions(arguments), 0)
+
+    def test_stale_smoke_runtime_is_automatically_revalidated(self) -> None:
+        model = self.model()
+        promote(
+            model,
+            {
+                "contract_sha256": contract_sha256(
+                    model, model["backends"]["audio_separator"]
+                )
+            },
+        )
+        model["backends"]["audio_separator"]["smoke_validation"][
+            "runtime_revision"
+        ] = "0" * 40
+        registry = {"models": [model]}
+        self.assertEqual(
+            [item["id"] for item in pending_models(registry, registry, True)],
+            ["test-model"],
+        )
+
     def test_contract_digest_changes_with_exact_outputs(self) -> None:
         model = self.model()
         backend = model["backends"]["audio_separator"]
         before = contract_sha256(model, backend)
         backend["outputs"][0]["runtime_key"] = "Different"
         self.assertNotEqual(before, contract_sha256(model, backend))
+
+    def test_structurally_valid_silent_specialist_output_is_allowed(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".wav") as handle:
+            with wave.open(handle.name, "wb") as output:
+                output.setnchannels(2)
+                output.setsampwidth(2)
+                output.setframerate(44100)
+                output.writeframes(b"\0\0\0\0" * 44100)
+            report = verify_wave(Path(handle.name), 44100)
+        self.assertFalse(report["nonzero_audio"])
 
     def test_listening_evaluation_only_tracks_selection_changes(self) -> None:
         base = {"recommendations": {"vocals": {"model": "a", "alternatives": []}}}

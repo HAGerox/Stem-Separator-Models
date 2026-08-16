@@ -113,19 +113,19 @@
           "model": "bs-roformer-leap-xe",
           "model_name": "BS RoFormer Leap XE",
           "specialty": "bleed_control",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_leap_xe_voc.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "vocals",
@@ -708,19 +708,19 @@
           "model": "becruily-guitar",
           "model_name": "MelBand RoFormer Guitar",
           "specialty": "guitar_capture",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "becruily_guitar.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "Guitar",
@@ -843,7 +843,7 @@
       "kind": "stem",
       "group": "voice",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "karaoke-frazer-becruily",
         "model_name": "BS RoFormer Karaoke Frazer & Becruily",
@@ -855,14 +855,14 @@
         {
           "id": "audio_separator",
           "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "Instrumental",
@@ -890,19 +890,19 @@
           "model": "karaoke-frazer-becruily",
           "model_name": "BS RoFormer Karaoke Frazer & Becruily",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "Instrumental",
@@ -934,7 +934,7 @@
       "kind": "stem",
       "group": "voice",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "karaoke-frazer-becruily",
         "model_name": "BS RoFormer Karaoke Frazer & Becruily",
@@ -946,14 +946,14 @@
         {
           "id": "audio_separator",
           "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "Vocals",
@@ -981,19 +981,19 @@
           "model": "karaoke-frazer-becruily",
           "model_name": "BS RoFormer Karaoke Frazer & Becruily",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_roformer_karaoke_frazer_becruily.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "Vocals",
@@ -1116,7 +1116,7 @@
       "kind": "stem",
       "group": "rhythm",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "jarredou-drumsep-5",
         "model_name": "MDX23C DrumSep 5-Stem",
@@ -1128,14 +1128,14 @@
         {
           "id": "audio_separator",
           "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "cymbals",
@@ -1163,19 +1163,19 @@
           "model": "jarredou-drumsep-5",
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "cymbals",
@@ -1209,21 +1209,21 @@
       "promoted": false,
       "available": true,
       "recommendation": {
-        "model": "jarredou-drumsep-6",
-        "model_name": "MDX23C DrumSep 6-Stem",
+        "model": "jarredou-drumsep-5",
+        "model_name": "MDX23C DrumSep 5-Stem",
         "preferred_model": "jarredou-drumsep-5",
         "policy": "ordinal-quality-v1",
-        "used_fallback": true
+        "used_fallback": false
       },
       "backends": [
         {
           "id": "audio_separator",
-          "reference": "MDX23C-DrumSep-aufr33-jarredou.ckpt",
+          "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
           "state": "validated",
           "validated": true,
           "smoke_validated": true,
           "installable": true,
-          "install_mode": "backend_catalog",
+          "install_mode": "artifacts",
           "candidate": true,
           "ready": true,
           "stable": true,
@@ -1236,17 +1236,17 @@
           ],
           "artifacts": [
             {
-              "name": "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "sha256": "d2a4aa53eb584d21eead358a4e66d1882ad182911be018f052b5da73be9096d0"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
             },
             {
-              "name": "config_drumsep_mdx23c.yaml",
-              "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/config_drumsep_mdx23c.yaml",
-              "sha256": "17d1649a227f841165bdb4c11a42082898192a1ea3ceab7e7e0b9293d6589dd6"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
             }
           ],
-          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
+          "catalog_snapshot": null
         }
       ],
       "candidates": [
@@ -1254,19 +1254,19 @@
           "model": "jarredou-drumsep-5",
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "hh",
@@ -1340,21 +1340,21 @@
       "promoted": false,
       "available": true,
       "recommendation": {
-        "model": "jarredou-drumsep-6",
-        "model_name": "MDX23C DrumSep 6-Stem",
+        "model": "jarredou-drumsep-5",
+        "model_name": "MDX23C DrumSep 5-Stem",
         "preferred_model": "jarredou-drumsep-5",
         "policy": "ordinal-quality-v1",
-        "used_fallback": true
+        "used_fallback": false
       },
       "backends": [
         {
           "id": "audio_separator",
-          "reference": "MDX23C-DrumSep-aufr33-jarredou.ckpt",
+          "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
           "state": "validated",
           "validated": true,
           "smoke_validated": true,
           "installable": true,
-          "install_mode": "backend_catalog",
+          "install_mode": "artifacts",
           "candidate": true,
           "ready": true,
           "stable": true,
@@ -1367,17 +1367,17 @@
           ],
           "artifacts": [
             {
-              "name": "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "sha256": "d2a4aa53eb584d21eead358a4e66d1882ad182911be018f052b5da73be9096d0"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
             },
             {
-              "name": "config_drumsep_mdx23c.yaml",
-              "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/config_drumsep_mdx23c.yaml",
-              "sha256": "17d1649a227f841165bdb4c11a42082898192a1ea3ceab7e7e0b9293d6589dd6"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
             }
           ],
-          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
+          "catalog_snapshot": null
         }
       ],
       "candidates": [
@@ -1385,19 +1385,19 @@
           "model": "jarredou-drumsep-5",
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "kick",
@@ -1562,21 +1562,21 @@
       "promoted": false,
       "available": true,
       "recommendation": {
-        "model": "jarredou-drumsep-6",
-        "model_name": "MDX23C DrumSep 6-Stem",
+        "model": "jarredou-drumsep-5",
+        "model_name": "MDX23C DrumSep 5-Stem",
         "preferred_model": "jarredou-drumsep-5",
         "policy": "ordinal-quality-v1",
-        "used_fallback": true
+        "used_fallback": false
       },
       "backends": [
         {
           "id": "audio_separator",
-          "reference": "MDX23C-DrumSep-aufr33-jarredou.ckpt",
+          "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
           "state": "validated",
           "validated": true,
           "smoke_validated": true,
           "installable": true,
-          "install_mode": "backend_catalog",
+          "install_mode": "artifacts",
           "candidate": true,
           "ready": true,
           "stable": true,
@@ -1589,17 +1589,17 @@
           ],
           "artifacts": [
             {
-              "name": "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "sha256": "d2a4aa53eb584d21eead358a4e66d1882ad182911be018f052b5da73be9096d0"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
             },
             {
-              "name": "config_drumsep_mdx23c.yaml",
-              "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/config_drumsep_mdx23c.yaml",
-              "sha256": "17d1649a227f841165bdb4c11a42082898192a1ea3ceab7e7e0b9293d6589dd6"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
             }
           ],
-          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
+          "catalog_snapshot": null
         }
       ],
       "candidates": [
@@ -1607,19 +1607,19 @@
           "model": "jarredou-drumsep-5",
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "snare",
@@ -1693,21 +1693,21 @@
       "promoted": false,
       "available": true,
       "recommendation": {
-        "model": "jarredou-drumsep-6",
-        "model_name": "MDX23C DrumSep 6-Stem",
+        "model": "jarredou-drumsep-5",
+        "model_name": "MDX23C DrumSep 5-Stem",
         "preferred_model": "jarredou-drumsep-5",
         "policy": "ordinal-quality-v1",
-        "used_fallback": true
+        "used_fallback": false
       },
       "backends": [
         {
           "id": "audio_separator",
-          "reference": "MDX23C-DrumSep-aufr33-jarredou.ckpt",
+          "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
           "state": "validated",
           "validated": true,
           "smoke_validated": true,
           "installable": true,
-          "install_mode": "backend_catalog",
+          "install_mode": "artifacts",
           "candidate": true,
           "ready": true,
           "stable": true,
@@ -1720,17 +1720,17 @@
           ],
           "artifacts": [
             {
-              "name": "mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_6stem_aufr33_jarredou.ckpt",
-              "sha256": "d2a4aa53eb584d21eead358a4e66d1882ad182911be018f052b5da73be9096d0"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
+              "sha256": "1f8e636fb674b88a52c8399fde9a4ebe2b72b065ca07eed4e03ab1c9f0bfb2e0"
             },
             {
-              "name": "config_drumsep_mdx23c.yaml",
-              "url": "https://github.com/nomadkaraoke/python-audio-separator/releases/download/model-configs/config_drumsep_mdx23c.yaml",
-              "sha256": "17d1649a227f841165bdb4c11a42082898192a1ea3ceab7e7e0b9293d6589dd6"
+              "name": "mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/52b829140b03681784e03764600ca7f46d85fa86/mdx23c/mdx23c_drumsep_5stem_aufr33_jarredou_config.yaml",
+              "sha256": "b559768ab3209adb667d6d9c0bab2816107b03a86f75df432f9f275990ecb9bb"
             }
           ],
-          "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
+          "catalog_snapshot": null
         }
       ],
       "candidates": [
@@ -1738,19 +1738,19 @@
           "model": "jarredou-drumsep-5",
           "model_name": "MDX23C DrumSep 5-Stem",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "toms",
@@ -1822,7 +1822,7 @@
       "kind": "stem",
       "group": "guitar",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "becruily-guitar",
         "model_name": "MelBand RoFormer Guitar",
@@ -1834,14 +1834,14 @@
         {
           "id": "audio_separator",
           "reference": "becruily_guitar.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "Guitar",
@@ -1869,19 +1869,19 @@
           "model": "becruily-guitar",
           "model_name": "MelBand RoFormer Guitar",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "becruily_guitar.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "Guitar",
@@ -1913,7 +1913,7 @@
       "kind": "stem",
       "group": "orchestral",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "gilliaan-bowed-strings-duality",
         "model_name": "BS RoFormer Bowed Strings Duality",
@@ -1925,14 +1925,14 @@
         {
           "id": "audio_separator",
           "reference": "bs_bowed_str_gilliaaan.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "strings",
@@ -1960,19 +1960,19 @@
           "model": "gilliaan-bowed-strings-duality",
           "model_name": "BS RoFormer Bowed Strings Duality",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_bowed_str_gilliaaan.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "strings",
@@ -2004,7 +2004,7 @@
       "kind": "stem",
       "group": "orchestral",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "gilliaan-bowed-strings-duality",
         "model_name": "BS RoFormer Bowed Strings Duality",
@@ -2016,14 +2016,14 @@
         {
           "id": "audio_separator",
           "reference": "bs_bowed_str_gilliaaan.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "strings",
@@ -2051,19 +2051,19 @@
           "model": "gilliaan-bowed-strings-duality",
           "model_name": "BS RoFormer Bowed Strings Duality",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_bowed_str_gilliaaan.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "strings",
@@ -2555,8 +2555,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "becruily_guitar.ckpt",
           "artifact_names": [
             "becruily_guitar.ckpt",
@@ -2572,6 +2572,11 @@
               "runtime_key": "Guitar",
               "capability": "electric_guitar",
               "label": "Electric guitar"
+            },
+            {
+              "runtime_key": "Other",
+              "capability": "other",
+              "label": "Other"
             }
           ],
           "artifacts": [
@@ -2648,8 +2653,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "bs_leap_xe_voc.ckpt",
           "artifact_names": [
             "bs_leap_xe_voc.ckpt",
@@ -2886,8 +2891,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "bs_bowed_str_gilliaaan.ckpt",
           "artifact_names": [
             "bs_bowed_str_gilliaaan.ckpt",
@@ -2903,6 +2908,11 @@
               "runtime_key": "strings",
               "capability": "bowed_strings",
               "label": "Bowed strings"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other"
             }
           ],
           "artifacts": [
@@ -3003,8 +3013,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
           "artifact_names": [
             "mdx23c_drumsep_5stem_aufr33_jarredou.ckpt",
@@ -3263,8 +3273,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "bs_roformer_karaoke_frazer_becruily.ckpt",
           "artifact_names": [
             "bs_roformer_karaoke_frazer_becruily.ckpt",
@@ -3423,41 +3433,10 @@
     }
   },
   "readiness": {
-    "ready_capabilities": 13,
-    "stable_capabilities": 13,
-    "installable_candidates": 13,
+    "ready_capabilities": 19,
+    "stable_capabilities": 19,
+    "installable_candidates": 19,
     "smoke_validation_gaps": [],
-    "unavailable": [
-      {
-        "capability": "backing_vocals",
-        "model": "karaoke-frazer-becruily",
-        "reason": "smoke_validation_pending"
-      },
-      {
-        "capability": "bowed_strings",
-        "model": "gilliaan-bowed-strings-duality",
-        "reason": "smoke_validation_pending"
-      },
-      {
-        "capability": "cymbals",
-        "model": "jarredou-drumsep-5",
-        "reason": "smoke_validation_pending"
-      },
-      {
-        "capability": "electric_guitar",
-        "model": "becruily-guitar",
-        "reason": "smoke_validation_pending"
-      },
-      {
-        "capability": "lead_vocals",
-        "model": "karaoke-frazer-becruily",
-        "reason": "smoke_validation_pending"
-      },
-      {
-        "capability": "strings",
-        "model": "gilliaan-bowed-strings-duality",
-        "reason": "smoke_validation_pending"
-      }
-    ]
+    "unavailable": []
   }
 }

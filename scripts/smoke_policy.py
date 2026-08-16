@@ -9,7 +9,7 @@ from typing import Any
 
 
 AUDIO_SEPARATOR_REPOSITORY = "https://github.com/HAGerox/python-audio-separator.git"
-AUDIO_SEPARATOR_REVISION = "dccdbe5fafa8d2c4274ebf76a3ff1c27bf0c86d3"
+AUDIO_SEPARATOR_REVISION = "e66045e5f0a06206d9ea5062cc7dd53df22d38c0"
 AUDIO_SEPARATOR_REQUIREMENT = (
     f"audio-separator[cpu] @ git+{AUDIO_SEPARATOR_REPOSITORY}@{AUDIO_SEPARATOR_REVISION}"
 )
