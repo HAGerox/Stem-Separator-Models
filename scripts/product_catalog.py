@@ -106,7 +106,7 @@ def backend_contracts(
                 "smoke_validated": smoke_validated,
                 "installable": installable,
                 "install_mode": install_mode,
-                "candidate": details.get("state") in {"listed", "validated"} and installable,
+                "candidate": details.get("state") == "validated" and installable,
                 "ready": smoke_validated and installable,
                 "stable": smoke_validated and installable,
                 "outputs": matching,

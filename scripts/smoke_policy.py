@@ -9,15 +9,17 @@ from typing import Any
 
 
 AUDIO_SEPARATOR_REPOSITORY = "https://github.com/HAGerox/python-audio-separator.git"
-AUDIO_SEPARATOR_REVISION = "e66045e5f0a06206d9ea5062cc7dd53df22d38c0"
+AUDIO_SEPARATOR_REVISION = "86f6756f8f400769c11707c48a7a27e749131a6c"
 AUDIO_SEPARATOR_REQUIREMENT = (
     f"audio-separator[cpu] @ git+{AUDIO_SEPARATOR_REPOSITORY}@{AUDIO_SEPARATOR_REVISION}"
 )
 SMOKE_FIXTURE = "synthetic-rich-mix-v1"
+PUBLIC_SMOKE_FIXTURE = "public-vocal-ccby-v1"
+ACCEPTED_SMOKE_FIXTURES = {SMOKE_FIXTURE, PUBLIC_SMOKE_FIXTURE}
 SMOKE_SCHEMA = 1
 WEIGHT_SUFFIXES = {".ckpt", ".pth", ".onnx", ".th"}
 CONFIG_SUFFIXES = {".yaml", ".yml"}
-TRUSTED_ARTIFACT_ORIGINS = {"github.com", "huggingface.co"}
+TRUSTED_ARTIFACT_ORIGINS = {"github.com", "huggingface.co", "raw.githubusercontent.com"}
 TRUSTED_ARTIFACT_DELIVERY_SUFFIXES = (
     ".hf.co",
     ".xethub.hf.co",
@@ -86,7 +88,6 @@ def smoke_evidence_errors(model: dict[str, Any], backend: dict[str, Any]) -> lis
         "kind": "exact_checkpoint_smoke",
         "runtime": "python-audio-separator",
         "runtime_revision": AUDIO_SEPARATOR_REVISION,
-        "fixture": SMOKE_FIXTURE,
         "contract_sha256": contract_sha256(model, backend),
         "outputs": expected_outputs,
         "sample_rate": 44100,
@@ -95,6 +96,11 @@ def smoke_evidence_errors(model: dict[str, Any], backend: dict[str, Any]) -> lis
     for field, expected in checks.items():
         if evidence.get(field) != expected:
             errors.append(f"smoke_validation.{field} must equal {expected!r}")
+    if evidence.get("fixture") not in ACCEPTED_SMOKE_FIXTURES:
+        errors.append(
+            "smoke_validation.fixture must be a trusted smoke fixture: "
+            + ", ".join(sorted(ACCEPTED_SMOKE_FIXTURES))
+        )
     validated_at = evidence.get("validated_at")
     try:
         date.fromisoformat(validated_at)

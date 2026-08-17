@@ -21,7 +21,7 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event.pull_request.draft == false &&
        github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: [self-hosted, stem-evaluation]
+    runs-on: macos-15
     timeout-minutes: 360
     permissions:
       contents: read
@@ -62,6 +62,12 @@ jobs:
           ref: ${{ steps.pr.outputs.base_sha }}
           path: trusted
           persist-credentials: false
+
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: 0.10.11
+          enable-cache: true
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ steps.pr.outputs.head_sha }}
@@ -69,10 +75,16 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ runner.temp }}/stem-separator-model-cache
+          key: ${{ runner.os }}-audio-separator-models-${{ hashFiles('proposed/registry.json') }}
+          restore-keys: |
+            ${{ runner.os }}-audio-separator-models-
+
       - name: Install the exact Audio Separator runtime
         id: runtime
         run: |
-          command -v uv >/dev/null
           requirement=$(PYTHONPATH=trusted/scripts python3 -c \
             'from smoke_policy import AUDIO_SEPARATOR_REQUIREMENT; print(AUDIO_SEPARATOR_REQUIREMENT)')
           uv venv --python 3.12 --clear "$RUNNER_TEMP/audio-separator-smoke"
@@ -80,6 +92,17 @@ jobs:
             --python "$RUNNER_TEMP/audio-separator-smoke/bin/python" \
             "$requirement"
           echo "binary=$RUNNER_TEMP/audio-separator-smoke/bin/audio-separator" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare the public vocal smoke fixture
+        run: |
+          command -v ffmpeg >/dev/null || brew install ffmpeg
+          python3 trusted/scripts/fetch_evaluation_tracks.py \
+            --manifest trusted/evaluation/tracks.json \
+            --output-dir "$RUNNER_TEMP/evaluation-audio" \
+            --cache-dir "$RUNNER_TEMP/evaluation-source-cache"
+          ffmpeg -hide_banner -loglevel error -y \
+            -t 6 -i "$RUNNER_TEMP/evaluation-audio/karm-ready-excited.wav" \
+            -c:a pcm_s16le "$RUNNER_TEMP/public-vocal-smoke.wav"
 
       - name: Validate proposed registry as data
         run: python3 trusted/scripts/validate.py proposed/registry.json
@@ -91,9 +114,12 @@ jobs:
             --registry proposed/registry.json \
             --output-registry proposed/registry.json \
             --audio-separator "${{ steps.runtime.outputs.binary }}" \
-            --cache-dir "$HOME/.cache/stem-separator-smoke/artifacts" \
+            --cache-dir "$RUNNER_TEMP/stem-separator-model-cache" \
             --report-dir "$RUNNER_TEMP/audio-separator-reports" \
             --summary-output "$RUNNER_TEMP/audio-separator-summary.md" \
+            --fixture-file "$RUNNER_TEMP/public-vocal-smoke.wav" \
+            --fixture-id public-vocal-ccby-v1 \
+            --jobs 2 \
             --all-pending
 
       - name: Regenerate and validate promoted data

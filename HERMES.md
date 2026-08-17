@@ -46,7 +46,7 @@ Qualitative evidence is ordinal:
 
 Use `scripts/rank.py` to inspect the evidence fronts for an affected task. Missing evidence means unobserved, not zero. Compatibility and popularity do not increase quality.
 
-The selected recommendation should be supported across the relevant evidence contexts. When the evidence does not establish a better replacement, retain the incumbent. A new selection must be compared against the incumbent using the private listening suite before merge.
+The selected recommendation should be supported across the relevant evidence contexts. When the evidence does not establish a better replacement, retain the incumbent. A new selection must be compared against the incumbent using the public, hash-pinned listening suite before merge.
 
 ## Model admission
 
@@ -66,8 +66,8 @@ Multi-Track is reserved for a useful general-music decomposition. Specialist dru
 
 Ordinary CI validates the schema, evidence, policy, generated product catalogue and recommendation delta.
 
-The Audio Separator smoke workflow then tests every `compatible_unvalidated` model using its pinned checkpoint and configuration. It also re-tests prior smoke-evidenced models whenever the pinned runtime changes. It verifies hashes, exact output filenames and structurally valid stereo WAV output. Passing models are promoted automatically and the product catalogue is regenerated. Failed models remain unavailable and block the PR. Silence in one specialist output is allowed because the deterministic fixture may not contain that target; this check establishes runtime compatibility rather than quality.
+The Audio Separator smoke workflow then tests every `compatible_unvalidated` model using its pinned checkpoint and configuration. It also re-tests prior smoke-evidenced models whenever the pinned runtime changes. It verifies hashes, exact output filenames and structurally valid stereo WAV output against a public, hash-pinned CC BY music excerpt. Passing models are promoted automatically and the product catalogue is regenerated. Failed models remain unavailable and block the PR. A valid silent specialist output is allowed because the excerpt may not contain that target; this check establishes runtime compatibility rather than quality.
 
-If the PR changes one selected recommendation, the private listening comparison runs automatically after the proposed model passes its smoke. It adds the comparison artifact to the PR for human review. Do not manually bypass either check.
+If the PR changes one selected recommendation, CI downloads the CC BY listening tracks in `evaluation/tracks.json`, verifies their hashes and compares the incumbent with the proposed model. It adds playable results to the PR for human review. Do not manually bypass either check.
 
 After approval and merge, the app and server fetch the generated product catalogue. Only validated, installable capabilities are exposed; unsupported or failed models remain hidden without requiring an app code change.

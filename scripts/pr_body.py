@@ -171,7 +171,7 @@ def main() -> int:
     ]
     selection_changed_tasks = [
         task
-        for task in sorted(before_recommendations.keys() | after_recommendations.keys())
+        for task in sorted(before_recommendations.keys() & after_recommendations.keys())
         if selection_signature(before_recommendations.get(task))
         != selection_signature(after_recommendations.get(task))
     ]
@@ -185,7 +185,7 @@ def main() -> int:
     )
     if len(selection_changed_tasks) > 1 and not baseline_replacement:
         raise RuntimeError(
-            "A PR may change at most one recommendation selection: "
+            "A PR may replace at most one existing recommendation selection: "
             + ", ".join(selection_changed_tasks)
         )
     recommendation_rows = []
@@ -335,7 +335,7 @@ def main() -> int:
     listening_required = bool(selection_changed_tasks) and not baseline_replacement
     if listening_required:
         overview_rows.append(
-            ["Test tracks", "<br>".join(f"`{track}`" for track in tracks) or "private manifest not present"]
+            ["Test tracks", "<br>".join(f"`{track}`" for track in tracks) or "public manifest not present"]
         )
         overview_rows.append(
             ["Listening artifact", f"[download]({args.artifact_url})" if args.artifact_url else "pending"]
@@ -384,7 +384,7 @@ def main() -> int:
             lines.append("- Test tracks:")
             lines.extend(f"  - `{track}`" for track in tracks)
         else:
-            lines.append("- Test tracks: private manifest not present")
+            lines.append("- Test tracks: public manifest not present")
         lines.append(
             f"- Artifact: [download comparison]({args.artifact_url})"
             if args.artifact_url

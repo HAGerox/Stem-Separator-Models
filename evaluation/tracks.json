@@ -1,3 +1,47 @@
 {
-  "tracks": []
+  "schema": 1,
+  "tracks": [
+    {
+      "filename": "karm-ready-excited.wav",
+      "source_filename": "Radioontheshelf_-_Karm_But_Ready_To_Be_Excited_1.mp3",
+      "source_url": "https://ccmixter.org/content/Radioontheshelf/Radioontheshelf_-_Karm_But_Ready_To_Be_Excited_1.mp3",
+      "source_sha256": "bdadfb0a2d271e19bf6fa33e90bc8d623dcb758843a9254fe225d5fd5b2d723a",
+      "source_page": "https://ccmixter.org/files/Radioontheshelf/70457",
+      "title": "Karm But Ready To Be Excited",
+      "artist": "Radioontheshelf",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "start_seconds": 68,
+      "duration_seconds": 45,
+      "content": [
+        "female vocals",
+        "piano",
+        "guitar",
+        "bass",
+        "mandolin",
+        "percussion",
+        "fiddle"
+      ]
+    },
+    {
+      "filename": "die-polizei.wav",
+      "source_filename": "JeffSpeed68_-_Die_Polizei.mp3",
+      "source_url": "https://ccmixter.org/content/JeffSpeed68/JeffSpeed68_-_Die_Polizei.mp3",
+      "source_sha256": "ae286ece07e8439981734323acb89bb9fe286bd4a1d09db7a9c548423ed9ac6f",
+      "source_page": "https://ccmixter.org/files/JeffSpeed68/70863",
+      "title": "Die Polizei",
+      "artist": "Stefan Kartenberg",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "start_seconds": 42,
+      "duration_seconds": 45,
+      "content": [
+        "male vocals",
+        "female vocals",
+        "vocoder",
+        "electronic",
+        "synthesizer"
+      ]
+    }
+  ]
 }

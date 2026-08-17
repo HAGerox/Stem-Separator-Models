@@ -72,15 +72,16 @@
       ]
     },
     {
-      "name": "mlx-audio-separator",
-      "url": "https://github.com/ssmall256/mlx-audio-separator",
+      "name": "Music Source Separation Training releases",
+      "url": "https://github.com/ZFTurbo/Music-Source-Separation-Training/releases",
+      "fetch_url": "https://api.github.com/repos/ZFTurbo/Music-Source-Separation-Training/releases",
       "enabled": true,
       "role": "supplementary",
       "look_for": [
-        "supported architectures",
-        "exact checkpoint compatibility",
-        "runtime and memory results",
-        "releases"
+        "new public checkpoints and configurations",
+        "supported architectures and output stems",
+        "runtime and memory requirements",
+        "licence evidence"
       ]
     }
   ]

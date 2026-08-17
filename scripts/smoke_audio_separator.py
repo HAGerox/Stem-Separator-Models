@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Run trusted, exact-checkpoint Audio Separator admission smokes.
 
-The PR is treated only as registry data. This module is intended to be run from
-the trusted base branch on a self-hosted runner; it never imports or executes
-code from the proposed branch.
+The PR is treated only as registry data. This module runs trusted code from the
+base branch on a hosted runner; it never imports or executes code from the
+proposed branch.
 """
 
 from __future__ import annotations
@@ -18,8 +18,10 @@ import shutil
 import struct
 import subprocess
 import tempfile
+import threading
 import urllib.request
 import wave
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
@@ -27,6 +29,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from smoke_policy import (
+    ACCEPTED_SMOKE_FIXTURES,
     AUDIO_SEPARATOR_REVISION,
     CONFIG_SUFFIXES,
     SMOKE_FIXTURE,
@@ -41,6 +44,8 @@ from smoke_policy import (
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_TOKEN = re.compile(r"_\(([^()]*)\)_[^/]+\.wav$", re.IGNORECASE)
+_DOWNLOAD_LOCKS: dict[str, threading.Lock] = {}
+_DOWNLOAD_LOCKS_GUARD = threading.Lock()
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -114,27 +119,32 @@ def rich_fixture(path: Path, duration_seconds: float = 6.0) -> int:
 
 def download_verified(artifact: dict[str, Any], cache_root: Path) -> Path:
     digest = artifact["sha256"]
-    cached = cache_root / digest / artifact["name"]
-    if cached.is_file() and sha256_file(cached) == digest:
-        return cached
-    cached.parent.mkdir(parents=True, exist_ok=True)
-    partial = cached.with_suffix(cached.suffix + ".part")
-    partial.unlink(missing_ok=True)
-    if not trusted_artifact_url(artifact["url"]):
-        raise RuntimeError(f"Untrusted artifact origin for {artifact['name']}")
-    request = urllib.request.Request(artifact["url"], headers={"User-Agent": "stem-separator-smoke/1"})
-    with urllib.request.urlopen(request, timeout=120) as response, partial.open("wb") as output:
-        if not trusted_artifact_url(response.geturl(), delivery=True):
-            raise RuntimeError(f"Untrusted artifact delivery URL for {artifact['name']}")
-        shutil.copyfileobj(response, output, length=1024 * 1024)
-    actual = sha256_file(partial)
-    if actual != digest:
+    with _DOWNLOAD_LOCKS_GUARD:
+        lock = _DOWNLOAD_LOCKS.setdefault(digest, threading.Lock())
+    with lock:
+        cached = cache_root / digest / artifact["name"]
+        if cached.is_file() and sha256_file(cached) == digest:
+            return cached
+        cached.parent.mkdir(parents=True, exist_ok=True)
+        partial = cached.with_suffix(cached.suffix + ".part")
         partial.unlink(missing_ok=True)
-        raise RuntimeError(
-            f"SHA-256 mismatch for {artifact['name']}: expected {digest}, got {actual}"
+        if not trusted_artifact_url(artifact["url"]):
+            raise RuntimeError(f"Untrusted artifact origin for {artifact['name']}")
+        request = urllib.request.Request(
+            artifact["url"], headers={"User-Agent": "stem-separator-smoke/1"}
         )
-    partial.replace(cached)
-    return cached
+        with urllib.request.urlopen(request, timeout=120) as response, partial.open("wb") as output:
+            if not trusted_artifact_url(response.geturl(), delivery=True):
+                raise RuntimeError(f"Untrusted artifact delivery URL for {artifact['name']}")
+            shutil.copyfileobj(response, output, length=1024 * 1024)
+        actual = sha256_file(partial)
+        if actual != digest:
+            partial.unlink(missing_ok=True)
+            raise RuntimeError(
+                f"SHA-256 mismatch for {artifact['name']}: expected {digest}, got {actual}"
+            )
+        partial.replace(cached)
+        return cached
 
 
 def selected_backend_artifacts(model: dict[str, Any], backend: dict[str, Any]) -> list[dict[str, Any]]:
@@ -211,6 +221,8 @@ def smoke_model(
     cache_root: Path,
     work_root: Path,
     timeout_seconds: int,
+    fixture_source: Path | None = None,
+    fixture_id: str = SMOKE_FIXTURE,
 ) -> dict[str, Any]:
     backend = model["backends"]["audio_separator"]
     model_root = work_root / "models"
@@ -218,7 +230,14 @@ def smoke_model(
     output_root.mkdir(parents=True, exist_ok=True)
     stage_model(model, backend, cache_root, model_root)
     fixture = work_root / "synthetic-rich-mix.wav"
-    expected_frames = rich_fixture(fixture)
+    if fixture_source is None:
+        expected_frames = rich_fixture(fixture)
+    else:
+        shutil.copy2(fixture_source, fixture)
+        with wave.open(str(fixture), "rb") as audio:
+            if audio.getnchannels() != 2 or audio.getframerate() != 44100:
+                raise RuntimeError("Smoke fixture must be stereo 44.1 kHz WAV")
+            expected_frames = audio.getnframes()
     command = [
         str(audio_separator),
         str(fixture),
@@ -274,6 +293,7 @@ def smoke_model(
         "model": model["id"],
         "status": "passed",
         "contract_sha256": contract_sha256(model, backend),
+        "fixture": fixture_id,
         "outputs": wave_reports,
         "log": str(log_path),
     }
@@ -313,7 +333,7 @@ def promote(model: dict[str, Any], result: dict[str, Any]) -> None:
         "kind": "exact_checkpoint_smoke",
         "runtime": "python-audio-separator",
         "runtime_revision": AUDIO_SEPARATOR_REVISION,
-        "fixture": SMOKE_FIXTURE,
+        "fixture": result.get("fixture", SMOKE_FIXTURE),
         "contract_sha256": result["contract_sha256"],
         "outputs": sorted(output["runtime_key"] for output in backend["outputs"]),
         "sample_rate": 44100,
@@ -323,33 +343,50 @@ def promote(model: dict[str, Any], result: dict[str, Any]) -> None:
 
 
 def run(args: argparse.Namespace) -> int:
+    if args.fixture_id not in ACCEPTED_SMOKE_FIXTURES:
+        raise RuntimeError(f"Untrusted smoke fixture id: {args.fixture_id}")
+    if args.fixture_file is None and args.fixture_id != SMOKE_FIXTURE:
+        raise RuntimeError("A non-default smoke fixture id requires --fixture-file")
     base = load(args.base_registry)
     proposed = load(args.registry)
     selected = pending_models(base, proposed, args.all_pending)
     report: dict[str, Any] = {
         "schema": 1,
         "runtime_revision": AUDIO_SEPARATOR_REVISION,
-        "fixture": SMOKE_FIXTURE,
+        "fixture": args.fixture_id,
         "models": [],
     }
     by_id = {model["id"]: model for model in proposed.get("models", [])}
     args.report_dir.mkdir(parents=True, exist_ok=True)
-    for model in selected:
+    def validate(model: dict[str, Any]) -> dict[str, Any]:
         model_work = args.report_dir / model["id"]
         if model_work.exists():
             shutil.rmtree(model_work)
         model_work.mkdir(parents=True)
         try:
-            result = smoke_model(
+            return smoke_model(
                 model,
                 args.audio_separator,
                 args.cache_dir,
                 model_work,
                 args.timeout_seconds,
+                args.fixture_file,
+                args.fixture_id,
             )
-            promote(by_id[model["id"]], result)
         except Exception as error:  # Every model must leave a report for the PR.
-            result = {"model": model["id"], "status": "failed", "error": str(error)}
+            return {"model": model["id"], "status": "failed", "error": str(error)}
+
+    results: dict[str, dict[str, Any]] = {}
+    with ThreadPoolExecutor(max_workers=args.jobs) as executor:
+        futures = {executor.submit(validate, model): model["id"] for model in selected}
+        for future in as_completed(futures):
+            model_id = futures[future]
+            results[model_id] = future.result()
+            print(f"{results[model_id]['status']}: {model_id}", flush=True)
+    for model in selected:
+        result = results[model["id"]]
+        if result["status"] == "passed":
+            promote(by_id[model["id"]], result)
         report["models"].append(result)
     report["passed"] = sum(item["status"] == "passed" for item in report["models"])
     report["failed"] = sum(item["status"] == "failed" for item in report["models"])
@@ -467,6 +504,9 @@ def parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--report-dir", type=Path, required=True)
     run_parser.add_argument("--summary-output", type=Path)
     run_parser.add_argument("--timeout-seconds", type=int, default=1800)
+    run_parser.add_argument("--jobs", type=int, default=1)
+    run_parser.add_argument("--fixture-file", type=Path)
+    run_parser.add_argument("--fixture-id", default=SMOKE_FIXTURE)
     run_parser.add_argument("--all-pending", action="store_true")
     verify = commands.add_parser("verify-transitions")
     verify.add_argument("--base-registry", type=Path, required=True)

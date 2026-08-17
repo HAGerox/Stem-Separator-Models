@@ -43,7 +43,6 @@ BACKEND_STATES = {
 }
 AUDIO_SEPARATOR_ADMISSION_STATES = {
     "validated",
-    "listed",
     "compatible_unvalidated",
 }
 LOCATION_KINDS = {"line_range", "page", "section", "json_pointer", "entry"}
@@ -432,7 +431,7 @@ def main() -> int:
                 )
             elif audio_separator.get("state") not in AUDIO_SEPARATOR_ADMISSION_STATES:
                 errors.append(
-                    f"{where}.backends.audio_separator: state must be validated, listed, or compatible_unvalidated"
+                    f"{where}.backends.audio_separator: state must be validated or compatible_unvalidated"
                 )
             elif audio_separator.get("state") == "compatible_unvalidated":
                 if audio_separator.get("validated") is not False:
@@ -461,14 +460,18 @@ def main() -> int:
                     errors.append(
                         f"{where}.backends.audio_separator: compatible_unvalidated requires selected checkpoint and YAML artifacts"
                     )
-            if isinstance(audio_separator, dict) and "smoke_validation" in audio_separator:
-                if audio_separator.get("state") != "validated" or audio_separator.get("validated") is not True:
+            if isinstance(audio_separator, dict) and audio_separator.get("state") == "validated":
+                if audio_separator.get("validated") is not True:
                     errors.append(
-                        f"{where}.backends.audio_separator: smoke_validation requires validated state"
+                        f"{where}.backends.audio_separator: validated state requires validated=true"
                     )
                 errors.extend(
                     f"{where}.backends.audio_separator: {error}"
                     for error in smoke_evidence_errors(model, audio_separator)
+                )
+            elif isinstance(audio_separator, dict) and "smoke_validation" in audio_separator:
+                errors.append(
+                    f"{where}.backends.audio_separator: smoke_validation requires validated state"
                 )
             if not locally_runnable:
                 errors.append(f"{where}: at least one local backend path is required")
@@ -812,13 +815,13 @@ def main() -> int:
         selected = by_id.get(recommendation.get("model"), {})
         evaluator_supported = any(
             isinstance(details, dict)
-            and details.get("state") in {"listed", "validated"}
+            and details.get("state") in {"validated", "compatible_unvalidated"}
             and any(
                 isinstance(details.get(field), str) and details[field]
                 for field in ("model_filename", "catalog_id")
             )
             for backend, details in selected.get("backends", {}).items()
-            if backend in {"audio_separator", "pymss"}
+            if backend == "audio_separator"
         )
         if not evaluator_supported:
             errors.append(f"recommendations.{task}: default must support the listening evaluator")

@@ -6,9 +6,13 @@ from __future__ import annotations
 import html
 import json
 import os
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Any
+
+from smoke_audio_separator import stage_model
+from smoke_policy import contract_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,7 +45,7 @@ def model_backend(registry: dict, model_id: str, capability: str) -> tuple[str, 
             if output["capability"] == capability
         ]
         if (
-            details.get("state") in {"listed", "validated"}
+            details.get("state") == "validated"
             and details.get(reference_field)
             and len(matches) == 1
         ):
@@ -76,14 +80,22 @@ def model_plan(
     }
 
 
-def separate(track: Path, backend: str, model: str, output: Path) -> None:
+def separate(
+    track: Path,
+    backend: str,
+    model: str,
+    output: Path,
+    model_dir: Path | None = None,
+) -> None:
     output.mkdir(parents=True, exist_ok=True)
     if backend == "audio_separator":
         command = [
-            "audio-separator",
+            os.environ.get("AUDIO_SEPARATOR", "audio-separator"),
             str(track),
             "--model_filename",
             model,
+            "--model_file_dir",
+            str(model_dir),
             "--output_dir",
             str(output),
             "--output_format",
@@ -131,6 +143,38 @@ def track_filename(track: object) -> str:
     raise RuntimeError("Each evaluation track must be a filename or an object with filename")
 
 
+def track_credit(track: object) -> str:
+    if not isinstance(track, dict):
+        return track_filename(track)
+    title = track.get("title", track_filename(track))
+    artist = track.get("artist")
+    license_name = track.get("license")
+    source_page = track.get("source_page")
+    credit = str(title)
+    if isinstance(artist, str):
+        credit += f" — {artist}"
+    if isinstance(license_name, str):
+        credit += f" ({license_name})"
+    if isinstance(source_page, str):
+        return f'<a href="{html.escape(source_page)}">{html.escape(credit)}</a>'
+    return html.escape(credit)
+
+
+def staged_model_dir(
+    registry: dict[str, Any],
+    model_id: str,
+    cache_root: Path,
+    staging_root: Path,
+) -> Path:
+    model = next(model for model in registry["models"] if model["id"] == model_id)
+    backend = model.get("backends", {}).get("audio_separator", {})
+    if backend.get("state") != "validated" or backend.get("validated") is not True:
+        raise RuntimeError(f"{model_id} is not validated for Audio Separator")
+    destination = staging_root / model_id / contract_sha256(model, backend)[:16]
+    stage_model(model, backend, cache_root, destination)
+    return destination
+
+
 def safe_track_path(audio_dir: Path, filename: str) -> Path:
     relative = Path(filename)
     if relative.is_absolute() or ".." in relative.parts:
@@ -146,10 +190,13 @@ def changed_tasks(base: dict[str, Any], proposed: dict[str, Any]) -> list[str]:
         recommendation = registry.get("recommendations", {}).get(task, {})
         return recommendation.get("model"), recommendation.get("decomposition")
 
+    # A listening comparison needs an incumbent. Newly exposed stems may be
+    # added together in one maintenance PR without pretending they replace a
+    # prior recommendation.
     changes = [
         task
         for task in sorted(
-            set(base.get("recommendations", {})) | set(proposed.get("recommendations", {}))
+            set(base.get("recommendations", {})) & set(proposed.get("recommendations", {}))
         )
         if selection(base, task) != selection(proposed, task)
     ]
@@ -182,6 +229,8 @@ def main() -> int:
         raise RuntimeError(f"Private evaluation manifest has no tracks: {tracks_path}")
     audio_dir = Path(os.environ.get("AUDIO_DIR", "/opt/stem-registry/tracks"))
     output = ROOT / os.environ.get("OUTPUT_DIR", "evaluation/results/local")
+    model_cache = Path(os.environ.get("MODEL_CACHE_DIR", output / ".model-cache"))
+    model_staging = Path(os.environ.get("MODEL_STAGING_DIR", output / ".models"))
 
     rows = []
     for task in tasks:
@@ -202,17 +251,47 @@ def main() -> int:
         proposed_backend, proposed_model, proposed_keys = model_plan(
             proposed, proposed_id, proposed_capabilities
         )
+        current_model_dir = (
+            staged_model_dir(base, current_id, model_cache, model_staging)
+            if current_plan and current_plan[0] == "audio_separator"
+            else None
+        )
+        proposed_model_dir = (
+            staged_model_dir(proposed, proposed_id, model_cache, model_staging)
+            if proposed_backend == "audio_separator"
+            else None
+        )
         for track_entry in tracks:
             filename = track_filename(track_entry)
             track = safe_track_path(audio_dir, filename)
             if not track.is_file():
                 raise RuntimeError(f"Missing evaluation track: {track}")
             track_output = output / task / Path(filename).stem
+            source_copy = track_output / "source" / filename
+            source_copy.parent.mkdir(parents=True, exist_ok=True)
+            if not source_copy.is_file():
+                shutil.copy2(track, source_copy)
+            source_player = (
+                track_credit(track_entry)
+                + f'<audio controls src="{html.escape(str(source_copy.relative_to(output)))}"></audio>'
+            )
             current_output = track_output / "current"
             proposed_output = track_output / "proposed"
             if current_plan:
-                separate(track, current_plan[0], current_plan[1], current_output)
-            separate(track, proposed_backend, proposed_model, proposed_output)
+                separate(
+                    track,
+                    current_plan[0],
+                    current_plan[1],
+                    current_output,
+                    current_model_dir,
+                )
+            separate(
+                track,
+                proposed_backend,
+                proposed_model,
+                proposed_output,
+                proposed_model_dir,
+            )
             for capability in capabilities:
                 current_player = "—"
                 if current_plan and capability in current_plan[2]:
@@ -231,7 +310,7 @@ def main() -> int:
                 display_task = task if task != "multitrack" else f"multitrack / {capability}"
                 rows.append(
                     "<tr>"
-                    f"<td>{html.escape(display_task)}</td><td>{html.escape(filename)}</td>"
+                    f"<td>{html.escape(display_task)}</td><td>{source_player}</td>"
                     f"<td>{current_player}</td><td>{proposed_player}</td>"
                     "</tr>"
                 )

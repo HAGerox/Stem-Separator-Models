@@ -35,6 +35,7 @@ GROUP_ORDER = (
 # These are workflows or legacy preset identifiers, not independently delivered
 # audio stems.  Restoration is intentionally outside the current product scope.
 EXCLUDED_CAPABILITIES = {
+    "backing_instrumental",
     "cinematic_dnr",
     "decrowd",
     "denoise",

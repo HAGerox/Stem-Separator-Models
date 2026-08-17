@@ -191,6 +191,25 @@ for token in ('Alpha', 'beta'):
             )
         self.assertEqual(completed.returncode, 0, completed.stderr)
 
+    def test_registry_rejects_catalog_listing_without_admission_smoke(self) -> None:
+        registry = json.loads((ROOT / "registry.json").read_text(encoding="utf-8"))
+        backend = registry["models"][0]["backends"]["audio_separator"]
+        backend["state"] = "listed"
+        backend["validated"] = False
+        backend.pop("smoke_validation", None)
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", encoding="utf-8") as handle:
+            json.dump(registry, handle)
+            handle.flush()
+            completed = subprocess.run(
+                ["python3", str(SCRIPTS / "validate.py"), handle.name],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        self.assertNotEqual(completed.returncode, 0)
+        self.assertIn("state must be validated or compatible_unvalidated", completed.stderr)
+
     def test_runner_output_allows_only_smoke_promotions(self) -> None:
         original_model = self.model()
         promoted_model = deepcopy(original_model)
@@ -297,9 +316,17 @@ for token in ('Alpha', 'beta'):
             }
         }
         replacement = {"recommendations": {"vocals": {"model": "b"}}}
+        new_capabilities = {
+            "recommendations": {
+                "vocals": {"model": "a"},
+                "accordion": {"model": "new"},
+                "banjo": {"model": "new"},
+            }
+        }
         with patch.dict(os.environ, {"STEMS": ""}):
             self.assertEqual(changed_tasks(base, metadata_only), [])
             self.assertEqual(changed_tasks(base, replacement), ["vocals"])
+            self.assertEqual(changed_tasks(base, new_capabilities), [])
 
 
 if __name__ == "__main__":
