@@ -1,6 +1,6 @@
 {
   "schema": 4,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-08-18",
   "baseline": false,
   "scope": {
     "execution": "local_only",
@@ -51,6 +51,15 @@
       "source": "https://raw.githubusercontent.com/pymss-project/pymss/e34d0d07a44f2dd7ef39363e42de1491c332bdfd/pymss/resources/model_catalog.json",
       "fetched_at": "2026-08-17",
       "sha256": "0cd3665c730e9a59e7248fd72cc587ce0de9fe6d6eebd8e94dd4ea80b7e2a67f"
+    },
+    "deton24-google-doc-2026-08-18": {
+      "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+      "fetched_at": "2026-08-18",
+      "sha256": "edc3ddff31ef3d7e32f02b04abd188f72815c95a8d300b9653c69fe8b6118f8d",
+      "tiers": {
+        "qualitative": "tier_2",
+        "measured": "tier_2"
+      }
     }
   },
   "evidence_policy": {},
