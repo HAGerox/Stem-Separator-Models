@@ -6840,7 +6840,7 @@
     {
       "id": "xeno-v3",
       "name": "MelBand RoFormer Xen0 V3",
-      "author": "DrYond3r / A\u00d73L-Ski3s",
+      "author": "DrYond3r / A×3L-Ski3s",
       "architecture": "mel_band_roformer",
       "status": "experimental",
       "tasks": [
