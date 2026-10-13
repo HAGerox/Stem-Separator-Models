@@ -2,7 +2,7 @@
   "schema": 1,
   "policy": "stem-separator-v1",
   "registry_schema": 4,
-  "generated_at": "2026-10-05",
+  "generated_at": "2026-10-13",
   "promoted": [
     "vocals",
     "instrumental",
@@ -5849,7 +5849,7 @@
       "kind": "stem",
       "group": "other",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "gilliaan-centerwide-v3",
         "model_name": "MelBand RoFormer CenterWide V3",
@@ -5861,14 +5861,14 @@
         {
           "id": "audio_separator",
           "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "center",
@@ -5896,19 +5896,19 @@
           "model": "gilliaan-centerwide-v3",
           "model_name": "MelBand RoFormer CenterWide V3",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "center",
@@ -6304,7 +6304,7 @@
       "kind": "stem",
       "group": "other",
       "promoted": false,
-      "available": false,
+      "available": true,
       "recommendation": {
         "model": "gilliaan-centerwide-v3",
         "model_name": "MelBand RoFormer CenterWide V3",
@@ -6316,14 +6316,14 @@
         {
           "id": "audio_separator",
           "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
-          "state": "compatible_unvalidated",
-          "validated": false,
-          "smoke_validated": false,
+          "state": "validated",
+          "validated": true,
+          "smoke_validated": true,
           "installable": true,
           "install_mode": "artifacts",
-          "candidate": false,
-          "ready": false,
-          "stable": false,
+          "candidate": true,
+          "ready": true,
+          "stable": true,
           "outputs": [
             {
               "runtime_key": "wide",
@@ -6351,19 +6351,19 @@
           "model": "gilliaan-centerwide-v3",
           "model_name": "MelBand RoFormer CenterWide V3",
           "specialty": "recommended",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "wide",
@@ -7342,8 +7342,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "gilliaan_melroformer_centerwide_v3.ckpt",
           "artifact_names": [
             "gilliaan_melroformer_centerwide_v3.ckpt",
@@ -11033,21 +11033,10 @@
     }
   },
   "readiness": {
-    "ready_capabilities": 58,
-    "stable_capabilities": 58,
-    "installable_candidates": 58,
+    "ready_capabilities": 60,
+    "stable_capabilities": 60,
+    "installable_candidates": 60,
     "smoke_validation_gaps": [],
-    "unavailable": [
-      {
-        "capability": "center",
-        "model": "gilliaan-centerwide-v3",
-        "reason": "smoke_validation_pending"
-      },
-      {
-        "capability": "wide",
-        "model": "gilliaan-centerwide-v3",
-        "reason": "smoke_validation_pending"
-      }
-    ]
+    "unavailable": []
   }
 }

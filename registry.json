@@ -1,6 +1,6 @@
 {
   "schema": 4,
-  "generated_at": "2026-10-05",
+  "generated_at": "2026-10-13",
   "baseline": false,
   "scope": {
     "execution": "local_only",
@@ -6769,9 +6769,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "gilliaan_melroformer_centerwide_v3.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "center",
@@ -6787,7 +6787,22 @@
           "artifact_names": [
             "gilliaan_melroformer_centerwide_v3.ckpt",
             "gilliaan_melroformer_centerwide_v3.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "5251f7c61a3013fa72d418e46a8787176be4405136e0d62607ba8761cd1b1051",
+            "outputs": [
+              "center",
+              "wide"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-13"
+          }
         }
       },
       "benchmarks": [
@@ -6840,7 +6855,7 @@
     {
       "id": "xeno-v3",
       "name": "MelBand RoFormer Xen0 V3",
-      "author": "DrYond3r / A\u00d73L-Ski3s",
+      "author": "DrYond3r / A×3L-Ski3s",
       "architecture": "mel_band_roformer",
       "status": "experimental",
       "tasks": [
@@ -6867,9 +6882,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "Mel_Band_Xen0_V3.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "vocals",
@@ -6885,7 +6900,22 @@
           "artifact_names": [
             "Mel_Band_Xen0_V3.ckpt",
             "Mel_Band_Xen0_V3.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "4c78ebdeec465052f47298ede1aeb294bc847f7b10b84b3454d99fa9990b2550",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-13"
+          }
         }
       },
       "benchmarks": [],
@@ -6925,9 +6955,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_bowed_str2_gilliaaan.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "strings",
@@ -6943,7 +6973,22 @@
           "artifact_names": [
             "bs_bowed_str2_gilliaaan.ckpt",
             "bs_bowed_str2_gilliaaan_config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "db90be2e46573a72917adfb16464ed37778a23ec308310fb7e779fe5bed07126",
+            "outputs": [
+              "other",
+              "strings"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-13"
+          }
         }
       },
       "benchmarks": [
@@ -7021,9 +7066,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "mbr_karaoke1_gilliaaan.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "lead",
@@ -7039,7 +7084,22 @@
           "artifact_names": [
             "mbr_karaoke1_gilliaaan.ckpt",
             "mbr_karaoke1_gilliaaan_config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "cc1f8cb016df09266b2bad05a20da59c73efb41807a759a13c074d2be96bab50",
+            "outputs": [
+              "back-instrum",
+              "lead"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-13"
+          }
         }
       },
       "benchmarks": [

@@ -100,7 +100,7 @@ jobs:
           uv venv --python 3.12 --clear "$RUNNER_TEMP/audio-separator-evaluation"
           uv pip install \
             --python "$RUNNER_TEMP/audio-separator-evaluation/bin/python" \
-            "$requirement"
+            "$requirement" "librosa==0.10.2.post1"
           echo "binary=$RUNNER_TEMP/audio-separator-evaluation/bin/audio-separator" >> "$GITHUB_OUTPUT"
       - name: Prepare public listening fixtures
         if: steps.delta.outputs.count == '1' && steps.delta.outputs.ready == 'true'
