@@ -2,7 +2,7 @@
   "schema": 1,
   "policy": "stem-separator-v1",
   "registry_schema": 4,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-10-05",
   "promoted": [
     "vocals",
     "instrumental",
@@ -5844,6 +5844,97 @@
       ]
     },
     {
+      "id": "center",
+      "label": "Center",
+      "kind": "stem",
+      "group": "other",
+      "promoted": false,
+      "available": false,
+      "recommendation": {
+        "model": "gilliaan-centerwide-v3",
+        "model_name": "MelBand RoFormer CenterWide V3",
+        "preferred_model": "gilliaan-centerwide-v3",
+        "policy": "ordinal-quality-v1",
+        "used_fallback": false
+      },
+      "backends": [
+        {
+          "id": "audio_separator",
+          "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
+          "ready": false,
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "center",
+              "capability": "center",
+              "label": "Center"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+              "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+              "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+            },
+            {
+              "name": "gilliaan_melroformer_centerwide_v3.yaml",
+              "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+              "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
+      "candidates": [
+        {
+          "model": "gilliaan-centerwide-v3",
+          "model_name": "MelBand RoFormer CenterWide V3",
+          "specialty": "recommended",
+          "ready": false,
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "center",
+                  "capability": "center",
+                  "label": "Center"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+                  "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+                  "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+                },
+                {
+                  "name": "gilliaan_melroformer_centerwide_v3.yaml",
+                  "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+                  "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "glockenspiel",
       "label": "Glockenspiel",
       "kind": "stem",
@@ -6202,6 +6293,97 @@
                 }
               ],
               "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wide",
+      "label": "Wide",
+      "kind": "stem",
+      "group": "other",
+      "promoted": false,
+      "available": false,
+      "recommendation": {
+        "model": "gilliaan-centerwide-v3",
+        "model_name": "MelBand RoFormer CenterWide V3",
+        "preferred_model": "gilliaan-centerwide-v3",
+        "policy": "ordinal-quality-v1",
+        "used_fallback": false
+      },
+      "backends": [
+        {
+          "id": "audio_separator",
+          "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "smoke_validated": false,
+          "installable": true,
+          "install_mode": "artifacts",
+          "candidate": false,
+          "ready": false,
+          "stable": false,
+          "outputs": [
+            {
+              "runtime_key": "wide",
+              "capability": "wide",
+              "label": "Wide"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+              "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+              "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+            },
+            {
+              "name": "gilliaan_melroformer_centerwide_v3.yaml",
+              "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+              "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+            }
+          ],
+          "catalog_snapshot": null
+        }
+      ],
+      "candidates": [
+        {
+          "model": "gilliaan-centerwide-v3",
+          "model_name": "MelBand RoFormer CenterWide V3",
+          "specialty": "recommended",
+          "ready": false,
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "gilliaan_melroformer_centerwide_v3.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "wide",
+                  "capability": "wide",
+                  "label": "Wide"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+                  "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+                  "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+                },
+                {
+                  "name": "gilliaan_melroformer_centerwide_v3.yaml",
+                  "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+                  "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+                }
+              ],
+              "catalog_snapshot": null
             }
           ]
         }
@@ -7131,6 +7313,64 @@
               "name": "bs_bowed_str_gilliaaan_config.yaml",
               "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/bs_roformer/bs_bowed_str_gilliaaan_config.yaml",
               "sha256": "abd85b92f52a8a46d894eef35fa651f239a21851d637ec0a7bcf86a3596537ca"
+            }
+          ]
+        }
+      }
+    },
+    "gilliaan-centerwide-v3": {
+      "name": "MelBand RoFormer CenterWide V3",
+      "architecture": "mel_band_roformer",
+      "status": "specialist",
+      "availability": {
+        "state": "public_weights",
+        "license": "CC-BY-NC-SA-4.0",
+        "repository": "https://huggingface.co/gilliaan/CenterWide-Models",
+        "revision": "312004582fe983e45c6becb03e1bbdbece7f8902",
+        "artifacts": [
+          {
+            "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+            "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+            "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+          },
+          {
+            "name": "gilliaan_melroformer_centerwide_v3.yaml",
+            "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+            "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "gilliaan_melroformer_centerwide_v3.ckpt",
+          "artifact_names": [
+            "gilliaan_melroformer_centerwide_v3.ckpt",
+            "gilliaan_melroformer_centerwide_v3.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "center",
+              "capability": "center",
+              "label": "Center"
+            },
+            {
+              "runtime_key": "wide",
+              "capability": "wide",
+              "label": "Wide"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+              "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+              "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+            },
+            {
+              "name": "gilliaan_melroformer_centerwide_v3.yaml",
+              "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+              "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
             }
           ]
         }
@@ -10797,6 +11037,17 @@
     "stable_capabilities": 58,
     "installable_candidates": 58,
     "smoke_validation_gaps": [],
-    "unavailable": []
+    "unavailable": [
+      {
+        "capability": "center",
+        "model": "gilliaan-centerwide-v3",
+        "reason": "smoke_validation_pending"
+      },
+      {
+        "capability": "wide",
+        "model": "gilliaan-centerwide-v3",
+        "reason": "smoke_validation_pending"
+      }
+    ]
   }
 }
