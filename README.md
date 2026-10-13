@@ -42,6 +42,12 @@ python3 -m py_compile scripts/*.py
 
 Private registry maintenance guidance is kept in [`HERMES.md`](HERMES.md).
 
+Runtime smoke and listening checks install the pinned Audio Separator revision
+with `librosa==0.10.2.post1`. Its audio writer uses the `filename` duration
+argument removed in librosa 1.0. Keep the compatibility constraint when
+reproducing those checks. Smoke artifacts include reports and output audio;
+staged checkpoints are kept in the model cache rather than uploaded again.
+
 ## License
 
 The registry and its supporting code are available under the
