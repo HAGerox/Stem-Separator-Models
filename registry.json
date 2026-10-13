@@ -1,6 +1,6 @@
 {
   "schema": 4,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-10-05",
   "baseline": false,
   "scope": {
     "execution": "local_only",
@@ -51,6 +51,47 @@
       "source": "https://raw.githubusercontent.com/pymss-project/pymss/e34d0d07a44f2dd7ef39363e42de1491c332bdfd/pymss/resources/model_catalog.json",
       "fetched_at": "2026-08-17",
       "sha256": "0cd3665c730e9a59e7248fd72cc587ce0de9fe6d6eebd8e94dd4ea80b7e2a67f"
+    },
+    "deton24-google-doc-2026-09-07": {
+      "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+      "fetched_at": "2026-09-07",
+      "sha256": "108bf0a57965171a4f5e18d9aea6f735202ea1d0327529acbff387db1d293018",
+      "tiers": {
+        "qualitative": "tier_2",
+        "measured": "tier_2"
+      }
+    },
+    "mvsep-quality-checker-entry-10390-2026-09-07": {
+      "source": "https://mvsep.com/quality_checker/entry/10390",
+      "fetched_at": "2026-09-07",
+      "sha256": "83eb229a6fcadd51b64373e270ac82f7b6e8e9ce635166d3bc975ced2842bd63",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsepless-catalogue-2026-09-07": {
+      "source": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/46ca65d52c07635a4992fadb9c6b1644eb51fe7f/models.json",
+      "fetched_at": "2026-09-07",
+      "sha256": "c3a516ba7418981edb604956d33f20885849d457bbff4200a62e641b0ea91c7f"
+    },
+    "zfturbo-releases-2026-09-07": {
+      "source": "https://api.github.com/repos/ZFTurbo/Music-Source-Separation-Training/releases",
+      "fetched_at": "2026-09-07",
+      "sha256": "866870bdbcaad1565b05749e3977662a02e4cef5556d9f322eaabfbbbf8dc131"
+    },
+    "deton24-google-doc-2026-10-05": {
+      "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+      "fetched_at": "2026-10-05",
+      "sha256": "1012491e04197c3574953290f0357bed9054950fec063d1889f05d6e8a2634f2",
+      "tiers": {
+        "qualitative": "tier_2",
+        "measured": "tier_2"
+      }
+    },
+    "mvsepless-catalogue-2026-10-05": {
+      "source": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/030a01aa951b3908ed6b01b2e507c17953300c2d/models.json",
+      "fetched_at": "2026-10-05",
+      "sha256": "103d6d9757faedf1828cfc87eff7f6fc868bcb892224684324661fd430603525"
     }
   },
   "evidence_policy": {},
@@ -217,6 +258,24 @@
       "version": 1,
       "standardized": false,
       "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing"
+    },
+    "mvsep-phantom-center-v1": {
+      "name": "MVSep Phantom Center",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10390"
+    },
+    "mvsep-bowed-strings-v1": {
+      "name": "MVSep Bowed Strings",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10610"
+    },
+    "mvsep-karaoke-specialist-v1": {
+      "name": "MVSep Karaoke Specialist",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10679"
     }
   },
   "models": [
@@ -6679,6 +6738,353 @@
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources"
       ]
+    },
+    {
+      "id": "gilliaan-centerwide-v3",
+      "name": "MelBand RoFormer CenterWide V3",
+      "author": "Gilliaan",
+      "architecture": "mel_band_roformer",
+      "status": "specialist",
+      "tasks": [
+        "center",
+        "wide"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "CC-BY-NC-SA-4.0",
+        "repository": "https://huggingface.co/gilliaan/CenterWide-Models",
+        "revision": "312004582fe983e45c6becb03e1bbdbece7f8902",
+        "artifacts": [
+          {
+            "name": "gilliaan_melroformer_centerwide_v3.ckpt",
+            "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.ckpt",
+            "sha256": "2b909a3e49abcea44f36e81760a2f1769e14fde0b59a4bbd737c2eef2180ca75"
+          },
+          {
+            "name": "gilliaan_melroformer_centerwide_v3.yaml",
+            "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
+            "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "gilliaan_melroformer_centerwide_v3.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "center",
+              "capability": "center",
+              "label": "Center"
+            },
+            {
+              "runtime_key": "wide",
+              "capability": "wide",
+              "label": "Wide"
+            }
+          ],
+          "artifact_names": [
+            "gilliaan_melroformer_centerwide_v3.ckpt",
+            "gilliaan_melroformer_centerwide_v3.yaml"
+          ]
+        }
+      },
+      "benchmarks": [
+        {
+          "suite": "mvsep-phantom-center-v1",
+          "stem": "center",
+          "values": {
+            "sdr_db": 17.3236,
+            "si_sdr_db": 17.0781,
+            "l1_freq": 47.1414,
+            "log_wmse": 19.8561,
+            "aura_stft": 19.0933,
+            "aura_mrstft": 33.1105,
+            "mvsep_bleedless": 47.389,
+            "mvsep_fullness": 43.433
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10390",
+          "config": {
+            "batch_size": 4,
+            "overlap": 4
+          }
+        },
+        {
+          "suite": "mvsep-phantom-center-v1",
+          "stem": "wide",
+          "values": {
+            "sdr_db": 17.2798,
+            "si_sdr_db": 17.1215,
+            "l1_freq": 46.5232,
+            "log_wmse": 19.5031,
+            "aura_stft": 12.2434,
+            "aura_mrstft": 16.9552,
+            "mvsep_bleedless": 37.949,
+            "mvsep_fullness": 36.7534
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10390",
+          "config": {
+            "batch_size": 4,
+            "overlap": 4
+          }
+        }
+      ],
+      "sources": [
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "https://huggingface.co/gilliaan/CenterWide-Models",
+        "https://mvsep.com/quality_checker/entry/10390"
+      ],
+      "released_at": "2026-09-05"
+    },
+    {
+      "id": "xeno-v3",
+      "name": "MelBand RoFormer Xen0 V3",
+      "author": "DrYond3r / A\u00d73L-Ski3s",
+      "architecture": "mel_band_roformer",
+      "status": "experimental",
+      "tasks": [
+        "vocals",
+        "instrumental"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/DrYond3r/Mel_Band_Xen0_V3",
+        "revision": "0301eb502b2797e708c9adf829418a2e983b1ff1",
+        "artifacts": [
+          {
+            "name": "Mel_Band_Xen0_V3.ckpt",
+            "url": "https://huggingface.co/DrYond3r/Mel_Band_Xen0_V3/resolve/0301eb502b2797e708c9adf829418a2e983b1ff1/Mel_Band_Xen0_V3.ckpt",
+            "sha256": "1577f0159b3002793c6fa10e046dbd428ef11b128f4221b5315c37d0df776688"
+          },
+          {
+            "name": "Mel_Band_Xen0_V3.yaml",
+            "url": "https://huggingface.co/DrYond3r/Mel_Band_Xen0_V3/resolve/0301eb502b2797e708c9adf829418a2e983b1ff1/Mel_Band_Xen0_V3.yaml",
+            "sha256": "a191d8223a640daa016f43ba40b7b5ef1fe5cea4a192ce4c4a500f003de96c99"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "Mel_Band_Xen0_V3.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "Mel_Band_Xen0_V3.ckpt",
+            "Mel_Band_Xen0_V3.yaml"
+          ]
+        }
+      },
+      "benchmarks": [],
+      "sources": [
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "https://huggingface.co/DrYond3r/Mel_Band_Xen0_V3"
+      ]
+    },
+    {
+      "id": "gilliaan-bowed-strings-v2",
+      "name": "BS RoFormer Bowed Strings V2",
+      "author": "Gilliaan",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "tasks": [
+        "strings",
+        "bowed_strings",
+        "other"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "CC-BY-NC-SA-4.0",
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "030a01aa951b3908ed6b01b2e507c17953300c2d",
+        "artifacts": [
+          {
+            "name": "bs_bowed_str2_gilliaaan.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/030a01aa951b3908ed6b01b2e507c17953300c2d/bs_roformer/bs_bowed_str2_gilliaaan.ckpt",
+            "sha256": "e49feede4125404930ea4dd2cd634b8a5850cc9e24dc0565a01ccac466a5bbff"
+          },
+          {
+            "name": "bs_bowed_str2_gilliaaan_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/030a01aa951b3908ed6b01b2e507c17953300c2d/bs_roformer/bs_bowed_str2_gilliaaan_config.yaml",
+            "sha256": "f32c4491984d6d3656cb078626758bef30ed0367e0d19c50d96392812a6eca74"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "bs_bowed_str2_gilliaaan.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "strings",
+              "capability": "bowed_strings",
+              "label": "Bowed strings"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other"
+            }
+          ],
+          "artifact_names": [
+            "bs_bowed_str2_gilliaaan.ckpt",
+            "bs_bowed_str2_gilliaaan_config.yaml"
+          ]
+        }
+      },
+      "benchmarks": [
+        {
+          "suite": "mvsep-bowed-strings-v1",
+          "stem": "strings",
+          "values": {
+            "sdr_db": 4.6863,
+            "si_sdr_db": 2.2609,
+            "l1_freq": 46.7703,
+            "log_wmse": 13.8024,
+            "aura_stft": 6.9581,
+            "aura_mrstft": 8.4351,
+            "mvsep_bleedless": 21.4907,
+            "mvsep_fullness": 15.6924
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10610",
+          "config": {
+            "overlap": 4
+          }
+        },
+        {
+          "suite": "mvsep-bowed-strings-v1",
+          "stem": "other",
+          "values": {
+            "sdr_db": 15.6039,
+            "si_sdr_db": 15.3744,
+            "l1_freq": 46.8955,
+            "log_wmse": 13.7669,
+            "aura_stft": 22.3057,
+            "aura_mrstft": 27.9691,
+            "mvsep_bleedless": 45.7813,
+            "mvsep_fullness": 40.3913
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10610",
+          "config": {
+            "overlap": 4
+          }
+        }
+      ],
+      "sources": [
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "https://huggingface.co/gilliaan/Stem-Separation-Models"
+      ]
+    },
+    {
+      "id": "gilliaan-karaoke-v1",
+      "name": "MelBand RoFormer Karaoke V1",
+      "author": "Gilliaan",
+      "architecture": "mel_band_roformer",
+      "status": "specialist",
+      "tasks": [
+        "lead_vocals",
+        "backing_instrumental",
+        "karaoke"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "CC-BY-NC-SA-4.0",
+        "repository": "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "revision": "030a01aa951b3908ed6b01b2e507c17953300c2d",
+        "artifacts": [
+          {
+            "name": "mbr_karaoke1_gilliaaan.ckpt",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/030a01aa951b3908ed6b01b2e507c17953300c2d/mel_band_roformer/mbr_karaoke1_gilliaaan.ckpt",
+            "sha256": "6aee6813b27f5f27d81c9be46f17c0db34fa7194e5e57276211a76477506061f"
+          },
+          {
+            "name": "mbr_karaoke1_gilliaaan_config.yaml",
+            "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/030a01aa951b3908ed6b01b2e507c17953300c2d/mel_band_roformer/mbr_karaoke1_gilliaaan_config.yaml",
+            "sha256": "6335e208665f5927f8ce8ffc420b733dc475b4f6b2d32b439528d20ebb6dc8d9"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "model_filename": "mbr_karaoke1_gilliaaan.ckpt",
+          "validated": false,
+          "outputs": [
+            {
+              "runtime_key": "lead",
+              "capability": "lead_vocals",
+              "label": "Lead vocals"
+            },
+            {
+              "runtime_key": "back-instrum",
+              "capability": "backing_instrumental",
+              "label": "Backing instrumental"
+            }
+          ],
+          "artifact_names": [
+            "mbr_karaoke1_gilliaaan.ckpt",
+            "mbr_karaoke1_gilliaaan_config.yaml"
+          ]
+        }
+      },
+      "benchmarks": [
+        {
+          "suite": "mvsep-karaoke-specialist-v1",
+          "stem": "lead",
+          "values": {
+            "sdr_db": 9.8158,
+            "si_sdr_db": 9.7359,
+            "l1_freq": 38.5207,
+            "log_wmse": 13.2846,
+            "aura_stft": 9.1495,
+            "aura_mrstft": 10.2471,
+            "mvsep_bleedless": 23.9558,
+            "mvsep_fullness": 17.3759
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10679",
+          "config": {
+            "overlap": 2
+          }
+        },
+        {
+          "suite": "mvsep-karaoke-specialist-v1",
+          "stem": "back-instrum",
+          "values": {
+            "sdr_db": 15.0967,
+            "si_sdr_db": 14.9005,
+            "l1_freq": 39.0804,
+            "log_wmse": 13.1909,
+            "aura_stft": 18.6081,
+            "aura_mrstft": 22.9798,
+            "mvsep_bleedless": 47.4456,
+            "mvsep_fullness": 36.9748
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10679",
+          "config": {
+            "overlap": 2
+          }
+        }
+      ],
+      "sources": [
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "https://huggingface.co/gilliaan/Stem-Separation-Models"
+      ]
     }
   ],
   "recommendations": {
@@ -6706,6 +7112,11 @@
           "specialty": "single_stem_fallback"
         }
       ]
+    },
+    "center": {
+      "policy": "ordinal-quality-v1",
+      "model": "gilliaan-centerwide-v3",
+      "alternatives": []
     },
     "crash": {
       "policy": "ordinal-quality-v1",
@@ -7119,6 +7530,11 @@
     "wind": {
       "policy": "ordinal-quality-v1",
       "model": "mvsep-mega-single-wind",
+      "alternatives": []
+    },
+    "wide": {
+      "policy": "ordinal-quality-v1",
+      "model": "gilliaan-centerwide-v3",
       "alternatives": []
     },
     "woodwinds": {
