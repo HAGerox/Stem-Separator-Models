@@ -353,19 +353,19 @@
           "model": "unwa-revive-3e",
           "model_name": "BS RoFormer Revive 3e",
           "specialty": "fullness",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_roformer_revive3e.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "vocals",
@@ -393,19 +393,19 @@
           "model": "unwa-revive-2",
           "model_name": "BS RoFormer Revive 2",
           "specialty": "bleed_control",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_roformer_revive2.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "vocals",
@@ -604,19 +604,19 @@
           "model": "bs-roformer-leap-xe-instrumental",
           "model_name": "BS RoFormer Leap XE Instrumental",
           "specialty": "instrumental_target_checkpoint",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "bs_leap_xe_inst.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "other",
@@ -775,19 +775,19 @@
           "model": "gilliaan-drums-duality",
           "model_name": "BS RoFormer Drums Duality",
           "specialty": "drums_other_duality",
-          "ready": false,
+          "ready": true,
           "backends": [
             {
               "id": "audio_separator",
               "reference": "gilliaan_bsroformer_drums_v1.ckpt",
-              "state": "compatible_unvalidated",
-              "validated": false,
-              "smoke_validated": false,
+              "state": "validated",
+              "validated": true,
+              "smoke_validated": true,
               "installable": true,
               "install_mode": "artifacts",
-              "candidate": false,
-              "ready": false,
-              "stable": false,
+              "candidate": true,
+              "ready": true,
+              "stable": true,
               "outputs": [
                 {
                   "runtime_key": "drums",
@@ -7284,8 +7284,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "bs_leap_xe_inst.ckpt",
           "artifact_names": [
             "bs_leap_xe_inst.ckpt",
@@ -7618,8 +7618,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "gilliaan_bsroformer_drums_v1.ckpt",
           "artifact_names": [
             "gilliaan_bsroformer_drums_v1.ckpt",
@@ -11273,8 +11273,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "bs_roformer_revive2.ckpt",
           "artifact_names": [
             "bs_roformer_revive2.ckpt",
@@ -11331,8 +11331,8 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
-          "validated": false,
+          "state": "validated",
+          "validated": true,
           "model_filename": "bs_roformer_revive3e.ckpt",
           "artifact_names": [
             "bs_roformer_revive3e.ckpt",

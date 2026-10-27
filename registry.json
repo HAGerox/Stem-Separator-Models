@@ -7618,9 +7618,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_leap_xe_inst.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "other",
@@ -7636,7 +7636,22 @@
           "artifact_names": [
             "bs_leap_xe_inst.ckpt",
             "leap_xe_config_inst.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "aaba71ee40331f95d377582e357fd1ad762860d15d8ab2e00a55ed1242ad206c",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
         }
       },
       "benchmarks": [],
@@ -7674,9 +7689,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_roformer_revive3e.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "vocals",
@@ -7692,7 +7707,22 @@
           "artifact_names": [
             "bs_roformer_revive3e.ckpt",
             "config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "e3f0b6281b915b026e40b5c60f7e1330394bc26a1954e7024dec2e5960d18eb4",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
         }
       },
       "benchmarks": [],
@@ -7730,9 +7760,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "gilliaan_bsroformer_drums_v1.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "drums",
@@ -7748,7 +7778,22 @@
           "artifact_names": [
             "gilliaan_bsroformer_drums_v1.ckpt",
             "gilliaan_bsroformer_drums_v1.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "c4cde503a6893624047d29c8de0ab15efe7bebd9420abf8f07908396aba9b286",
+            "outputs": [
+              "drums",
+              "other"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
         }
       },
       "benchmarks": [],
@@ -7786,9 +7831,9 @@
       },
       "backends": {
         "audio_separator": {
-          "state": "compatible_unvalidated",
+          "state": "validated",
           "model_filename": "bs_roformer_revive2.ckpt",
-          "validated": false,
+          "validated": true,
           "outputs": [
             {
               "runtime_key": "vocals",
@@ -7804,7 +7849,22 @@
           "artifact_names": [
             "bs_roformer_revive2.ckpt",
             "config.yaml"
-          ]
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "e9f89066af0a810e25c8a808ed637f7db8d635ea9e5bf3654d70111a51a429cf",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
         }
       },
       "benchmarks": [
