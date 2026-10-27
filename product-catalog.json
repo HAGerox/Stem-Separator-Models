@@ -2,7 +2,7 @@
   "schema": 1,
   "policy": "stem-separator-v1",
   "registry_schema": 4,
-  "generated_at": "2026-10-13",
+  "generated_at": "2026-10-27",
   "promoted": [
     "vocals",
     "instrumental",
@@ -348,6 +348,86 @@
               "catalog_snapshot": "mvsepless-catalogue-2026-08-16"
             }
           ]
+        },
+        {
+          "model": "unwa-revive-3e",
+          "model_name": "BS RoFormer Revive 3e",
+          "specialty": "fullness",
+          "ready": false,
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_roformer_revive3e.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "vocals",
+                  "capability": "vocals",
+                  "label": "Vocals"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_roformer_revive3e.ckpt",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive3e.ckpt",
+                  "sha256": "1b0751b9a15c591407c3b77f08eb4ad3005e42e96051f3f2b39760f1130c467b"
+                },
+                {
+                  "name": "config.yaml",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+                  "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
+        },
+        {
+          "model": "unwa-revive-2",
+          "model_name": "BS RoFormer Revive 2",
+          "specialty": "bleed_control",
+          "ready": false,
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_roformer_revive2.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "vocals",
+                  "capability": "vocals",
+                  "label": "Vocals"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_roformer_revive2.ckpt",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive2.ckpt",
+                  "sha256": "58098850c882a7472dad39f99fb8040ce6eaafe671cfe9881d89aea276bbb5f5"
+                },
+                {
+                  "name": "config.yaml",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+                  "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -519,6 +599,46 @@
               "catalog_snapshot": "python-audio-separator-catalogue-2026-08-13"
             }
           ]
+        },
+        {
+          "model": "bs-roformer-leap-xe-instrumental",
+          "model_name": "BS RoFormer Leap XE Instrumental",
+          "specialty": "instrumental_target_checkpoint",
+          "ready": false,
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "bs_leap_xe_inst.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "other",
+                  "capability": "instrumental",
+                  "label": "Instrumental"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "bs_leap_xe_inst.ckpt",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_inst.ckpt",
+                  "sha256": "33ee9415f491d257fa7a79f6e92a80d647bc71ed622bfef9a137b6e4250307d3"
+                },
+                {
+                  "name": "leap_xe_config_inst.yaml",
+                  "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_inst.yaml",
+                  "sha256": "bc188276085e07840757e5117285ead7ec5631f94329c1c6f5f0aff385adea4d"
+                }
+              ],
+              "catalog_snapshot": null
+            }
+          ]
         }
       ]
     },
@@ -648,6 +768,46 @@
                 }
               ],
               "catalog_snapshot": "mvsepless-catalogue-2026-08-16"
+            }
+          ]
+        },
+        {
+          "model": "gilliaan-drums-duality",
+          "model_name": "BS RoFormer Drums Duality",
+          "specialty": "drums_other_duality",
+          "ready": false,
+          "backends": [
+            {
+              "id": "audio_separator",
+              "reference": "gilliaan_bsroformer_drums_v1.ckpt",
+              "state": "compatible_unvalidated",
+              "validated": false,
+              "smoke_validated": false,
+              "installable": true,
+              "install_mode": "artifacts",
+              "candidate": false,
+              "ready": false,
+              "stable": false,
+              "outputs": [
+                {
+                  "runtime_key": "drums",
+                  "capability": "drums",
+                  "label": "Drums"
+                }
+              ],
+              "artifacts": [
+                {
+                  "name": "gilliaan_bsroformer_drums_v1.ckpt",
+                  "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.ckpt",
+                  "sha256": "f60c4370257257301922dec9c6528cfab1b82b02d772ae0a0090cb566d4c4ca7"
+                },
+                {
+                  "name": "gilliaan_bsroformer_drums_v1.yaml",
+                  "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.yaml",
+                  "sha256": "c0bbf1861c2fe6e00ddbae66babd2534923a79e6e8670b59df961363f1ef964b"
+                }
+              ],
+              "catalog_snapshot": null
             }
           ]
         }
@@ -7100,6 +7260,64 @@
         }
       }
     },
+    "bs-roformer-leap-xe-instrumental": {
+      "name": "BS RoFormer Leap XE Instrumental",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Leap",
+        "revision": "4e47d6662ae82eaa8b4ac4329fe66099a843b48e",
+        "artifacts": [
+          {
+            "name": "bs_leap_xe_inst.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_inst.ckpt",
+            "sha256": "33ee9415f491d257fa7a79f6e92a80d647bc71ed622bfef9a137b6e4250307d3"
+          },
+          {
+            "name": "leap_xe_config_inst.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_inst.yaml",
+            "sha256": "bc188276085e07840757e5117285ead7ec5631f94329c1c6f5f0aff385adea4d"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "bs_leap_xe_inst.ckpt",
+          "artifact_names": [
+            "bs_leap_xe_inst.ckpt",
+            "leap_xe_config_inst.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            },
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_leap_xe_inst.ckpt",
+              "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_inst.ckpt",
+              "sha256": "33ee9415f491d257fa7a79f6e92a80d647bc71ed622bfef9a137b6e4250307d3"
+            },
+            {
+              "name": "leap_xe_config_inst.yaml",
+              "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_inst.yaml",
+              "sha256": "bc188276085e07840757e5117285ead7ec5631f94329c1c6f5f0aff385adea4d"
+            }
+          ]
+        }
+      }
+    },
     "bs-roformer-sw": {
       "name": "BS RoFormer SW 6-Stem",
       "architecture": "bs_roformer",
@@ -7371,6 +7589,64 @@
               "name": "gilliaan_melroformer_centerwide_v3.yaml",
               "url": "https://huggingface.co/gilliaan/CenterWide-Models/resolve/312004582fe983e45c6becb03e1bbdbece7f8902/MelbandRoformer/gilliaan_melroformer_centerwide_v3.yaml",
               "sha256": "ee0b250b567ee353903a182491c205e814db6625ce59dce83acc956240211efe"
+            }
+          ]
+        }
+      }
+    },
+    "gilliaan-drums-duality": {
+      "name": "BS RoFormer Drums Duality",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "availability": {
+        "state": "public_weights",
+        "license": "CC-BY-NC-SA-4.0",
+        "repository": "https://huggingface.co/gilliaan/Stem-Separation-Models",
+        "revision": "62fe7d8e363e7285d1d24aaaab87351ebc566bae",
+        "artifacts": [
+          {
+            "name": "gilliaan_bsroformer_drums_v1.ckpt",
+            "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.ckpt",
+            "sha256": "f60c4370257257301922dec9c6528cfab1b82b02d772ae0a0090cb566d4c4ca7"
+          },
+          {
+            "name": "gilliaan_bsroformer_drums_v1.yaml",
+            "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.yaml",
+            "sha256": "c0bbf1861c2fe6e00ddbae66babd2534923a79e6e8670b59df961363f1ef964b"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "gilliaan_bsroformer_drums_v1.ckpt",
+          "artifact_names": [
+            "gilliaan_bsroformer_drums_v1.ckpt",
+            "gilliaan_bsroformer_drums_v1.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "drums",
+              "capability": "drums",
+              "label": "Drums"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other (without drums)"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "gilliaan_bsroformer_drums_v1.ckpt",
+              "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.ckpt",
+              "sha256": "f60c4370257257301922dec9c6528cfab1b82b02d772ae0a0090cb566d4c4ca7"
+            },
+            {
+              "name": "gilliaan_bsroformer_drums_v1.yaml",
+              "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.yaml",
+              "sha256": "c0bbf1861c2fe6e00ddbae66babd2534923a79e6e8670b59df961363f1ef964b"
             }
           ]
         }
@@ -10968,6 +11244,122 @@
               "name": "mbr_bigbeta7_unwa_config.yaml",
               "url": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/8e2b6945d510001642bb18bb1d209f661fc5b7b0/mel_band_roformer/mbr_bigbeta7_unwa_config.yaml",
               "sha256": "07bf6f3307de21f79f60c6991eb32a4592ef9a23a4bb8a6cb30f60c581590c59"
+            }
+          ]
+        }
+      }
+    },
+    "unwa-revive-2": {
+      "name": "BS RoFormer Revive 2",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Revive",
+        "revision": "3f912884cdf9cbe8549297ce465f86a38572236c",
+        "artifacts": [
+          {
+            "name": "bs_roformer_revive2.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive2.ckpt",
+            "sha256": "58098850c882a7472dad39f99fb8040ce6eaafe671cfe9881d89aea276bbb5f5"
+          },
+          {
+            "name": "config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+            "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "bs_roformer_revive2.ckpt",
+          "artifact_names": [
+            "bs_roformer_revive2.ckpt",
+            "config.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_roformer_revive2.ckpt",
+              "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive2.ckpt",
+              "sha256": "58098850c882a7472dad39f99fb8040ce6eaafe671cfe9881d89aea276bbb5f5"
+            },
+            {
+              "name": "config.yaml",
+              "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+              "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+            }
+          ]
+        }
+      }
+    },
+    "unwa-revive-3e": {
+      "name": "BS RoFormer Revive 3e",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Revive",
+        "revision": "3f912884cdf9cbe8549297ce465f86a38572236c",
+        "artifacts": [
+          {
+            "name": "bs_roformer_revive3e.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive3e.ckpt",
+            "sha256": "1b0751b9a15c591407c3b77f08eb4ad3005e42e96051f3f2b39760f1130c467b"
+          },
+          {
+            "name": "config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+            "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "compatible_unvalidated",
+          "validated": false,
+          "model_filename": "bs_roformer_revive3e.ckpt",
+          "artifact_names": [
+            "bs_roformer_revive3e.ckpt",
+            "config.yaml"
+          ],
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifacts": [
+            {
+              "name": "bs_roformer_revive3e.ckpt",
+              "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive3e.ckpt",
+              "sha256": "1b0751b9a15c591407c3b77f08eb4ad3005e42e96051f3f2b39760f1130c467b"
+            },
+            {
+              "name": "config.yaml",
+              "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+              "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
             }
           ]
         }

@@ -1,0 +1,825 @@
+{
+  "reviewed_at": "2026-10-27",
+  "coverage": "All 91 submissions visible in the MVSep queue dated October 5–27 at fetch time; deleted or non-visible submissions cannot be enumerated.",
+  "candidates": [
+    {
+      "id": 10989,
+      "date": "2026-10-27 09:32:43",
+      "name": "SW + htdemucs_ft avg on instrumental (bass)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10989",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10988,
+      "date": "2026-10-27 09:27:26",
+      "name": "BS-RoFormer SW on instrumental (bass)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10988",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10987,
+      "date": "2026-10-27 08:23:45",
+      "name": "tf-gonza",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10987",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10982,
+      "date": "2026-10-26 08:34:30",
+      "name": "scnet rope",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10982",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10981,
+      "date": "2026-10-26 08:11:10",
+      "name": "scnet rope",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10981",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10980,
+      "date": "2026-10-26 08:04:06",
+      "name": "tf-becruily",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10980",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10979,
+      "date": "2026-10-26 08:03:24",
+      "name": "tf-gabox1",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10979",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10978,
+      "date": "2026-10-26 08:02:49",
+      "name": "tf-viperx",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10978",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10977,
+      "date": "2026-10-26 08:02:10",
+      "name": "tf-gabox",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10977",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10976,
+      "date": "2026-10-26 08:01:34",
+      "name": "tf-frazer",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10976",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10975,
+      "date": "2026-10-26 07:52:02",
+      "name": "scnet rope",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10975",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10974,
+      "date": "2026-10-26 07:50:38",
+      "name": "tf-anvuew",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10974",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10973,
+      "date": "2026-10-26 05:44:37",
+      "name": "test_guitar_1026",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10973",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10972,
+      "date": "2026-10-26 05:32:41",
+      "name": "MLSLABS WCJ V2",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10972",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10970,
+      "date": "2026-10-26 04:01:21",
+      "name": "gilliaan_bsroformer_centerwide_v4",
+      "suite": "Phantom Center",
+      "source": "https://mvsep.com/quality_checker/entry/10970",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10966,
+      "date": "2026-10-24 20:57:32",
+      "name": "six model ensemble reimagined - ugamii",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10966",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10964,
+      "date": "2026-10-24 11:09:28",
+      "name": "Kim Vocal 1 repro (5 tracks)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10964",
+      "decision": "rejected_failed_submission",
+      "reason": "Benchmark submission failed; no valid result to admit."
+    },
+    {
+      "id": 10963,
+      "date": "2026-10-24 01:36:55",
+      "name": "repro:kim vocal1 multisong",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10963",
+      "decision": "rejected_failed_submission",
+      "reason": "Benchmark submission failed; no valid result to admit."
+    },
+    {
+      "id": 10962,
+      "date": "2026-10-24 00:26:40",
+      "name": "aka k-r-ok-",
+      "suite": "Medley Vox",
+      "source": "https://mvsep.com/quality_checker/entry/10962",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10961,
+      "date": "2026-10-23 18:56:29",
+      "name": "six model ensemble - ugamii",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10961",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10958,
+      "date": "2026-10-23 05:05:42",
+      "name": "tf-yingmusic-3-stem",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10958",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10953,
+      "date": "2026-10-22 13:37:01",
+      "name": "Five model ensemble v2 - ugamii",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10953",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10952,
+      "date": "2026-10-22 12:04:37",
+      "name": "`\\play,_perform,_&_enjoy`\\",
+      "suite": "Synth",
+      "source": "https://mvsep.com/quality_checker/entry/10952",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10947,
+      "date": "2026-10-21 19:37:38",
+      "name": "Four model ensemble v2 - ugamii",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10947",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10946,
+      "date": "2026-10-21 08:41:49",
+      "name": "Five model ensemble - ugamii",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10946",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10940,
+      "date": "2026-10-19 08:57:06",
+      "name": "karaoke gabox",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10940",
+      "decision": "not_admitted_public_weights_unverified",
+      "reason": "Hosted/gatekept karaoke model; no verified public immutable checkpoint/configuration pair located."
+    },
+    {
+      "id": 10939,
+      "date": "2026-10-19 05:41:37",
+      "name": "scnet1019",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10939",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10938,
+      "date": "2026-10-19 05:37:34",
+      "name": "scnet1019",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10938",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10937,
+      "date": "2026-10-19 05:35:21",
+      "name": "scnet1019",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10937",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10935,
+      "date": "2026-10-19 01:27:51",
+      "name": "test",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10935",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10934,
+      "date": "2026-10-18 15:25:47",
+      "name": "Four vocal models baseline - ugamii",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10934",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10932,
+      "date": "2026-10-16 23:58:39",
+      "name": "ai beat restructurer when? (for already existing songs)",
+      "suite": "Synth",
+      "source": "https://mvsep.com/quality_checker/entry/10932",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10931,
+      "date": "2026-10-16 20:23:37",
+      "name": "MuVR v4 (Tangepon)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10931",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10930,
+      "date": "2026-10-16 18:35:29",
+      "name": "BS-Roformer Revive2 (local port) / local-port-check",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10930",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10926,
+      "date": "2026-10-15 21:08:48",
+      "name": "Vocal BS-RoFormer + BS-RoFormer drums + HT-Demucs FT (per-stem ensemble)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10926",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10925,
+      "date": "2026-10-15 21:05:10",
+      "name": "Vocal BS-RoFormer + BS-RoFormer drums + HT-Demucs FT (per-stem ensemble)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10925",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10924,
+      "date": "2026-10-15 21:02:06",
+      "name": "Vocal BS-RoFormer + BS-RoFormer drums + HT-Demucs FT (per-stem ensemble)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10924",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10923,
+      "date": "2026-10-15 21:00:26",
+      "name": "Vocal BS-RoFormer + BS-RoFormer drums + HT-Demucs FT (per-stem ensemble)",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10923",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10922,
+      "date": "2026-10-15 20:57:25",
+      "name": "Vocal BS-RoFormer + BS-RoFormer drums + HT-Demucs FT (per-stem ensemble).",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10922",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10921,
+      "date": "2026-10-15 20:39:43",
+      "name": "roformer supersmall",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10921",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10920,
+      "date": "2026-10-15 10:16:33",
+      "name": "BS 6stems",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10920",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10919,
+      "date": "2026-10-15 10:15:26",
+      "name": "BS 6stems piano",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10919",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10918,
+      "date": "2026-10-15 10:04:32",
+      "name": "BS 6stems guitar",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10918",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10915,
+      "date": "2026-10-15 06:41:46",
+      "name": "test_vocals_1015",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10915",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10914,
+      "date": "2026-10-15 02:39:39",
+      "name": "scnetXXL+ TURBOHYPERFIGHTINGSUPERULTRADELUXE++",
+      "suite": "Synth",
+      "source": "https://mvsep.com/quality_checker/entry/10914",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10913,
+      "date": "2026-10-15 01:33:28",
+      "name": "MLSLABS WCJ V2",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10913",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10906,
+      "date": "2026-10-14 01:10:17",
+      "name": "Stereoize",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10906",
+      "decision": "excluded_non_separation",
+      "reason": "Stereoization or super-resolution; outside the separation registry scope."
+    },
+    {
+      "id": 10904,
+      "date": "2026-10-13 23:22:08",
+      "name": "S Test v2",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10904",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10902,
+      "date": "2026-10-13 21:14:22",
+      "name": "gtr_eval_c",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10902",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10901,
+      "date": "2026-10-13 20:58:54",
+      "name": "gtr_eval_b",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10901",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10900,
+      "date": "2026-10-13 20:43:13",
+      "name": "gtr_eval_a",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10900",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10899,
+      "date": "2026-10-13 12:52:31",
+      "name": "StereoNet",
+      "suite": "Phantom Center",
+      "source": "https://mvsep.com/quality_checker/entry/10899",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10898,
+      "date": "2026-10-13 09:43:23",
+      "name": "Run A6EE40",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10898",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10895,
+      "date": "2026-10-12 20:42:05",
+      "name": "STEMS bench · htdemucs_v4 · bass · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10895",
+      "decision": "reviewed_existing_family",
+      "reason": "Existing Demucs family benchmark, not a new model release; submission does not identify an immutable checkpoint hash and complete inference protocol."
+    },
+    {
+      "id": 10894,
+      "date": "2026-10-12 20:37:01",
+      "name": "STEMS bench · htdemucs_v4 · other · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10894",
+      "decision": "reviewed_existing_family",
+      "reason": "Existing Demucs family benchmark, not a new model release; submission does not identify an immutable checkpoint hash and complete inference protocol."
+    },
+    {
+      "id": 10892,
+      "date": "2026-10-12 20:26:55",
+      "name": "STEMS bench · htdemucs_v4 · drums · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10892",
+      "decision": "reviewed_existing_family",
+      "reason": "Existing Demucs family benchmark, not a new model release; submission does not identify an immutable checkpoint hash and complete inference protocol."
+    },
+    {
+      "id": 10889,
+      "date": "2026-10-12 20:03:09",
+      "name": "Ensemble of 5 Karaoke Models (2026.10)",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10889",
+      "decision": "reviewed_pipeline",
+      "reason": "Ensemble or preprocessing pipeline, not evidence for an individual unchanged checkpoint."
+    },
+    {
+      "id": 10888,
+      "date": "2026-10-12 19:58:05",
+      "name": "STEMS bench · htdemucs_ft · drums · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10888",
+      "decision": "reviewed_existing_family",
+      "reason": "Existing Demucs family benchmark, not a new model release; submission does not identify an immutable checkpoint hash and complete inference protocol."
+    },
+    {
+      "id": 10887,
+      "date": "2026-10-12 18:18:01",
+      "name": "STEMS bench · scnet_xl_ihf_msst · other · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10887",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10886,
+      "date": "2026-10-12 18:08:59",
+      "name": "STEMS bench · scnet_xl_ihf_msst · bass · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10886",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10885,
+      "date": "2026-10-12 18:02:55",
+      "name": "STEMS bench · scnet_xl_ihf_msst · drums · 2026-10-12",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10885",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10882,
+      "date": "2026-10-12 07:35:11",
+      "name": "test1012",
+      "suite": "DNR v3 Test",
+      "source": "https://mvsep.com/quality_checker/entry/10882",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10878,
+      "date": "2026-10-11 09:30:45",
+      "name": "V8 U1200 DJPIPW FT",
+      "suite": "Synth Vocals 2026",
+      "source": "https://mvsep.com/quality_checker/entry/10878",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10877,
+      "date": "2026-10-11 08:50:57",
+      "name": "DJPIPW Becruily FT",
+      "suite": "Synth Vocals 2026",
+      "source": "https://mvsep.com/quality_checker/entry/10877",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10876,
+      "date": "2026-10-11 07:21:49",
+      "name": "MVSep Lead/Back BS Roformer 124 bands (2026.10) Overlap: 8",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10876",
+      "decision": "not_admitted_public_weights_unverified",
+      "reason": "Hosted/gatekept karaoke model; no verified public immutable checkpoint/configuration pair located."
+    },
+    {
+      "id": 10875,
+      "date": "2026-10-10 23:14:00",
+      "name": "MVSep Lead/Back BS Roformer 124 bands (2026.10)",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10875",
+      "decision": "not_admitted_public_weights_unverified",
+      "reason": "Hosted/gatekept karaoke model; no verified public immutable checkpoint/configuration pair located."
+    },
+    {
+      "id": 10874,
+      "date": "2026-10-10 09:28:00",
+      "name": "scent-prune",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10874",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10873,
+      "date": "2026-10-10 07:11:30",
+      "name": "MLSLABS WCJ",
+      "suite": "Wind",
+      "source": "https://mvsep.com/quality_checker/entry/10873",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10872,
+      "date": "2026-10-10 03:44:43",
+      "name": "scnet-prune",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10872",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10871,
+      "date": "2026-10-10 02:38:18",
+      "name": "scnet-prune",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10871",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10866,
+      "date": "2026-10-09 04:21:37",
+      "name": "Mel-Band Roformer splatv4",
+      "suite": "Synth",
+      "source": "https://mvsep.com/quality_checker/entry/10866",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10858,
+      "date": "2026-10-08 05:58:24",
+      "name": "bass",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10858",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10857,
+      "date": "2026-10-08 03:02:17",
+      "name": "scent6c-18",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10857",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10856,
+      "date": "2026-10-08 02:42:21",
+      "name": "scent6c-18",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10856",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10855,
+      "date": "2026-10-08 02:39:14",
+      "name": "scent6c-18",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10855",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10853,
+      "date": "2026-10-08 02:14:21",
+      "name": "scent6c",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10853",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10851,
+      "date": "2026-10-08 01:37:39",
+      "name": "scent6c",
+      "suite": "Piano",
+      "source": "https://mvsep.com/quality_checker/entry/10851",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10850,
+      "date": "2026-10-08 01:23:45",
+      "name": "scent6c",
+      "suite": "Guitar",
+      "source": "https://mvsep.com/quality_checker/entry/10850",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10848,
+      "date": "2026-10-07 13:14:16",
+      "name": "gilliaan mbrofo karaoke V1",
+      "suite": "Lead/Back Vocals",
+      "source": "https://mvsep.com/quality_checker/entry/10848",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10847,
+      "date": "2026-10-07 13:09:22",
+      "name": "BS-RoFormer SW (6 stems), fp16, overlap 2",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10847",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10846,
+      "date": "2026-10-07 12:38:10",
+      "name": "BS-Roformer Leap Xe by unwa (vocals), overlap 2",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10846",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10845,
+      "date": "2026-10-07 11:47:58",
+      "name": "BS-RoFormer ft1 by anvuew (vocals, sdr 12.55), overlap 4",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10845",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10842,
+      "date": "2026-10-06 23:45:54",
+      "name": "STEMS bench · scnet_xl_ihf_msst · 2026-10-06",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10842",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10841,
+      "date": "2026-10-06 23:10:01",
+      "name": "STEMS bench · bs_polarformer_msst · 2026-10-06",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10841",
+      "decision": "excluded_unsupported_or_unidentified_architecture",
+      "reason": "SCNet, PolarFormer, or causal BSRNN submission; no executable contract in the pinned runtime. Anonymous variants also lack exact artifact identity."
+    },
+    {
+      "id": 10840,
+      "date": "2026-10-06 22:49:47",
+      "name": "STEMS bench · melroformer_duality_aname · 2026-10-04",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10840",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10838,
+      "date": "2026-10-06 22:33:39",
+      "name": "STEMS bench · bsroformer_viperx_1297 · 2026-10-04",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10838",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10837,
+      "date": "2026-10-06 22:24:25",
+      "name": "STEMS bench · melroformer_kim · 2026-10-04",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10837",
+      "decision": "evidence_recorded",
+      "reason": "Identifiable public checkpoint; exact displayed metrics retained in a separate source-specific benchmark suite."
+    },
+    {
+      "id": 10833,
+      "date": "2026-10-06 07:34:01",
+      "name": "test_vocals_20261006",
+      "suite": "Multi",
+      "source": "https://mvsep.com/quality_checker/entry/10833",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10825,
+      "date": "2026-10-05 14:35:58",
+      "name": "BS Roformer DrumSep (small by jarredou)",
+      "suite": "Drums Separation (5 stems)",
+      "source": "https://mvsep.com/quality_checker/entry/10825",
+      "decision": "not_admitted_artifact_identity_unresolved",
+      "reason": "No exact public immutable checkpoint and matching configuration established from the submission, configured catalogues, original author repositories, or targeted searches."
+    },
+    {
+      "id": 10823,
+      "date": "2026-10-05 09:05:45",
+      "name": "UniverSR (Speech model)",
+      "suite": "Super Resolution Checker for Music",
+      "source": "https://mvsep.com/quality_checker/entry/10823",
+      "decision": "excluded_non_separation",
+      "reason": "Stereoization or super-resolution; outside the separation registry scope."
+    },
+    {
+      "id": 10822,
+      "date": "2026-10-05 08:59:01",
+      "name": "UniverSR (General audio model)",
+      "suite": "Super Resolution Checker for Music",
+      "source": "https://mvsep.com/quality_checker/entry/10822",
+      "decision": "excluded_non_separation",
+      "reason": "Stereoization or super-resolution; outside the separation registry scope."
+    }
+  ]
+}
