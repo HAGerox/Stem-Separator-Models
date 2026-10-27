@@ -38,6 +38,7 @@ from smoke_policy import (
     TRUSTED_ARTIFACT_ORIGINS,
     WEIGHT_SUFFIXES,
     contract_sha256,
+    safe_artifact_filename,
     smoke_evidence_errors,
 )
 
@@ -66,13 +67,25 @@ def sha256_file(path: Path) -> str:
 
 
 def trusted_artifact_url(value: str, *, delivery: bool = False) -> bool:
-    parsed = urlparse(value)
+    try:
+        parsed = urlparse(value)
+        port = parsed.port
+    except ValueError:
+        return False
     host = (parsed.hostname or "").lower()
-    if parsed.scheme != "https" or parsed.username or parsed.password:
+    if parsed.scheme != "https" or parsed.username or parsed.password or port not in (None, 443):
         return False
     if host in TRUSTED_ARTIFACT_ORIGINS:
         return True
     return delivery and any(host.endswith(suffix) for suffix in TRUSTED_ARTIFACT_DELIVERY_SUFFIXES)
+
+
+class ArtifactRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        # Check before urllib contacts the redirect target, including every hop.
+        if not trusted_artifact_url(newurl, delivery=True):
+            raise RuntimeError("Untrusted artifact redirect URL")
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
 def rich_fixture(path: Path, duration_seconds: float = 6.0) -> int:
@@ -119,24 +132,40 @@ def rich_fixture(path: Path, duration_seconds: float = 6.0) -> int:
 
 def download_verified(artifact: dict[str, Any], cache_root: Path) -> Path:
     digest = artifact["sha256"]
+    if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise RuntimeError("Invalid artifact SHA-256")
+    if not safe_artifact_filename(artifact.get("name")):
+        raise RuntimeError("Unsafe artifact filename")
+    cache_root = cache_root.resolve()
     with _DOWNLOAD_LOCKS_GUARD:
         lock = _DOWNLOAD_LOCKS.setdefault(digest, threading.Lock())
     with lock:
         cached = cache_root / digest / artifact["name"]
+        partial = cached.with_suffix(cached.suffix + ".part")
+        if any(path.is_symlink() for path in (cached.parent, cached, partial)):
+            raise RuntimeError("Artifact cache must not contain symlinks")
+        if not cached.resolve().is_relative_to(cache_root):
+            raise RuntimeError("Artifact path escapes the cache")
         if cached.is_file() and sha256_file(cached) == digest:
             return cached
         cached.parent.mkdir(parents=True, exist_ok=True)
-        partial = cached.with_suffix(cached.suffix + ".part")
         partial.unlink(missing_ok=True)
         if not trusted_artifact_url(artifact["url"]):
             raise RuntimeError(f"Untrusted artifact origin for {artifact['name']}")
         request = urllib.request.Request(
             artifact["url"], headers={"User-Agent": "stem-separator-smoke/1"}
         )
-        with urllib.request.urlopen(request, timeout=120) as response, partial.open("wb") as output:
+        opener = urllib.request.build_opener(ArtifactRedirectHandler())
+        with opener.open(request, timeout=120) as response, partial.open("xb") as output:
             if not trusted_artifact_url(response.geturl(), delivery=True):
                 raise RuntimeError(f"Untrusted artifact delivery URL for {artifact['name']}")
-            shutil.copyfileobj(response, output, length=1024 * 1024)
+            limit = 1024 * 1024 if Path(artifact["name"]).suffix.lower() in CONFIG_SUFFIXES else 8 * 1024**3
+            size = 0
+            while chunk := response.read(1024 * 1024):
+                size += len(chunk)
+                if size > limit:
+                    raise RuntimeError("Artifact exceeds its download size limit")
+                output.write(chunk)
         actual = sha256_file(partial)
         if actual != digest:
             partial.unlink(missing_ok=True)
@@ -169,6 +198,8 @@ def stage_model(
     if len(weights) != 1 or len(configs) != 1:
         raise RuntimeError("Smoke admission requires exactly one checkpoint and one YAML config")
     model_filename = backend["model_filename"]
+    if not safe_artifact_filename(model_filename):
+        raise RuntimeError("Unsafe runtime model filename")
     runtime_config = f"{Path(model_filename).stem}.yaml"
     staged = {
         model_filename: download_verified(weights[0], cache_root),
