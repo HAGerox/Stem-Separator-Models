@@ -1914,7 +1914,7 @@
     {
       "id": "bs-roformer-sw",
       "name": "BS RoFormer SW 6-Stem",
-      "author": "ZFTurbo / Jarredou",
+      "author": "Unknown",
       "architecture": "bs_roformer",
       "status": "current",
       "tasks": [
@@ -2048,7 +2048,8 @@
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "https://github.com/openmirlab/bs-roformer-infer/issues/3#issuecomment-5986741133"
       ],
       "decompositions": {
         "general_music_6": {
