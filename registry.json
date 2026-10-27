@@ -1,6 +1,6 @@
 {
   "schema": 4,
-  "generated_at": "2026-10-13",
+  "generated_at": "2026-10-27",
   "baseline": false,
   "scope": {
     "execution": "local_only",
@@ -92,6 +92,99 @@
       "source": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/030a01aa951b3908ed6b01b2e507c17953300c2d/models.json",
       "fetched_at": "2026-10-05",
       "sha256": "103d6d9757faedf1828cfc87eff7f6fc868bcb892224684324661fd430603525"
+    },
+    "deton24-google-doc-2026-10-27": {
+      "source": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+      "fetched_at": "2026-10-27",
+      "sha256": "266e07928a332094384856ec375452b80b1b09eabd303d0bb14e57c39960926b",
+      "tiers": {
+        "qualitative": "tier_2",
+        "measured": "tier_2"
+      }
+    },
+    "mvsep-quality-checker-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/",
+      "fetched_at": "2026-10-27",
+      "sha256": "d9eb72a6932bdfe0707e3a97c094e5c387f665445cb6351d3bbaecd5141c8efb",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsepless-catalogue-2026-10-27": {
+      "source": "https://huggingface.co/noblebarkrr/mvsepless_resources/resolve/283025218e6447db47da1ad18df3c2f67ca8d66d/models.json",
+      "fetched_at": "2026-10-27",
+      "sha256": "ddcb888439c9372ce117111829f18d8623a9062dec3c79b3493103c007d78833"
+    },
+    "pymss-catalogue-2026-10-27": {
+      "source": "https://raw.githubusercontent.com/pymss-project/pymss/1b6d735ce2c096329ee0aa453144bf1fb6412fcb/pymss/resources/model_catalog.json",
+      "fetched_at": "2026-10-27",
+      "sha256": "74799d4a817bcadabfd996edcfd48ce59b113dee6a7e027118f8333b4e4bea49"
+    },
+    "python-audio-separator-catalogue-2026-10-27": {
+      "source": "https://raw.githubusercontent.com/nomadkaraoke/python-audio-separator/af25ca81cd10b02972ce6533b637f1857941c313/audio_separator/models-scores.json",
+      "fetched_at": "2026-10-27",
+      "sha256": "aa33a06cb8a583ee053a73bf47065690817fde6cd2c83c57b6f9f543da0dcc2a"
+    },
+    "zfturbo-releases-2026-10-27": {
+      "source": "https://api.github.com/repos/ZFTurbo/Music-Source-Separation-Training/releases",
+      "fetched_at": "2026-10-27",
+      "sha256": "a4362185f38b41cc3765aa59d4639f11d923f90e2286e2a97caa435b3fe71cba"
+    },
+    "mvsep-entry-10846-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10846",
+      "fetched_at": "2026-10-27",
+      "sha256": "ad4057e001fc6dd89a0a1bd13b54369a5e216417930ce050af646a57ee72f622",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsep-entry-10845-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10845",
+      "fetched_at": "2026-10-27",
+      "sha256": "4106fdc7e024ce084d6af983d03e928d16bda347ca9fb02e857bdf53c24d9e22",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsep-entry-10848-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10848",
+      "fetched_at": "2026-10-27",
+      "sha256": "a4d20388e3677c4fe0d57d0cb26e499325b12dc5dbf8ec88f2455edb4230274b",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsep-entry-10930-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10930",
+      "fetched_at": "2026-10-27",
+      "sha256": "008a1facdd4b763a5b2df7ba075472e7c2c46ba9e95bcd8e61e0d37eadffc7b3",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsep-entry-10847-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10847",
+      "fetched_at": "2026-10-27",
+      "sha256": "38041878ba9bd349dabb997bdd407d08dabce5ef7c5ce59d0c6c03a37aedfacb",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsep-entry-10838-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10838",
+      "fetched_at": "2026-10-27",
+      "sha256": "8dd24f57847c7e9fbd2dd5dd874be5249bc75bea1a8c1817b5a56424bce6d43b",
+      "tiers": {
+        "measured": "tier_1"
+      }
+    },
+    "mvsep-entry-10837-2026-10-27": {
+      "source": "https://mvsep.com/quality_checker/entry/10837",
+      "fetched_at": "2026-10-27",
+      "sha256": "ff33a0d7f219b349c5e9d866662a9fecfd983e7fe660fb96dbc28a0ba830479b",
+      "tiers": {
+        "measured": "tier_1"
+      }
     }
   },
   "evidence_policy": {},
@@ -276,6 +369,54 @@
       "version": 1,
       "standardized": false,
       "source": "https://mvsep.com/quality_checker/entry/10679"
+    },
+    "mvsep-multisong-leap-xe-voc-fp32-overlap2-v1": {
+      "name": "MVSep submission 10846 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10846",
+      "dataset": "https://mvsep.com/storage/public/multisong_dataset.zip"
+    },
+    "mvsep-multisong-anvuew-ft1-fp32-overlap4-v1": {
+      "name": "MVSep submission 10845 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10845",
+      "dataset": "https://mvsep.com/storage/public/multisong_dataset.zip"
+    },
+    "mvsep-karaoke-gilliaan-v1-config-unreported-v1": {
+      "name": "MVSep submission 10848 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10848"
+    },
+    "mvsep-submission-10930-v1": {
+      "name": "MVSep submission 10930 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10930",
+      "dataset": "https://mvsep.com/storage/public/multisong_dataset.zip"
+    },
+    "mvsep-submission-10847-v1": {
+      "name": "MVSep submission 10847 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10847",
+      "dataset": "https://mvsep.com/storage/public/multisong_dataset.zip"
+    },
+    "mvsep-submission-10838-v1": {
+      "name": "MVSep submission 10838 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10838",
+      "dataset": "https://mvsep.com/storage/public/multisong_dataset.zip"
+    },
+    "mvsep-submission-10837-v1": {
+      "name": "MVSep submission 10837 (source-specific protocol)",
+      "version": 1,
+      "standardized": false,
+      "source": "https://mvsep.com/quality_checker/entry/10837",
+      "dataset": "https://mvsep.com/storage/public/multisong_dataset.zip"
     }
   },
   "models": [
@@ -531,11 +672,60 @@
           },
           "source": "https://mvsep.com/quality_checker/entry/10178",
           "config": {}
+        },
+        {
+          "suite": "mvsep-multisong-leap-xe-voc-fp32-overlap2-v1",
+          "stem": "instrumental",
+          "values": {
+            "sdr_db": 18.0995,
+            "si_sdr_db": 18.0127,
+            "l1_freq": 40.9321,
+            "log_wmse": 14.7943,
+            "aura_stft": 13.1443,
+            "aura_mrstft": 17.3313,
+            "mvsep_bleedless": 45.8545,
+            "mvsep_fullness": 29.5615
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10846",
+          "config": {
+            "chunk_size": 881559,
+            "overlap": 2,
+            "batch_size": 2,
+            "precision": "fp32",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "instrumental": "mixture - vocals"
+          }
+        },
+        {
+          "suite": "mvsep-multisong-leap-xe-voc-fp32-overlap2-v1",
+          "stem": "vocals",
+          "values": {
+            "sdr_db": 11.792,
+            "si_sdr_db": 11.4287,
+            "l1_freq": 40.0752,
+            "log_wmse": 14.7943,
+            "aura_stft": 9.787,
+            "aura_mrstft": 11.9439,
+            "mvsep_bleedless": 38.0739,
+            "mvsep_fullness": 18.144
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10846",
+          "config": {
+            "chunk_size": 881559,
+            "overlap": 2,
+            "batch_size": 2,
+            "precision": "fp32",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "instrumental": "mixture - vocals"
+          }
         }
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/pcunwa/BS-Roformer-Leap"
+        "https://huggingface.co/pcunwa/BS-Roformer-Leap",
+        "https://mvsep.com/quality_checker/entry/10846"
       ],
       "released_at": "2026-06-30"
     },
@@ -1160,11 +1350,33 @@
           },
           "source": "https://github.com/nomadkaraoke/python-audio-separator",
           "config": {}
+        },
+        {
+          "suite": "mvsep-submission-10838-v1",
+          "stem": "vocals",
+          "values": {
+            "sdr_db": 10.8899,
+            "si_sdr_db": 10.3885,
+            "l1_freq": 38.1816,
+            "log_wmse": 13.9656,
+            "aura_stft": 7.7776,
+            "aura_mrstft": 9.604,
+            "mvsep_bleedless": 35.972,
+            "mvsep_fullness": 15.3814
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10838",
+          "config": {
+            "runtime": "MSST",
+            "hardware": "Kaggle T4",
+            "submission_scope": "vocals only",
+            "checkpoint": "BS-RoFormer viperx ep_317"
+          }
         }
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "https://mvsep.com/quality_checker/entry/10838"
       ]
     },
     {
@@ -1344,11 +1556,33 @@
           },
           "source": "https://github.com/nomadkaraoke/python-audio-separator",
           "config": {}
+        },
+        {
+          "suite": "mvsep-submission-10837-v1",
+          "stem": "vocals",
+          "values": {
+            "sdr_db": 10.977,
+            "si_sdr_db": 10.533,
+            "l1_freq": 38.9114,
+            "log_wmse": 14.0849,
+            "aura_stft": 8.5348,
+            "aura_mrstft": 10.1229,
+            "mvsep_bleedless": 36.7733,
+            "mvsep_fullness": 16.2472
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10837",
+          "config": {
+            "runtime": "MSST",
+            "hardware": "Kaggle T4",
+            "submission_scope": "vocals only",
+            "checkpoint": "Mel-RoFormer vocals (Kimberley Jensen)"
+          }
         }
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/KimberleyJSN/melbandroformer"
+        "https://huggingface.co/KimberleyJSN/melbandroformer",
+        "https://mvsep.com/quality_checker/entry/10837"
       ]
     },
     {
@@ -1914,7 +2148,7 @@
     {
       "id": "bs-roformer-sw",
       "name": "BS RoFormer SW 6-Stem",
-      "author": "ZFTurbo / Jarredou",
+      "author": "Unknown",
       "architecture": "bs_roformer",
       "status": "current",
       "tasks": [
@@ -2044,11 +2278,138 @@
           },
           "source": "https://mvsep.com/quality_checker/entry/9576",
           "config": {}
+        },
+        {
+          "suite": "mvsep-submission-10847-v1",
+          "stem": "instrumental",
+          "values": {
+            "sdr_db": 17.574,
+            "si_sdr_db": 17.4792,
+            "l1_freq": 39.6125,
+            "log_wmse": 14.2863,
+            "aura_stft": 12.7597,
+            "aura_mrstft": 15.9035,
+            "mvsep_bleedless": 47.974,
+            "mvsep_fullness": 26.6393
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10847",
+          "config": {
+            "chunk_size": 588800,
+            "overlap": 2,
+            "batch_size": 1,
+            "precision": "fp16 autocast",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "other": "guitar + piano + other",
+            "instrumental": "mixture - vocals"
+          }
+        },
+        {
+          "suite": "mvsep-submission-10847-v1",
+          "stem": "vocals",
+          "values": {
+            "sdr_db": 11.2666,
+            "si_sdr_db": 10.8347,
+            "l1_freq": 38.9049,
+            "log_wmse": 14.2863,
+            "aura_stft": 8.7066,
+            "aura_mrstft": 10.4562,
+            "mvsep_bleedless": 37.8359,
+            "mvsep_fullness": 15.9982
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10847",
+          "config": {
+            "chunk_size": 588800,
+            "overlap": 2,
+            "batch_size": 1,
+            "precision": "fp16 autocast",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "other": "guitar + piano + other",
+            "instrumental": "mixture - vocals"
+          }
+        },
+        {
+          "suite": "mvsep-submission-10847-v1",
+          "stem": "bass",
+          "values": {
+            "sdr_db": 14.5643,
+            "si_sdr_db": 14.2251,
+            "l1_freq": 59.9587,
+            "log_wmse": 18.8707,
+            "aura_stft": 5.7128,
+            "aura_mrstft": 4.7641,
+            "mvsep_bleedless": 36.4676,
+            "mvsep_fullness": 20.537
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10847",
+          "config": {
+            "chunk_size": 588800,
+            "overlap": 2,
+            "batch_size": 1,
+            "precision": "fp16 autocast",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "other": "guitar + piano + other",
+            "instrumental": "mixture - vocals"
+          }
+        },
+        {
+          "suite": "mvsep-submission-10847-v1",
+          "stem": "drums",
+          "values": {
+            "sdr_db": 14.0422,
+            "si_sdr_db": 13.6087,
+            "l1_freq": 42.0022,
+            "log_wmse": 17.1074,
+            "aura_stft": 7.3577,
+            "aura_mrstft": 6.6406,
+            "mvsep_bleedless": 43.8194,
+            "mvsep_fullness": 14.2562
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10847",
+          "config": {
+            "chunk_size": 588800,
+            "overlap": 2,
+            "batch_size": 1,
+            "precision": "fp16 autocast",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "other": "guitar + piano + other",
+            "instrumental": "mixture - vocals"
+          }
+        },
+        {
+          "suite": "mvsep-submission-10847-v1",
+          "stem": "other",
+          "values": {
+            "sdr_db": 8.6576,
+            "si_sdr_db": 7.9761,
+            "l1_freq": 37.2028,
+            "log_wmse": 13.2454,
+            "aura_stft": 5.1257,
+            "aura_mrstft": 7.2864,
+            "mvsep_bleedless": 28.2385,
+            "mvsep_fullness": 15.0328
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10847",
+          "config": {
+            "chunk_size": 588800,
+            "overlap": 2,
+            "batch_size": 1,
+            "precision": "fp16 autocast",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "other": "guitar + piano + other",
+            "instrumental": "mixture - vocals"
+          }
         }
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "https://github.com/openmirlab/bs-roformer-infer/issues/3#issuecomment-5986741133",
+        "https://mvsep.com/quality_checker/entry/10847"
       ],
       "decompositions": {
         "general_music_6": {
@@ -6646,12 +7007,61 @@
           },
           "source": "https://mvsep.com/quality_checker/entry/9942",
           "config": {}
+        },
+        {
+          "suite": "mvsep-multisong-anvuew-ft1-fp32-overlap4-v1",
+          "stem": "instrumental",
+          "values": {
+            "sdr_db": 17.8452,
+            "si_sdr_db": 17.7548,
+            "l1_freq": 40.0582,
+            "log_wmse": 14.5297,
+            "aura_stft": 12.4922,
+            "aura_mrstft": 16.426,
+            "mvsep_bleedless": 43.857,
+            "mvsep_fullness": 29.0744
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10845",
+          "config": {
+            "chunk_size": 960000,
+            "overlap": 4,
+            "batch_size": 2,
+            "precision": "fp32",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "instrumental": "mixture - vocals"
+          }
+        },
+        {
+          "suite": "mvsep-multisong-anvuew-ft1-fp32-overlap4-v1",
+          "stem": "vocals",
+          "values": {
+            "sdr_db": 11.5378,
+            "si_sdr_db": 11.1171,
+            "l1_freq": 40.0568,
+            "log_wmse": 14.5297,
+            "aura_stft": 10.7514,
+            "aura_mrstft": 13.617,
+            "mvsep_bleedless": 35.1971,
+            "mvsep_fullness": 19.8473
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10845",
+          "config": {
+            "chunk_size": 960000,
+            "overlap": 4,
+            "batch_size": 2,
+            "precision": "fp32",
+            "tta": false,
+            "encoding": "16-bit FLAC",
+            "instrumental": "mixture - vocals"
+          }
         }
       ],
       "sources": [
         "https://huggingface.co/anvuew/BS-RoFormer",
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
-        "https://huggingface.co/noblebarkrr/mvsepless_resources"
+        "https://huggingface.co/noblebarkrr/mvsepless_resources",
+        "https://mvsep.com/quality_checker/entry/10845"
       ]
     },
     {
@@ -7138,12 +7548,353 @@
           "config": {
             "overlap": 2
           }
+        },
+        {
+          "suite": "mvsep-karaoke-gilliaan-v1-config-unreported-v1",
+          "stem": "lead_vocals",
+          "values": {
+            "sdr_db": 9.8624,
+            "si_sdr_db": 9.7909,
+            "l1_freq": 38.7635,
+            "log_wmse": 13.3188,
+            "aura_stft": 9.4711,
+            "aura_mrstft": 10.3934,
+            "mvsep_bleedless": 24.1917,
+            "mvsep_fullness": 17.6063
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10848",
+          "config": {}
+        },
+        {
+          "suite": "mvsep-karaoke-gilliaan-v1-config-unreported-v1",
+          "stem": "backing_instrumental",
+          "values": {
+            "sdr_db": 15.2486,
+            "si_sdr_db": 15.0504,
+            "l1_freq": 39.0271,
+            "log_wmse": 13.3188,
+            "aura_stft": 18.3711,
+            "aura_mrstft": 21.6608,
+            "mvsep_bleedless": 45.4823,
+            "mvsep_fullness": 35.7791
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10848",
+          "config": {}
         }
       ],
       "sources": [
         "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
         "https://huggingface.co/noblebarkrr/mvsepless_resources",
-        "https://huggingface.co/gilliaan/Stem-Separation-Models"
+        "https://huggingface.co/gilliaan/Stem-Separation-Models",
+        "https://mvsep.com/quality_checker/entry/10848"
+      ]
+    },
+    {
+      "id": "bs-roformer-leap-xe-instrumental",
+      "name": "BS RoFormer Leap XE Instrumental",
+      "author": "Unwa",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "tasks": [
+        "instrumental"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Leap",
+        "revision": "4e47d6662ae82eaa8b4ac4329fe66099a843b48e",
+        "artifacts": [
+          {
+            "name": "bs_leap_xe_inst.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/bs_leap_xe_inst.ckpt",
+            "sha256": "33ee9415f491d257fa7a79f6e92a80d647bc71ed622bfef9a137b6e4250307d3"
+          },
+          {
+            "name": "leap_xe_config_inst.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Leap/resolve/4e47d6662ae82eaa8b4ac4329fe66099a843b48e/Xe/leap_xe_config_inst.yaml",
+            "sha256": "bc188276085e07840757e5117285ead7ec5631f94329c1c6f5f0aff385adea4d"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "validated",
+          "model_filename": "bs_leap_xe_inst.ckpt",
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            },
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            }
+          ],
+          "artifact_names": [
+            "bs_leap_xe_inst.ckpt",
+            "leap_xe_config_inst.yaml"
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "aaba71ee40331f95d377582e357fd1ad762860d15d8ab2e00a55ed1242ad206c",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
+        }
+      },
+      "benchmarks": [],
+      "sources": [
+        "https://huggingface.co/pcunwa/BS-Roformer-Leap",
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing"
+      ]
+    },
+    {
+      "id": "unwa-revive-3e",
+      "name": "BS RoFormer Revive 3e",
+      "author": "Unwa",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "tasks": [
+        "vocals"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Revive",
+        "revision": "3f912884cdf9cbe8549297ce465f86a38572236c",
+        "artifacts": [
+          {
+            "name": "bs_roformer_revive3e.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive3e.ckpt",
+            "sha256": "1b0751b9a15c591407c3b77f08eb4ad3005e42e96051f3f2b39760f1130c467b"
+          },
+          {
+            "name": "config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+            "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "validated",
+          "model_filename": "bs_roformer_revive3e.ckpt",
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "bs_roformer_revive3e.ckpt",
+            "config.yaml"
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "e3f0b6281b915b026e40b5c60f7e1330394bc26a1954e7024dec2e5960d18eb4",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
+        }
+      },
+      "benchmarks": [],
+      "sources": [
+        "https://huggingface.co/pcunwa/BS-Roformer-Revive",
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing"
+      ]
+    },
+    {
+      "id": "gilliaan-drums-duality",
+      "name": "BS RoFormer Drums Duality",
+      "author": "Gilliaan",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "tasks": [
+        "drums"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "CC-BY-NC-SA-4.0",
+        "repository": "https://huggingface.co/gilliaan/Stem-Separation-Models",
+        "revision": "62fe7d8e363e7285d1d24aaaab87351ebc566bae",
+        "artifacts": [
+          {
+            "name": "gilliaan_bsroformer_drums_v1.ckpt",
+            "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.ckpt",
+            "sha256": "f60c4370257257301922dec9c6528cfab1b82b02d772ae0a0090cb566d4c4ca7"
+          },
+          {
+            "name": "gilliaan_bsroformer_drums_v1.yaml",
+            "url": "https://huggingface.co/gilliaan/Stem-Separation-Models/resolve/62fe7d8e363e7285d1d24aaaab87351ebc566bae/Drums/BandSplitRoformer/gilliaan_bsroformer_drums_v1.yaml",
+            "sha256": "c0bbf1861c2fe6e00ddbae66babd2534923a79e6e8670b59df961363f1ef964b"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "validated",
+          "model_filename": "gilliaan_bsroformer_drums_v1.ckpt",
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "drums",
+              "capability": "drums",
+              "label": "Drums"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "other",
+              "label": "Other (without drums)"
+            }
+          ],
+          "artifact_names": [
+            "gilliaan_bsroformer_drums_v1.ckpt",
+            "gilliaan_bsroformer_drums_v1.yaml"
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "c4cde503a6893624047d29c8de0ab15efe7bebd9420abf8f07908396aba9b286",
+            "outputs": [
+              "drums",
+              "other"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
+        }
+      },
+      "benchmarks": [],
+      "sources": [
+        "https://huggingface.co/gilliaan/Stem-Separation-Models",
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing"
+      ]
+    },
+    {
+      "id": "unwa-revive-2",
+      "name": "BS RoFormer Revive 2",
+      "author": "Unwa",
+      "architecture": "bs_roformer",
+      "status": "specialist",
+      "tasks": [
+        "vocals"
+      ],
+      "availability": {
+        "state": "public_weights",
+        "license": "unknown",
+        "repository": "https://huggingface.co/pcunwa/BS-Roformer-Revive",
+        "revision": "3f912884cdf9cbe8549297ce465f86a38572236c",
+        "artifacts": [
+          {
+            "name": "bs_roformer_revive2.ckpt",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/bs_roformer_revive2.ckpt",
+            "sha256": "58098850c882a7472dad39f99fb8040ce6eaafe671cfe9881d89aea276bbb5f5"
+          },
+          {
+            "name": "config.yaml",
+            "url": "https://huggingface.co/pcunwa/BS-Roformer-Revive/resolve/3f912884cdf9cbe8549297ce465f86a38572236c/config.yaml",
+            "sha256": "6b9d5fb6aeda6b0941f937e4e4883643e3187331ff403fb820c7aa6af4b02dbb"
+          }
+        ]
+      },
+      "backends": {
+        "audio_separator": {
+          "state": "validated",
+          "model_filename": "bs_roformer_revive2.ckpt",
+          "validated": true,
+          "outputs": [
+            {
+              "runtime_key": "vocals",
+              "capability": "vocals",
+              "label": "Vocals"
+            },
+            {
+              "runtime_key": "other",
+              "capability": "instrumental",
+              "label": "Instrumental"
+            }
+          ],
+          "artifact_names": [
+            "bs_roformer_revive2.ckpt",
+            "config.yaml"
+          ],
+          "smoke_validation": {
+            "schema": 1,
+            "kind": "exact_checkpoint_smoke",
+            "runtime": "python-audio-separator",
+            "runtime_revision": "86f6756f8f400769c11707c48a7a27e749131a6c",
+            "fixture": "public-vocal-ccby-v1",
+            "contract_sha256": "e9f89066af0a810e25c8a808ed637f7db8d635ea9e5bf3654d70111a51a429cf",
+            "outputs": [
+              "other",
+              "vocals"
+            ],
+            "sample_rate": 44100,
+            "channels": 2,
+            "validated_at": "2026-10-27"
+          }
+        }
+      },
+      "benchmarks": [
+        {
+          "suite": "mvsep-submission-10930-v1",
+          "stem": "vocals",
+          "values": {
+            "sdr_db": 10.9711,
+            "si_sdr_db": 10.4647,
+            "l1_freq": 38.2617,
+            "log_wmse": 14.0338,
+            "aura_stft": 7.4159,
+            "aura_mrstft": 9.3745,
+            "mvsep_bleedless": 40.076,
+            "mvsep_fullness": 15.1229
+          },
+          "source": "https://mvsep.com/quality_checker/entry/10930",
+          "config": {
+            "chunk_size": 485100,
+            "overlap": 2,
+            "precision": "fp16",
+            "runtime": "MSST local port",
+            "submission_scope": "100 vocal files"
+          }
+        }
+      ],
+      "sources": [
+        "https://huggingface.co/pcunwa/BS-Roformer-Revive",
+        "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "https://mvsep.com/quality_checker/entry/10930"
       ]
     }
   ],
@@ -7200,6 +7951,10 @@
         {
           "model": "mvsep-mega-single-drums",
           "specialty": "single_stem_fallback"
+        },
+        {
+          "model": "gilliaan-drums-duality",
+          "specialty": "drums_other_duality"
         }
       ]
     },
@@ -7252,6 +8007,10 @@
         {
           "model": "viperx-1297",
           "specialty": "validated_runtime_fallback"
+        },
+        {
+          "model": "bs-roformer-leap-xe-instrumental",
+          "specialty": "instrumental_target_checkpoint"
         }
       ]
     },
@@ -7383,6 +8142,14 @@
         {
           "model": "anvuew-vocals-1255",
           "specialty": "fullness"
+        },
+        {
+          "model": "unwa-revive-3e",
+          "specialty": "fullness"
+        },
+        {
+          "model": "unwa-revive-2",
+          "specialty": "bleed_control"
         }
       ]
     },
@@ -7849,6 +8616,14 @@
       "protocol": "Source-attributed qualitative comparison; valid only for the stated scope.",
       "stem_mapping": {
         "backing_instrumental": "backing_instrumental"
+      },
+      "conditions": []
+    },
+    "deton24-vocals-revive3e-vs-beta5e-2026-10-27": {
+      "scope": "Gilliaan compares Revive 3e with Big Beta 5e in the guide’s vocal fullness section. Fuller vocals and more noise are separate observations.",
+      "protocol": "Source-attributed qualitative comparison; no controlled dataset or inference settings supplied.",
+      "stem_mapping": {
+        "vocals": "vocals"
       },
       "conditions": []
     }
@@ -8931,6 +9706,56 @@
         }
       },
       "summary": "The historical model guidance says 1297 tends to be better for instrumentals and 1296 for vocals.",
+      "tags": []
+    },
+    {
+      "id": "deton24-beta5e-vs-revive3e-fullness-preservation-2026-10-27",
+      "task": "vocals",
+      "metric": "fullness_preservation",
+      "context": "deton24-vocals-revive3e-vs-beta5e-2026-10-27",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "unwa-revive-3e"
+      },
+      "relation": "worse",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-10-27",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7767,
+          "end": 7773
+        }
+      },
+      "summary": "Gilliaan reports that Revive 3e preserves more vocal fullness than Big Beta 5e.",
+      "tags": []
+    },
+    {
+      "id": "deton24-beta5e-vs-revive3e-artifact-control-2026-10-27",
+      "task": "vocals",
+      "metric": "artifact_control",
+      "context": "deton24-vocals-revive3e-vs-beta5e-2026-10-27",
+      "left": {
+        "model": "big-beta-5e"
+      },
+      "right": {
+        "model": "unwa-revive-3e"
+      },
+      "relation": "better",
+      "confidence": "medium",
+      "source": {
+        "snapshot": "deton24-google-doc-2026-10-27",
+        "entry_url": "https://docs.google.com/document/d/17fjNvJzj8ZGSer7c7OFe_CNfUKbAxEh_OBv94ZdRG5c/edit?usp=sharing",
+        "location": {
+          "kind": "line_range",
+          "start": 7767,
+          "end": 7773
+        }
+      },
+      "summary": "In the same comparison, Gilliaan reports that Revive 3e is noisier than Big Beta 5e.",
       "tags": []
     }
   ]
