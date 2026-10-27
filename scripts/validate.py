@@ -18,7 +18,7 @@ from evidence_policy import (
     SOURCE_TIER_ORDER,
 )
 from product_policy import EXCLUDED_CAPABILITIES, multitrack_policy_errors
-from smoke_policy import smoke_evidence_errors
+from smoke_policy import safe_artifact_filename, smoke_evidence_errors
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -313,8 +313,8 @@ def main() -> int:
                     errors.append(f"{artifact_where}: must be an object")
                     continue
                 name = artifact.get("name")
-                if not isinstance(name, str) or not name:
-                    errors.append(f"{artifact_where}: name is required")
+                if not safe_artifact_filename(name):
+                    errors.append(f"{artifact_where}: name must be a safe filename without directories")
                 elif name in artifact_names:
                     errors.append(f"{artifact_where}: duplicate name {name}")
                 else:

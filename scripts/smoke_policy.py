@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from datetime import date
 from typing import Any
 
@@ -26,6 +27,11 @@ TRUSTED_ARTIFACT_DELIVERY_SUFFIXES = (
     ".githubusercontent.com",
     ".amazonaws.com",
 )
+ARTIFACT_FILENAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+
+
+def safe_artifact_filename(value: object) -> bool:
+    return isinstance(value, str) and ARTIFACT_FILENAME.fullmatch(value) is not None
 
 
 def selected_artifacts(model: dict[str, Any], backend: dict[str, Any]) -> list[dict[str, Any]]:

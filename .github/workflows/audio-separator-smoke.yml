@@ -15,12 +15,20 @@ concurrency:
   group: audio-separator-smoke-${{ github.event.pull_request.number || inputs.pr_number }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   smoke:
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.pull_request.draft == false &&
-       github.event.pull_request.head.repo.full_name == github.repository)
+      github.repository_id == '1332928462' &&
+      github.repository_owner_id == '73347504' &&
+      github.actor_id == '73347504' &&
+      github.triggering_actor == 'HAGerox' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event.pull_request.draft == false &&
+        github.event.pull_request.user.id == 73347504 &&
+        github.event.pull_request.head.repo.id == 1332928462 &&
+        github.event.pull_request.base.ref == 'main'))
     runs-on: macos-15
     timeout-minutes: 360
     permissions:
@@ -35,52 +43,30 @@ jobs:
       failed: ${{ steps.result.outputs.failed }}
       tested: ${{ steps.result.outputs.tested }}
     steps:
-      - name: Resolve the trusted base and proposed branch
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          path: trusted
+          persist-credentials: false
+      - name: Resolve and authorize the owner PR
         id: pr
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
-          REPOSITORY: ${{ github.repository }}
         run: |
-          gh api "repos/$REPOSITORY/pulls/$PR_NUMBER" > "$RUNNER_TEMP/pr.json"
-          python3 - "$RUNNER_TEMP/pr.json" "$GITHUB_OUTPUT" <<'PY'
-          import json, pathlib, sys
-          pr = json.loads(pathlib.Path(sys.argv[1]).read_text())
-          if pr["head"]["repo"]["full_name"] != pr["base"]["repo"]["full_name"]:
-              raise SystemExit("Smoke validation only writes to same-repository PRs")
-          with pathlib.Path(sys.argv[2]).open("a") as output:
-              output.write(f"number={pr['number']}\n")
-              output.write(f"base_sha={pr['base']['sha']}\n")
-              output.write(f"head_sha={pr['head']['sha']}\n")
-              output.write(f"head_ref={pr['head']['ref']}\n")
-          PY
-
-      # Only scripts from the reviewed base branch are executed. The proposed
-      # checkout below is treated as data and is never imported or invoked.
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: ${{ steps.pr.outputs.base_sha }}
-          path: trusted
-          persist-credentials: false
+          gh api "repos/HAGerox/Stem-Separator-Models/pulls/$PR_NUMBER" > "$RUNNER_TEMP/pr.json"
+          python3 trusted/scripts/workflow_policy.py \
+            --pr-json "$RUNNER_TEMP/pr.json" \
+            --trusted-sha "$(git -C trusted rev-parse HEAD)" --output "$GITHUB_OUTPUT"
+          head_sha=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["head"]["sha"])' "$RUNNER_TEMP/pr.json")
+          mkdir proposed
+          gh api "repos/HAGerox/Stem-Separator-Models/contents/registry.json?ref=$head_sha" \
+            --jq .content | base64 --decode > proposed/registry.json
 
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
           version: 0.10.11
-          enable-cache: true
-
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: ${{ steps.pr.outputs.head_sha }}
-          path: proposed
-          fetch-depth: 0
-          persist-credentials: false
-
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ runner.temp }}/stem-separator-model-cache
-          key: ${{ runner.os }}-audio-separator-models-${{ hashFiles('proposed/registry.json') }}
-          restore-keys: |
-            ${{ runner.os }}-audio-separator-models-
+          enable-cache: false
 
       - name: Install the exact Audio Separator runtime
         id: runtime
@@ -168,17 +154,11 @@ jobs:
     needs: smoke
     if: needs.smoke.result == 'success'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
-      actions: write
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: ${{ needs.smoke.outputs.head_sha }}
-          path: proposed
-          fetch-depth: 0
-          persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.smoke.outputs.base_sha }}
@@ -192,10 +172,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           HEAD_REF: ${{ needs.smoke.outputs.head_ref }}
-          REPOSITORY: ${{ github.repository }}
+          HEAD_SHA: ${{ needs.smoke.outputs.head_sha }}
+          BASE_SHA: ${{ needs.smoke.outputs.base_sha }}
+          PR_NUMBER: ${{ needs.smoke.outputs.pr_number }}
+          GIT_INDEX_FILE: ${{ runner.temp }}/promotion-index
         run: |
+          gh api "repos/HAGerox/Stem-Separator-Models/pulls/$PR_NUMBER" > "$RUNNER_TEMP/current-pr.json"
+          python3 trusted/scripts/workflow_policy.py \
+            --pr-json "$RUNNER_TEMP/current-pr.json" \
+            --trusted-sha "$BASE_SHA" --expected-head "$HEAD_SHA"
+          git -C trusted fetch origin "$HEAD_SHA"
+          git -C trusted show "$HEAD_SHA:registry.json" > "$RUNNER_TEMP/original-registry.json"
           python3 trusted/scripts/smoke_audio_separator.py verify-promotions \
-            --registry proposed/registry.json \
+            --registry "$RUNNER_TEMP/original-registry.json" \
             --promoted-registry "$RUNNER_TEMP/audio-separator-package/registry.json"
           python3 trusted/scripts/validate.py "$RUNNER_TEMP/audio-separator-package/registry.json"
           python3 trusted/scripts/product_catalog.py \
@@ -203,15 +192,24 @@ jobs:
             --output "$RUNNER_TEMP/product-catalog.json"
           cmp "$RUNNER_TEMP/product-catalog.json" \
             "$RUNNER_TEMP/audio-separator-package/product-catalog.json"
-          cp "$RUNNER_TEMP/audio-separator-package/registry.json" proposed/registry.json
-          cp "$RUNNER_TEMP/audio-separator-package/product-catalog.json" proposed/product-catalog.json
-          git -C proposed config user.name "stem-separator-smoke[bot]"
-          git -C proposed config user.email "stem-separator-smoke[bot]@users.noreply.github.com"
-          git -C proposed add registry.json product-catalog.json
-          if ! git -C proposed diff --cached --quiet; then
-            git -C proposed commit -m "Validate Audio Separator model artifacts"
+          # Build the commit without checking out the PR tree, invoking its
+          # attributes, or running any proposed code in this write-capable job.
+          git -C trusted config user.name "stem-separator-smoke[bot]"
+          git -C trusted config user.email "stem-separator-smoke[bot]@users.noreply.github.com"
+          git -C trusted read-tree "$HEAD_SHA"
+          for file in registry.json product-catalog.json; do
+            blob=$(git -C trusted hash-object -w --no-filters "$RUNNER_TEMP/audio-separator-package/$file")
+            git -C trusted update-index --add --cacheinfo "100644,$blob,$file"
+          done
+          tree=$(git -C trusted write-tree)
+          if [ "$tree" != "$(git -C trusted rev-parse "$HEAD_SHA^{tree}")" ]; then
+            commit=$(git -C trusted commit-tree "$tree" -p "$HEAD_SHA" -m "Validate Audio Separator model artifacts")
+            gh api "repos/HAGerox/Stem-Separator-Models/pulls/$PR_NUMBER" > "$RUNNER_TEMP/current-pr.json"
+            python3 trusted/scripts/workflow_policy.py \
+              --pr-json "$RUNNER_TEMP/current-pr.json" \
+              --trusted-sha "$BASE_SHA" --expected-head "$HEAD_SHA"
             gh auth setup-git
-            git -C proposed push "https://github.com/$REPOSITORY.git" "HEAD:$HEAD_REF"
+            git -C trusted push "https://github.com/HAGerox/Stem-Separator-Models.git" "$commit:refs/heads/$HEAD_REF"
           fi
       - name: Post the result to the PR
         if: needs.smoke.outputs.tested != '0'
@@ -222,14 +220,6 @@ jobs:
         run: >-
           gh pr comment "$PR_NUMBER" --repo "$REPOSITORY"
           --body-file "$RUNNER_TEMP/audio-separator-package/summary.md"
-
-      - name: Delete consumed build artifact
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
-            --jq '.artifacts[] | select(.name == "audio-separator-smoke-pr-${{ needs.smoke.outputs.pr_number }}") | .id' \
-            | xargs -I{} gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/{}"
 
       - name: Fail when any model failed validation
         if: needs.smoke.outputs.failed != '0'

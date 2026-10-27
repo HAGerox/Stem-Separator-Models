@@ -10,11 +10,22 @@ permissions:
 
 jobs:
   validate:
+    # Fork PRs can change this file, so repository-level approval for ALL
+    # external contributors is also required. Never approve an outside run.
+    if: >-
+      github.repository_id == '1332928462' &&
+      github.repository_owner_id == '73347504' &&
+      (github.event_name == 'push' ||
+       (github.event.pull_request.user.id == 73347504 &&
+        github.event.pull_request.head.repo.id == 1332928462 &&
+        github.event.pull_request.base.ref == 'main'))
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Validate data
         run: python3 scripts/validate.py
       - name: Validate generated product catalogue
